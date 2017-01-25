@@ -14,9 +14,7 @@ public class BootCompletedReceiver extends WakefulBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         ServiceUtils.startService(context, ListenerService.class);
 
-        intent.putExtra("weak-lock", true);
         Intent mIntent = new Intent(context, ListenerService.class);
-
-        WakefulBroadcastReceiver.startWakefulService(context, mIntent);
+        startWakefulService(context, mIntent);
     }
 }

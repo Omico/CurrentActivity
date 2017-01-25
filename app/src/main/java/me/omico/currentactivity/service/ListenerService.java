@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 
 import me.omico.currentactivity.R;
@@ -15,8 +16,9 @@ import me.omico.util.ServiceUtils;
 
 public final class ListenerService extends Service implements TipViewController.ViewDismissHandler {
 
-    private CharSequence LAST_CONTENT = null;
     private TipViewController mTipViewController;
+    private Handler handler = new Handler();
+    private CharSequence LAST_CONTENT = null;
 
     @Override
     public void onCreate() {
@@ -25,10 +27,25 @@ public final class ListenerService extends Service implements TipViewController.
             @Override
             public void OnTipViewClick() {
                 notificationMethod();
+                handler.removeCallbacks(runnable);
                 ServiceUtils.stopService(ListenerService.this, ListenerService.this.getClass());
             }
         });
     }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        handler.postDelayed(runnable, 500);
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            showContent(Util.getCurrentActivity());
+            handler.postDelayed(this, 500);
+        }
+    };
 
     @Override
     public void onDestroy() {
