@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Current Activity</string>
+    <string name="tip">Click and hide into the notification bar</string>
+    <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>
+        <string name="about_author">
+        "Author: 宇文 (Also you can tell me \"龙天宇\", \"Omico\", \"Yuwen\"）\n\n"
+
+        "This project has been open source in Github, welcome to inspect.\n\n"
+
+        "Address（click and copy)：\n"
+        "https://github.com/Omico/CurrentActivity\n\n"
+
+        "PS：Thanks iAcn（Leon连续）review my code"
+    </string>
+</resources>

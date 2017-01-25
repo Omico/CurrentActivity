@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">当前进程</string>
+    <string name="tip">点击后隐藏到通知栏</string>
+    <string name="about_author">
+        "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"
+
+        "此应用开源到我的 Github 上，欢迎查阅。\n\n"
+
+        "地址（点击复制)：\n"
+        "https://github.com/Omico/CurrentActivity\n\n"
+
+        "PS：感谢 iAcn（Leon连续）审察源码"
+    </string>
+</resources>

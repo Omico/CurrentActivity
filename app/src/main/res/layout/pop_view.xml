@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.omico.widget.ViewContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/pop_view_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#48000000"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:text="@string/tip"
+            android:textColor="#ffffff"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/pop_view_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:textColor="#ffffff"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</me.omico.widget.ViewContainer>
