@@ -123,5 +123,6 @@ public final class ListenerService extends Service implements TipViewController.
     public void onViewDismiss() {
         LAST_CONTENT = null;
         mTipViewController = null;
+        handler.removeCallbacks(runnable);
     }
 }
