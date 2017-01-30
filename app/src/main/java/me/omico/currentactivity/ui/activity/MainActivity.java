@@ -74,7 +74,7 @@ public final class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     ServiceUtils.startService(MainActivity.this, ListenerService.class);
-                } else if (ServiceUtils.isRunning(MainActivity.this, ListenerService.class.getName())) {
+                } else {
                     ServiceUtils.stopService(MainActivity.this, ListenerService.class);
                 }
             }
