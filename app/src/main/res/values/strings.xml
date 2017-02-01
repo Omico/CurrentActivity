@@ -12,4 +12,5 @@
 
         "PS：Thanks iAcn（Leon连续）review my code"
     </string>
+    <string name="failed_to_get">Failed to get current activity.</string>
 </resources>

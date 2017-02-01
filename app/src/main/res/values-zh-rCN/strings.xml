@@ -12,4 +12,5 @@
 
         "PS：感谢 iAcn（Leon连续）审察源码"
     </string>
+    <string name="failed_to_get">无法获取当前进程。</string>
 </resources>

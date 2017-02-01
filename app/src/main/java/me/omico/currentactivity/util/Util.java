@@ -1,12 +1,14 @@
 package me.omico.currentactivity.util;
 
+import android.content.Context;
 import android.text.TextUtils;
 
+import me.omico.currentactivity.R;
 import me.omico.util.root.SU;
 
 public class Util {
 
-    public static String getCurrentActivity() {
+    public static String getCurrentActivity(Context context) {
         String request = SU.getSU().runCommand("dumpsys activity | grep \"mFocusedActivity\"");
 
         if (!TextUtils.isEmpty(request)) {
@@ -17,7 +19,6 @@ public class Util {
 
             return packageName + "\n" + activityName;
         }
-
-        return null;
+        return context.getString(R.string.failed_to_get);
     }
 }

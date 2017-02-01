@@ -79,7 +79,7 @@ public final class ListenerService extends Service implements TipViewController.
     }
 
     private String setCurrentActivity() {
-        return Util.getCurrentActivity();
+        return Util.getCurrentActivity(this);
     }
 
     private Notification notificationMethod() {
