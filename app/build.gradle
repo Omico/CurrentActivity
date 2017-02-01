@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "me.omico.currentactivity"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 4
-        versionName "1.0.3"
+        applicationId rootProject.ext.app.applicationId
+        minSdkVersion rootProject.ext.app.minSdkVersion
+        targetSdkVersion rootProject.ext.app.targetSdkVersion
+        versionCode rootProject.ext.app.versionCode
+        versionName rootProject.ext.app.versionName
     }
     buildTypes {
         release {
@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile "com.android.support:appcompat-v7:$rootProject.ext.dependencies.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.dependencies.supportLibraryVersion"
     compile project(':library')
 }
