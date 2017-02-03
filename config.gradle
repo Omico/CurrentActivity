@@ -6,8 +6,8 @@ ext {
             applicationId   : "me.omico.currentactivity",
             minSdkVersion   : 19,
             targetSdkVersion: 25,
-            versionCode     : 9,
-            versionName     : "1.0.8"
+            versionCode     : getVersionCode(),
+            versionName     : getVersionName()
     ]
 
     library = [
@@ -20,4 +20,14 @@ ext {
     dependencies = [
             supportLibraryVersion: "25.1.1"
     ]
+}
+
+def getVersionCode() {
+    def cmd = 'git rev-list HEAD --count'
+    return cmd.execute().text.trim().toInteger()
+}
+
+def getVersionName() {
+    def cmd = 'git describe --tags --dirty'
+    return cmd.execute().text.trim()
 }
