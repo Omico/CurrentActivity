@@ -105,7 +105,7 @@ public final class ListenerService extends Service implements TipViewController.
     }
 
     private void showContent(CharSequence content) {
-        if (LAST_CONTENT != null && LAST_CONTENT.equals(content) || content == null) {
+        if (LAST_CONTENT != null && LAST_CONTENT.equals(content) || content == null || isStop) {
             return;
         }
         LAST_CONTENT = content;
