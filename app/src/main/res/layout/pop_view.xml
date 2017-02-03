@@ -11,7 +11,10 @@
         android:layout_height="wrap_content"
         android:background="#48000000"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="30dp">
 
         <TextView
             android:layout_width="match_parent"
