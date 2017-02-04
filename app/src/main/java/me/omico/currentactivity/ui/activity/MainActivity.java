@@ -1,7 +1,6 @@
 package me.omico.currentactivity.ui.activity;
 
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -45,13 +44,12 @@ public final class MainActivity extends AppCompatActivity {
 
         initData();
         initListener();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) askForPermission();
     }
 
     private void initData() {
-        if (SharedPreferencesUtils.getDefaultSharedPreferences(this, IS_FIRST_OPEN, true))
+        if (SharedPreferencesUtils.getDefaultSharedPreferences(this, IS_FIRST_OPEN, true)) {
             showNoticeDialog();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
 
         swOpen.setChecked(ServiceUtils.isRunning(this, ListenerService.class.getName()));
     }
@@ -82,15 +80,14 @@ public final class MainActivity extends AppCompatActivity {
     }
 
     private void showNoticeDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                .setTitle("注意")
-                .setMessage("此软件需要 ROOT 权限，6.0以上的应用需要额外权限")
+        addDialog(this, "注意", "此软件需要 ROOT 权限，6.0以上的应用需要额外权限")
                 .setPositiveButton("接受，并授权", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         swOpen.setEnabled(SU.isRoot());
                         SharedPreferencesUtils.setDefaultSharedPreferences(MainActivity.this, IS_FIRST_OPEN, false);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
                     }
                 })
                 .setNegativeButton("放弃并退出", new DialogInterface.OnClickListener() {
@@ -99,24 +96,30 @@ public final class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                         MainActivity.this.finish();
                     }
-                });
-        Dialog noticeDialog = builder.create();
-        noticeDialog.show();
+                }).create().show();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    public void askForPermission() {
+    private void showPermissionDialog() {
         if (!Settings.canDrawOverlays(this)) {
             swOpen.setEnabled(false);
-            Snackbar.make(findViewById(R.id.main_coordinator_layout), "需要额外授权“允许出现在其他应用上”的权限！", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("授权", new View.OnClickListener() {
+            addDialog(this, "注意", "需要额外授权“允许出现在其他应用上”的权限！")
+                    .setPositiveButton("接受，并授权", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                                     Uri.parse("package:" + getPackageName()));
                             startActivityForResult(intent, OVERLAY_PERMISSION_CODE);
                         }
-                    }).show();
+                    })
+                    .setNegativeButton("放弃并退出", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            MainActivity.this.finish();
+                        }
+                    }).create().show();
         }
     }
 
@@ -131,6 +134,10 @@ public final class MainActivity extends AppCompatActivity {
                 swOpen.setEnabled(true);
             }
         }
+    }
+
+    private AlertDialog.Builder addDialog(Context context, String title, String message) {
+        return new AlertDialog.Builder(context).setTitle(title).setMessage(message);
     }
 
     private void showSnackBarNoAction(String text, int time) {
