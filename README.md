@@ -4,6 +4,12 @@ A current activity watcher.
 
 一个当前活动监视器。
 
+## Screenshot 屏幕截图
+
+![Screenshot_1](Screenshot/Screenshot_1.png)
+
+![Screenshot_2](Screenshot/Screenshot_2.png)
+
 ## License 许可证
 
 [![license](https://img.shields.io/github/license/Omico/CurrentActivity.svg?style=flat-square)](https://github.com/Omico/CurrentActivity/blob/master/LICENSE)
