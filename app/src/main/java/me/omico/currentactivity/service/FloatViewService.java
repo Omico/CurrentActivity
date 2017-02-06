@@ -154,7 +154,9 @@ public final class FloatViewService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        isStop = true;
         stopForeground(true);
+        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
         mFloatView.remove();
     }
 }
