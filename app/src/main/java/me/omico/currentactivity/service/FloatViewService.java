@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -158,5 +159,7 @@ public final class FloatViewService extends Service {
         super.onDestroy();
         stopForeground(true);
         mFloatView.remove();
+        isStop=true;
+        updateNotification();
     }
 }
