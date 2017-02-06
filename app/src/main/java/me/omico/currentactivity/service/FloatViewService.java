@@ -18,7 +18,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.ui.widget.FloatView;
+import me.omico.widget.FloatView;
 import me.omico.currentactivity.util.Util;
 
 public final class FloatViewService extends Service {

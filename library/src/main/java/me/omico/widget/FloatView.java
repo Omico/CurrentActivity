@@ -1,25 +1,24 @@
-package me.omico.currentactivity.ui.widget;
+package me.omico.widget;
 
 import android.content.Context;
 import android.view.View;
 import android.view.WindowManager;
 
-import me.omico.currentactivity.R;
+public class FloatView extends View {
 
-public final class FloatView {
-
-    private WindowManager mWindowManager;
-    private WindowManager.LayoutParams mLayoutParams;
     private View mView;
+    private Context mContext;
+    private FloatViewManager mFloatViewManager;
 
     public FloatView(Context context) {
-        mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        super(context);
+        mContext = context;
     }
 
     public FloatView init(View view, WindowManager.LayoutParams layoutParams) {
         mView = view;
 //        mView.setId(R.id.float_view_layout);
-        mLayoutParams = layoutParams;
+        mFloatViewManager = new FloatViewManager(mContext, layoutParams, mView);
         return this;
     }
 
@@ -53,11 +52,11 @@ public final class FloatView {
     }
 
     public void add() {
-        mWindowManager.addView(mView, mLayoutParams);
+        mFloatViewManager.add();
     }
 
     public void remove() {
-        mWindowManager.removeView(mView);
+        mFloatViewManager.remove();
     }
 
     public void show() {
