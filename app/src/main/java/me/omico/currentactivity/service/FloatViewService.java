@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -59,6 +60,8 @@ public final class FloatViewService extends Service {
     private void updateNotification() {
         if (!isStop)
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID, notificationMethod());
+        else
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
     }
 
     private Runnable runnable = new Runnable() {
@@ -158,5 +161,7 @@ public final class FloatViewService extends Service {
         stopForeground(true);
         ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
         mFloatView.remove();
+        isStop=true;
+        updateNotification();
     }
 }
