@@ -5,16 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
-import me.omico.currentactivity.service.ListenerService;
+import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ServiceUtils;
 
 public class BootCompletedReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        ServiceUtils.startService(context, ListenerService.class);
+        ServiceUtils.startService(context, FloatViewService.class);
 
-        Intent mIntent = new Intent(context, ListenerService.class);
+        Intent mIntent = new Intent(context, FloatViewService.class);
         startWakefulService(context, mIntent);
     }
 }

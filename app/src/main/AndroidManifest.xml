@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".service.ListenerService"
+            android:name=".service.FloatViewService"
             android:enabled="true"
             android:exported="true"
             android:process=":process"/>

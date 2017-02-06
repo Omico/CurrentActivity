@@ -20,7 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.service.ListenerService;
+import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.root.SU;
@@ -51,7 +51,7 @@ public final class MainActivity extends AppCompatActivity {
             showNoticeDialog();
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
 
-        swOpen.setChecked(ServiceUtils.isRunning(this, ListenerService.class.getName()));
+        swOpen.setChecked(ServiceUtils.isRunning(this, FloatViewService.class.getName()));
     }
 
     private void initListener() {
@@ -71,9 +71,9 @@ public final class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    ServiceUtils.startService(MainActivity.this, ListenerService.class);
+                    ServiceUtils.startService(MainActivity.this, FloatViewService.class);
                 } else {
-                    ServiceUtils.stopService(MainActivity.this, ListenerService.class);
+                    ServiceUtils.stopService(MainActivity.this, FloatViewService.class);
                 }
             }
         });

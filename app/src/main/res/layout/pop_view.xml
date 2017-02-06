@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.omico.widget.ViewContainer
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#48000000"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/pop_view_content_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#48000000"
         android:orientation="vertical"
         android:paddingBottom="16dp"
         android:paddingLeft="16dp"
@@ -35,4 +35,4 @@
             android:textColor="#ffffff"
             android:textSize="14sp"/>
     </LinearLayout>
-</me.omico.widget.ViewContainer>
+</FrameLayout>
