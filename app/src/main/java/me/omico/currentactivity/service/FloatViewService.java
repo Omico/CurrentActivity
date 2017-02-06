@@ -59,6 +59,8 @@ public final class FloatViewService extends Service {
     private void updateNotification() {
         if (!isStop)
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID, notificationMethod());
+        else
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
     }
 
     private Runnable runnable = new Runnable() {
