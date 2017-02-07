@@ -18,13 +18,13 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import me.omico.currentactivity.R;
-import me.omico.util.ClipboardUtils;
-import me.omico.widget.FloatView;
 import me.omico.currentactivity.util.Util;
+import me.omico.util.ClipboardUtils;
+import me.omico.widget.FloatWindow;
 
 public final class FloatViewService extends Service {
 
-    private FloatView mFloatView;
+    private FloatWindow mFloatWindow;
     private TextView mTextView;
     private View view;
     private Handler handler = new Handler();
@@ -49,7 +49,7 @@ public final class FloatViewService extends Service {
             stopSelf();
         }
 
-        if (!isStop) mFloatView.show();
+        if (!isStop) mFloatWindow.show();
 
         handler.postDelayed(runnable, 500);
 
@@ -92,24 +92,10 @@ public final class FloatViewService extends Service {
         return builder.build();
     }
 
-    private FloatView showFloatView() {
-        mFloatView = new FloatView(this);
-        mFloatView.init(view, setLayoutParams())
-                .setOnFloatViewClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mFloatView.hide();
-                    }
-                })
-                .setOnFloatViewLongClickListener(true, new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
-                        return false;
-                    }
-                })
-                .add();
-        return mFloatView;
+    private FloatWindow showFloatView() {
+        mFloatWindow = new FloatWindow(this);
+        mFloatWindow.init(view, setLayoutParams()).attach();
+        return mFloatWindow;
     }
 
 
@@ -119,6 +105,19 @@ public final class FloatViewService extends Service {
         view.setSystemUiVisibility(view.getSystemUiVisibility()
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFloatWindow.hide();
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
+                return true;
+            }
+        });
     }
 
     private WindowManager.LayoutParams setLayoutParams() {
@@ -158,6 +157,6 @@ public final class FloatViewService extends Service {
         isStop = true;
         stopForeground(true);
         ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
-        mFloatView.remove();
+        mFloatWindow.detach();
     }
 }
