@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import me.omico.currentactivity.R;
+import me.omico.util.ClipboardUtils;
 import me.omico.widget.FloatView;
 import me.omico.currentactivity.util.Util;
 
@@ -103,7 +104,7 @@ public final class FloatViewService extends Service {
                 .setOnFloatViewLongClickListener(true, new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        Util.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
+                        ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
                         return false;
                     }
                 })

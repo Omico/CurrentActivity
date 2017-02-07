@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="copy_success">内容已被复制到剪贴板。</string>
+    <string name="copy_failed">内容无法复制到剪贴板。</string>
+</resources>
