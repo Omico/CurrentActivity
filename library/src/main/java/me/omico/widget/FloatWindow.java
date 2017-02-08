@@ -12,15 +12,61 @@ public class FloatWindow {
     private WindowManager.LayoutParams mLayoutParams;
 
     public FloatWindow(Context context) {
-        mContext = context;
+        this.mContext = context;
     }
 
     public FloatWindow init(View view, WindowManager.LayoutParams layoutParams) {
-        mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        mView = view;
+        this.mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        this.mView = view;
 //        mView.setId(R.id.float_view_layout);
-        mLayoutParams = layoutParams;
+        this.mLayoutParams = layoutParams;
         return this;
+    }
+
+    public FloatWindow init(View view, WindowManager.LayoutParams layoutParams, int gravity) {
+        this.init(view, layoutParams);
+        this.setLayoutParamsGravity(gravity);
+        return this;
+    }
+
+    public FloatWindow init(View view) {
+        this.init(view, getLayoutParams());
+        return this;
+    }
+
+    public FloatWindow setLayoutParams(int width, int height, int type, int flags, int format) {
+        this.mLayoutParams = new WindowManager.LayoutParams(width, height, type, flags, format);
+        return this;
+    }
+
+    public FloatWindow setLayoutParams(int width, int height, int type, int flags, int format, int gravity) {
+        this.setLayoutParams(width, height, type, flags, format);
+        this.setLayoutParamsGravity(gravity);
+        return this;
+    }
+
+    public FloatWindow setLayoutParams(WindowManager.LayoutParams layoutParams) {
+        this.mLayoutParams = layoutParams;
+        return this;
+    }
+
+    public FloatWindow setLayoutParams(WindowManager.LayoutParams layoutParams, int gravity) {
+        this.mLayoutParams = layoutParams;
+        this.setLayoutParamsGravity(gravity);
+        return this;
+    }
+
+    public WindowManager.LayoutParams getLayoutParams() {
+        return mLayoutParams;
+    }
+
+    public FloatWindow setLayoutParamsGravity(int gravity) {
+        this.mLayoutParams.gravity = gravity;
+        return this;
+    }
+
+    public int getLayoutParamsGravity() {
+        return mLayoutParams.gravity;
     }
 
     public void attach() {

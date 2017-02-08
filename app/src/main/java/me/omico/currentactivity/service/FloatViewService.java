@@ -94,9 +94,74 @@ public final class FloatViewService extends Service {
 
     private FloatWindow showFloatView() {
         mFloatWindow = new FloatWindow(this);
-        mFloatWindow.init(view, setLayoutParams()).attach();
+
+//        mFloatWindow.init(view, setLayoutParams()).attach();
+//
+//        mFloatWindow.init(view, setLayoutParams(), Gravity.TOP).attach();
+//
+//        mFloatWindow.init(view).setLayoutParams(setLayoutParams()).attach();
+//
+//        mFloatWindow.init(view).setLayoutParams(setLayoutParams(), Gravity.TOP).attach();
+//
+//        mFloatWindow.init(view, setLayoutParams()).setLayoutParamsGravity(Gravity.BOTTOM).attach();
+//
+//        mFloatWindow
+//                .init(view)
+//                .setLayoutParams(
+//                        WindowManager.LayoutParams.MATCH_PARENT,
+//                        WindowManager.LayoutParams.WRAP_CONTENT,
+//                        getType(),
+//                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+//                                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+//                                | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//                        PixelFormat.TRANSLUCENT)
+//                .setLayoutParamsGravity(Gravity.TOP)
+//                .attach();
+//
+        mFloatWindow
+                .init(view)
+                .setLayoutParams(
+                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        getType(),
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                        PixelFormat.TRANSLUCENT,
+                        Gravity.TOP)
+                .attach();
+
+
         return mFloatWindow;
     }
+
+    private int getType() {
+        int type;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+                type = WindowManager.LayoutParams.TYPE_PHONE;
+            } else {
+                type = WindowManager.LayoutParams.TYPE_TOAST;
+            }
+        } else {
+            type = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        return type;
+    }
+
+//    private WindowManager.LayoutParams setLayoutParams() {
+//        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.WRAP_CONTENT,
+//                getType(),
+//                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+//                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+//                        | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//                PixelFormat.TRANSLUCENT);
+//
+//        layoutParams.gravity = Gravity.TOP;
+//        return layoutParams;
+//    }
 
 
     private void setFloatViewContent() {
@@ -118,32 +183,6 @@ public final class FloatViewService extends Service {
                 return true;
             }
         });
-    }
-
-    private WindowManager.LayoutParams setLayoutParams() {
-        int type;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-                type = WindowManager.LayoutParams.TYPE_PHONE;
-            } else {
-                type = WindowManager.LayoutParams.TYPE_TOAST;
-            }
-        } else {
-            type = WindowManager.LayoutParams.TYPE_PHONE;
-        }
-
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                type,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                PixelFormat.TRANSLUCENT);
-
-        layoutParams.gravity = Gravity.TOP;
-        return layoutParams;
     }
 
     @Override
