@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import me.omico.currentactivity.R;
+import me.omico.util.ApplicationUtil;
 import me.omico.util.root.SU;
 
 public class Util {
@@ -16,8 +17,13 @@ public class Util {
 
             String packageName = requests[0];
             String activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
+            String applicationName = ApplicationUtil.getApplicationNameByPackageName(context, requests[0]);
 
-            return packageName + "\n" + activityName;
+            if (applicationName != null) {
+                return applicationName + " ( " + packageName + " )" + "\n" + activityName;
+            } else {
+                return packageName + "\n" + activityName;
+            }
         }
         return context.getString(R.string.failed_to_get);
     }
