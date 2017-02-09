@@ -1,6 +1,7 @@
 package me.omico.widget;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -11,6 +12,13 @@ public class FloatWindow {
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mLayoutParams;
 
+    private int moveX, moveY;
+    private int deviationAmount = 3;
+
+    private View.OnTouchListener mOnTouchListener;
+    private View.OnClickListener mOnClickListener;
+    private View.OnLongClickListener mOnLongClickListener;
+
     public FloatWindow(Context context) {
         this.mContext = context;
     }
@@ -18,8 +26,13 @@ public class FloatWindow {
     public FloatWindow init(View view, WindowManager.LayoutParams layoutParams) {
         this.mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mView = view;
-//        mView.setId(R.id.float_view_layout);
         this.mLayoutParams = layoutParams;
+
+        if (mOnTouchListener != null) {
+            mView.setOnTouchListener(mOnTouchListener);
+        } else {
+            this.setDefaultFloatWindowGestureListener();
+        }
         return this;
     }
 
@@ -67,6 +80,71 @@ public class FloatWindow {
 
     public int getLayoutParamsGravity() {
         return mLayoutParams.gravity;
+    }
+
+    public void updateFloatWindowPosition(int x, int y, int currentX, int currentY) {
+        mLayoutParams.x = x - currentX;
+        mLayoutParams.y = y - currentY;
+        mWindowManager.updateViewLayout(mView, mLayoutParams);
+    }
+
+    public FloatWindow setFloatWindowOnTouchListener(View.OnTouchListener onTouchListener) {
+        mOnTouchListener = onTouchListener;
+        return this;
+    }
+
+    public FloatWindow setOnFloatWindowClickListener(View.OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
+        return this;
+    }
+
+    public FloatWindow setOnFloatWindowLongClickListener(View.OnLongClickListener onLongClickListener) {
+        mOnLongClickListener = onLongClickListener;
+        return this;
+    }
+
+    public int getGestureDeviationAmount() {
+        return deviationAmount;
+    }
+
+    public FloatWindow setGestureDeviationAmount(int deviationAmount) {
+        this.deviationAmount = deviationAmount;
+        return this;
+    }
+
+    private void setDefaultFloatWindowGestureListener() {
+        mView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int startX = (int) event.getRawX();
+                int startY = (int) event.getRawY();
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        moveX = (int) event.getX();
+                        moveY = (int) event.getY();
+                        break;
+                    }
+                    case MotionEvent.ACTION_MOVE: {
+                        updateFloatWindowPosition(startX, startY, moveX, moveY);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                        int endX = (int) event.getX();
+                        int endY = (int) event.getY();
+                        if (Math.abs(moveX - endX) < deviationAmount || Math.abs(moveY - endY) < deviationAmount) {
+                            if (mOnClickListener != null) {
+                                mView.setOnClickListener(mOnClickListener);
+                            }
+                            if (mOnLongClickListener != null) {
+                                mView.setOnLongClickListener(mOnLongClickListener);
+                            }
+                        }
+                        updateFloatWindowPosition(startX, startY, moveX, moveY);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     public void attach() {
