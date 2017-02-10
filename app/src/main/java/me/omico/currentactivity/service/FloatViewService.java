@@ -19,8 +19,8 @@ import android.widget.TextView;
 
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.util.Util;
+import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
-import me.omico.widget.FloatWindow;
 
 public final class FloatViewService extends Service {
 
