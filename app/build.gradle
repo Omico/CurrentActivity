@@ -23,6 +23,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$rootProject.ext.dependencies.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.dependencies.supportLibraryVersion"
-    compile "com.github.Omico:FloatWindow:$rootProject.ext.dependencies.omicoFloatWindow"
+    compile "me.omico.support.widget:floatwindow:$rootProject.ext.dependencies.omicoFloatWindowVersion"
     compile project(':library')
 }
