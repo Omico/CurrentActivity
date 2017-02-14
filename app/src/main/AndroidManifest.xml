@@ -35,5 +35,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 </manifest>

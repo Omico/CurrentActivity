@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -18,10 +19,13 @@ import android.support.v7.app.AlertDialog;
 
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.service.FloatViewService;
+import me.omico.currentactivity.ui.activity.AboutActivity;
+import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.root.SU;
 
+import static me.omico.currentactivity.Constants.ABOUT;
 import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
 import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
@@ -156,5 +160,15 @@ public class MainFragment extends PreferenceFragment {
 
     private void showSnackBarNoAction(String text, int time) {
         Snackbar.make(activity.findViewById(R.id.main_coordinator_layout), text, time).show();
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        switch (preference.getKey()) {
+            case ABOUT:
+                ActivityUtils.startActivity(activity, AboutActivity.class);
+                break;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
