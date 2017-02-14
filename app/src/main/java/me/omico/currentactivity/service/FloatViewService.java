@@ -22,14 +22,15 @@ import me.omico.currentactivity.util.Util;
 import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
 
+import static me.omico.currentactivity.Constants.ACTION_STOP;
+import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
+
 public final class FloatViewService extends Service {
 
     private FloatWindow mFloatWindow;
     private TextView mTextView;
     private View view;
     private Handler handler = new Handler();
-    private String ACTION_STOP_SERVICE = "me.omico.currentactivity.stop";
-    private int NOTIFICATION_ID = 1080;
     private boolean isStop = false;
 
     @Override
@@ -43,7 +44,7 @@ public final class FloatViewService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
-        if (ACTION_STOP_SERVICE.equals(action)) {
+        if (ACTION_STOP.equals(action)) {
             isStop = true;
             handler.removeCallbacks(runnable);
             stopSelf();
@@ -86,7 +87,7 @@ public final class FloatViewService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
-        Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP_SERVICE);
+        Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
         builder.addAction(android.R.drawable.ic_delete, "Exit", PendingIntent.getService(this, 0, exitIntent, 0));
 
         return builder.build();

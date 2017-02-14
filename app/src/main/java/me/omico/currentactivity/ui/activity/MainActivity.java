@@ -25,13 +25,13 @@ import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.root.SU;
 
+import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
+import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
+
 public final class MainActivity extends AppCompatActivity {
 
     private SwitchCompat swOpen;
     private TextView tvAbout;
-
-    private String IS_FIRST_OPEN = "is_first_open";
-    private int OVERLAY_PERMISSION_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
