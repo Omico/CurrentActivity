@@ -84,8 +84,7 @@ public final class FloatViewService extends Service {
                 .setContentText(Util.getCurrentActivity(this))
                 .setContentIntent(pendingIntent)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                .setSmallIcon(R.mipmap.ic_launcher);
 
         Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
         builder.addAction(android.R.drawable.ic_delete, "Exit", PendingIntent.getService(this, 0, exitIntent, 0));
