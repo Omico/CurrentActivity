@@ -22,6 +22,7 @@ import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.root.SU;
 
+import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
 import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
 import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
@@ -35,6 +36,7 @@ public class MainFragment extends PreferenceFragment {
     private Activity activity;
 
     private SwitchPreference enableFloatWindowPreference;
+    private SwitchPreference bootCompletedPreference;
 
     public MainFragment() {
     }
@@ -50,6 +52,7 @@ public class MainFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.main);
 
         enableFloatWindowPreference = (SwitchPreference) findPreference(ENABLE_FLOAT_WINDOW);
+        bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
 
         initData();
         initListener();
@@ -75,6 +78,14 @@ public class MainFragment extends PreferenceFragment {
                 return true;
             }
         });
+
+        bootCompletedPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, BOOT_COMPLETED, (boolean) newValue);
+                return true;
+            }
+        });
     }
 
     private void showNoticeDialog() {
@@ -83,7 +94,7 @@ public class MainFragment extends PreferenceFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        enableFloatWindowPreference.setEnabled(SU.isRoot());
+                        setPreferenceEnable(SU.isRoot());
                         SharedPreferencesUtils.setDefaultSharedPreferences(activity, IS_FIRST_OPEN, false);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
                     }
@@ -100,7 +111,7 @@ public class MainFragment extends PreferenceFragment {
     @TargetApi(Build.VERSION_CODES.M)
     private void showPermissionDialog() {
         if (!Settings.canDrawOverlays(activity)) {
-            enableFloatWindowPreference.setEnabled(false);
+            setPreferenceEnable(false);
             addDialog(activity, "注意", "需要额外授权“允许出现在其他应用上”的权限！")
                     .setPositiveButton("接受，并授权", new DialogInterface.OnClickListener() {
                         @Override
@@ -126,12 +137,17 @@ public class MainFragment extends PreferenceFragment {
         if (requestCode == OVERLAY_PERMISSION_CODE) {
             if (!Settings.canDrawOverlays(activity)) {
                 showSnackBarNoAction("权限授予失败，无法开启悬浮窗", Snackbar.LENGTH_SHORT);
-                enableFloatWindowPreference.setEnabled(false);
+                setPreferenceEnable(false);
             } else {
                 showSnackBarNoAction("权限授予成功！", Snackbar.LENGTH_SHORT);
-                enableFloatWindowPreference.setEnabled(true);
+                setPreferenceEnable(true);
             }
         }
+    }
+
+    private void setPreferenceEnable(boolean enable) {
+        enableFloatWindowPreference.setEnabled(enable);
+        bootCompletedPreference.setEnabled(enable);
     }
 
     private AlertDialog.Builder addDialog(Context context, String title, String message) {
