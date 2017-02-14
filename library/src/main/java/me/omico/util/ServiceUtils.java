@@ -26,7 +26,7 @@ public class ServiceUtils {
 
     public static boolean isRunning(Context mContext, String serviceClassName) {
         ActivityManager manager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> serviceList = manager.getRunningServices(30);
+        List<ActivityManager.RunningServiceInfo> serviceList = manager.getRunningServices(Integer.MAX_VALUE);
 
         for (ActivityManager.RunningServiceInfo info : serviceList) {
             if (TextUtils.equals(serviceClassName, info.service.getClassName())) {
