@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.ui.fragment.MainFragment;
+import me.omico.util.StatusBarUtils;
 
 public final class MainActivity extends AppCompatActivity {
 
@@ -15,5 +16,7 @@ public final class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getFragmentManager().beginTransaction().replace(R.id.main_fragment, new MainFragment(this)).commit();
+
+        StatusBarUtils.addStatusBarView(this, R.color.colorPrimary);
     }
 }
