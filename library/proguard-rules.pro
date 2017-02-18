@@ -25,4 +25,4 @@
 -keep class com.android.support.**{ *; }
 
 -keep class me.omico.util.**{ *; }
--keep class me.omico.widget.**{ *; }
+-keep class me.omico.support.**{ *; }
