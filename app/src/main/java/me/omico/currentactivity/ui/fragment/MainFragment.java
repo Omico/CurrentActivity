@@ -65,6 +65,8 @@ public class MainFragment extends PreferenceFragment {
 
         enableFloatWindowPreference = (SwitchPreference) findPreference(ENABLE_FLOAT_WINDOW);
         bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
+
+        initShortcut();
     }
 
     @Override
@@ -74,16 +76,18 @@ public class MainFragment extends PreferenceFragment {
         initListener();
     }
 
-    private void initData() {
-        if (SharedPreferencesUtils.getDefaultSharedPreferences(activity, IS_FIRST_OPEN, true)) {
-            showNoticeDialog();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcuts();
+    private void initShortcut() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
         if (activity.getIntent().getAction().equals(ACTION_QUICK_START) ||
                 activity.getIntent().getBooleanExtra(IS_SHORTCUT_OPEN, false))
             ServiceUtils.startService(activity, FloatViewService.class);
+    }
+
+    private void initData() {
+        if (SharedPreferencesUtils.getDefaultSharedPreferences(activity, IS_FIRST_OPEN, true)) {
+            showNoticeDialog();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
 
         enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
     }
@@ -167,8 +171,8 @@ public class MainFragment extends PreferenceFragment {
         }
     }
 
-    @TargetApi(25)
-    private void createShortcuts() {
+    @TargetApi(Build.VERSION_CODES.N_MR1)
+    private void createShortcut() {
         ShortcutManager shortcutManager = activity.getSystemService(ShortcutManager.class);
 
         Intent intent = new Intent(activity, MainActivity.class);
