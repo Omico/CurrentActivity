@@ -15,4 +15,6 @@
     <string name="failed_to_get">Failed to get current activity.</string>
     <string name="title_activity_about">About</string>
     <string name="version" formatted="false" translatable="false">Version: %s:%s(%d)</string>
+    <string name="quick_enable">Quick enable</string>
+    <string name="enable_float_window">Enable float window</string>
 </resources>

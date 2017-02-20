@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,18 +20,23 @@ import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 
+import java.util.Collections;
+
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
+import me.omico.currentactivity.ui.activity.MainActivity;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.root.SU;
 
 import static me.omico.currentactivity.Constants.ABOUT;
+import static me.omico.currentactivity.Constants.ACTION_QUICK_START;
 import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
 import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
+import static me.omico.currentactivity.Constants.IS_SHORTCUT_OPEN;
 import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
 
 /**
@@ -57,7 +65,11 @@ public class MainFragment extends PreferenceFragment {
 
         enableFloatWindowPreference = (SwitchPreference) findPreference(ENABLE_FLOAT_WINDOW);
         bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         initData();
         initListener();
     }
@@ -66,6 +78,12 @@ public class MainFragment extends PreferenceFragment {
         if (SharedPreferencesUtils.getDefaultSharedPreferences(activity, IS_FIRST_OPEN, true)) {
             showNoticeDialog();
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcuts();
+
+        if (activity.getIntent().getAction().equals(ACTION_QUICK_START) ||
+                activity.getIntent().getBooleanExtra(IS_SHORTCUT_OPEN, false))
+            ServiceUtils.startService(activity, FloatViewService.class);
 
         enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
     }
@@ -147,6 +165,25 @@ public class MainFragment extends PreferenceFragment {
                 setPreferenceEnable(true);
             }
         }
+    }
+
+    @TargetApi(25)
+    private void createShortcuts() {
+        ShortcutManager shortcutManager = activity.getSystemService(ShortcutManager.class);
+
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.setAction(ACTION_QUICK_START);
+        intent.putExtra(IS_SHORTCUT_OPEN, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        ShortcutInfo shortcut = new ShortcutInfo.Builder(activity, "shortcut_open")
+                .setShortLabel(getString(R.string.quick_enable))
+                .setLongLabel(getString(R.string.enable_float_window))
+                .setIcon(Icon.createWithResource(activity, R.mipmap.ic_launcher))
+                .setIntent(intent)
+                .build();
+
+        shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
     }
 
     private void setPreferenceEnable(boolean enable) {
