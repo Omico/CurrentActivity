@@ -13,6 +13,8 @@ public class Constants {
     public static final String ABOUT = "about";
 
     public static final String IS_FIRST_OPEN = "is_first_open";
+    public static final String IS_SHORTCUT_OPEN = "is_shortcut_open";
 
+    public static final String ACTION_QUICK_START = "me.omico.currentactivity.quick_start";
     public static final String ACTION_STOP = "me.omico.currentactivity.stop";
 }
