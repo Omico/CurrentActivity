@@ -23,12 +23,12 @@ ext {
     ]
 }
 
-def getVersionCode() {
+static def getVersionCode() {
     def cmd = 'git rev-list HEAD --count'
     return cmd.execute().text.trim().toInteger()
 }
 
-def getVersionName() {
+static def getVersionName() {
     def cmd = 'git describe --tags --dirty'
     return cmd.execute().text.trim()
 }
