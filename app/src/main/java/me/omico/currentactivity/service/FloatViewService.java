@@ -26,6 +26,7 @@ import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
 
 public final class FloatViewService extends Service {
 
+    private NotificationManager notificationManager;
     private FloatWindow mFloatWindow;
     private TextView mTextView;
     private View view;
@@ -34,6 +35,7 @@ public final class FloatViewService extends Service {
 
     @Override
     public void onCreate() {
+        notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
         startForeground(NOTIFICATION_ID, notificationMethod());
         setFloatViewContent();
         showFloatView();
@@ -58,8 +60,7 @@ public final class FloatViewService extends Service {
     }
 
     private void updateNotification() {
-        if (!isStop)
-            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID, notificationMethod());
+        if (!isStop) notificationManager.notify(NOTIFICATION_ID, notificationMethod());
     }
 
     private Runnable runnable = new Runnable() {
@@ -198,7 +199,7 @@ public final class FloatViewService extends Service {
         super.onDestroy();
         isStop = true;
         stopForeground(true);
-        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
+        notificationManager.cancel(NOTIFICATION_ID);
         mFloatWindow.detach();
     }
 }
