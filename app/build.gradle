@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -25,4 +26,7 @@ dependencies {
     compile "com.android.support:design:$rootProject.ext.dependencies.supportLibraryVersion"
     compile "me.omico.support.widget:floatwindow:$rootProject.ext.dependencies.omicoFloatWindowVersion"
     compile project(':library')
+
+    // Firebase Crash Reporting
+    compile 'com.google.firebase:firebase-crash:9.6.1'
 }

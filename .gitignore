@@ -36,3 +36,6 @@ build/
 .DS_Store
 
 *.keystore
+
+# Google Services file
+app/google-services.json
