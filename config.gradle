@@ -18,7 +18,7 @@ ext {
     ]
 
     dependencies = [
-            supportLibraryVersion  : "25.2.0",
+            supportLibraryVersion  : "25.3.1",
             omicoFloatWindowVersion: "1.0.0"
     ]
 }
