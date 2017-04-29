@@ -15,7 +15,7 @@ public final class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getFragmentManager().beginTransaction().replace(R.id.main_fragment, new MainFragment(this)).commit();
+        getFragmentManager().beginTransaction().replace(R.id.main_fragment, new MainFragment()).commit();
 
         StatusBarUtils.addStatusBarView(this, R.color.colorPrimary);
     }

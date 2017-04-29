@@ -1,6 +1,5 @@
 package me.omico.currentactivity.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -53,15 +52,12 @@ public class MainFragment extends PreferenceFragment {
     public MainFragment() {
     }
 
-    @SuppressLint("ValidFragment")
-    public MainFragment(Activity activity) {
-        this.activity = activity;
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.main);
+
+        this.activity = MainFragment.this.getActivity();
 
         enableFloatWindowPreference = (SwitchPreference) findPreference(ENABLE_FLOAT_WINDOW);
         bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
