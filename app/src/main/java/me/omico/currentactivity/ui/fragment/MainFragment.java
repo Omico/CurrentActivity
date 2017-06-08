@@ -11,6 +11,7 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -34,6 +35,8 @@ import static me.omico.currentactivity.Constants.ABOUT;
 import static me.omico.currentactivity.Constants.ACTION_QUICK_START;
 import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
 import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.Constants.GESTURE_CLICK;
+import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
 import static me.omico.currentactivity.Constants.IS_SHORTCUT_OPEN;
 import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
@@ -48,6 +51,8 @@ public class MainFragment extends PreferenceFragment {
 
     private SwitchPreference enableFloatWindowPreference;
     private SwitchPreference bootCompletedPreference;
+    private ListPreference gestureClickPreference;
+    private ListPreference gestureLongPressPreference;
 
     public MainFragment() {
     }
@@ -61,6 +66,8 @@ public class MainFragment extends PreferenceFragment {
 
         enableFloatWindowPreference = (SwitchPreference) findPreference(ENABLE_FLOAT_WINDOW);
         bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
+        gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
+        gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
 
         initShortcut();
     }
@@ -105,6 +112,22 @@ public class MainFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 SharedPreferencesUtils.setDefaultSharedPreferences(activity, BOOT_COMPLETED, (boolean) newValue);
+                return true;
+            }
+        });
+
+        gestureClickPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_CLICK, (String) newValue);
+                return true;
+            }
+        });
+
+        gestureLongPressPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_LONG_PRESS, (String) newValue);
                 return true;
             }
         });
@@ -189,6 +212,8 @@ public class MainFragment extends PreferenceFragment {
     private void setPreferenceEnable(boolean enable) {
         enableFloatWindowPreference.setEnabled(enable);
         bootCompletedPreference.setEnabled(enable);
+        gestureClickPreference.setEnabled(enable);
+        gestureLongPressPreference.setEnabled(enable);
     }
 
     private AlertDialog.Builder addDialog(Context context, String title, String message) {

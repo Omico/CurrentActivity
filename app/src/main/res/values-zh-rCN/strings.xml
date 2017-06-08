@@ -6,6 +6,12 @@
     <string name="quick_enable">快速打开</string>
     <string name="enable_float_window">开启悬浮窗</string>
     <string name="boot_completed">开机启动</string>
+    <string name="gesture_click">点击</string>
+    <string name="gesture_click_label">点击：%1$s</string>
+    <string name="gesture_copy">复制</string>
+    <string name="gesture_hide">隐藏</string>
+    <string name="gesture_long_press">长按</string>
+    <string name="gesture_long_press_label">长按：%1$s</string>
     <string name="about">关于</string>
     <string name="about_author">
         "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"

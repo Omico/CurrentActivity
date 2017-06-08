@@ -22,8 +22,12 @@ import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
 import me.omico.util.SharedPreferencesUtils;
 
+import static me.omico.currentactivity.Constants.ACTION_GESTURE_COPY;
+import static me.omico.currentactivity.Constants.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.Constants.ACTION_STOP;
 import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.Constants.GESTURE_CLICK;
+import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
 
 public final class FloatViewService extends Service {
@@ -155,19 +159,30 @@ public final class FloatViewService extends Service {
         mFloatWindow.setOnFloatWindowClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFloatWindow.hide();
+                loadGestureAction(GESTURE_CLICK);
             }
         });
 
         mFloatWindow.setOnFloatWindowLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
+                loadGestureAction(GESTURE_LONG_PRESS);
                 return true;
             }
         });
 
         return mFloatWindow;
+    }
+
+    private void loadGestureAction(String key) {
+        switch (SharedPreferencesUtils.getDefaultSharedPreferences(getApplicationContext(), key, "")) {
+            case ACTION_GESTURE_HIDE:
+                mFloatWindow.hide();
+                break;
+            case ACTION_GESTURE_COPY:
+                ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
+                break;
+        }
     }
 
     private int getType() {

@@ -5,6 +5,14 @@
     <string name="quick_enable">Quick enable</string>
     <string name="enable_float_window">Enable float window</string>
     <string name="boot_completed">Boot completed</string>
+    <string name="gesture_click">Click</string>
+    <string name="gesture_long_press">Long press</string>
+    <string name="gesture_copy">Copy</string>
+    <string name="gesture_hide">Hide</string>
+    <string name="gesture_click_label">Click: %1$s</string>
+    <string name="gesture_long_press_label">Long press: %1$s</string>
+    <string name="default_gesture_click_value" translatable="false">me.omico.currentactivity.action.gesture_hide</string>
+    <string name="default_gesture_long_press_value" translatable="false">me.omico.currentactivity.action.gesture_copy</string>
     <string name="about">About</string>
     <string name="version" formatted="false" translatable="false">Version: %1$s:%2$s(%3$d)</string>
     <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>

@@ -10,6 +10,22 @@
         android:key="boot_completed"
         android:title="@string/boot_completed"/>
 
+    <ListPreference
+        android:defaultValue="@string/default_gesture_click_value"
+        android:entries="@array/gesture_entries"
+        android:entryValues="@array/gesture_values"
+        android:key="gesture_click"
+        android:summary="@string/gesture_click_label"
+        android:title="@string/gesture_click"/>
+
+    <ListPreference
+        android:defaultValue="@string/default_gesture_long_press_value"
+        android:entries="@array/gesture_entries"
+        android:entryValues="@array/gesture_values"
+        android:key="gesture_long_press"
+        android:summary="@string/gesture_long_press_label"
+        android:title="@string/gesture_long_press"/>
+
     <Preference
         android:key="about"
         android:title="@string/about"/>
