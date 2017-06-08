@@ -6,9 +6,9 @@ A current activity watcher.
 
 ## Screenshot 屏幕截图
 
-![Screenshot_1](Screenshot/Screenshot_1.png)
+![Screenshot_1.png](https://ooo.0o0.ooo/2017/06/08/59392c282bc69.png)
 
-![Screenshot_2](Screenshot/Screenshot_2.png)
+![Screenshot_2.png](https://ooo.0o0.ooo/2017/06/08/59392c26015c7.png)
 
 ## License 许可证
 
