@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">当前进程</string>
     <string name="tip">点击后隐藏到通知栏</string>
+    <string name="failed_to_get">无法获取当前进程。</string>
+    <string name="quick_enable">快速打开</string>
+    <string name="enable_float_window">开启悬浮窗</string>
+    <string name="boot_completed">开机启动</string>
+    <string name="about">关于</string>
     <string name="about_author">
         "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"
 
@@ -12,8 +17,4 @@
 
         "PS：感谢 iAcn（Leon连续）、 drakeet 审察源码"
     </string>
-    <string name="failed_to_get">无法获取当前进程。</string>
-    <string name="title_activity_about">关于</string>
-    <string name="quick_enable">快速打开</string>
-    <string name="enable_float_window">开启悬浮窗</string>
 </resources>

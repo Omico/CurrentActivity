@@ -4,12 +4,13 @@
     <SwitchPreference
         android:defaultValue="false"
         android:key="enable_float_window"
-        android:title="开启悬浮窗"/>
+        android:title="@string/enable_float_window"/>
     <SwitchPreference
         android:defaultValue="false"
         android:key="boot_completed"
-        android:title="开机启动"/>
+        android:title="@string/boot_completed"/>
+
     <Preference
         android:key="about"
-        android:title="关于"/>
+        android:title="@string/about"/>
 </PreferenceScreen>

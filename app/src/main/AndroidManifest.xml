@@ -37,7 +37,7 @@
         </receiver>
         <activity
             android:name=".ui.activity.AboutActivity"
-            android:label="@string/title_activity_about"
+            android:label="@string/about"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
