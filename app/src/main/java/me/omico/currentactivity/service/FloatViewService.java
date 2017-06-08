@@ -20,8 +20,10 @@ import me.omico.currentactivity.R;
 import me.omico.currentactivity.util.Util;
 import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
+import me.omico.util.SharedPreferencesUtils;
 
 import static me.omico.currentactivity.Constants.ACTION_STOP;
+import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
 
 public final class FloatViewService extends Service {
@@ -48,6 +50,7 @@ public final class FloatViewService extends Service {
         if (ACTION_STOP.equals(action)) {
             isStop = true;
             handler.removeCallbacks(runnable);
+            SharedPreferencesUtils.setDefaultSharedPreferences(getApplicationContext(), ENABLE_FLOAT_WINDOW, false);
             stopSelf();
         }
 
