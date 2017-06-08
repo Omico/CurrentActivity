@@ -26,8 +26,7 @@
         <service
             android:name=".service.FloatViewService"
             android:enabled="true"
-            android:exported="true"
-            android:process=":process"/>
+            android:exported="true"/>
         <receiver
             android:name=".receiver.BootCompletedReceiver"
             android:enabled="true"
