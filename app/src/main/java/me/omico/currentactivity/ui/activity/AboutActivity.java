@@ -20,7 +20,7 @@ public class AboutActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.title_activity_about);
+        getSupportActionBar().setTitle(R.string.about);
 
         TextView appVersion = (TextView) findViewById(R.id.app_version);
         TextView about = (TextView) findViewById(R.id.about);
