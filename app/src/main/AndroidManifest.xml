@@ -23,10 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="@string/about"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <service
             android:name=".service.FloatViewService"
-            android:enabled="true"
-            android:exported="true"/>
+            android:enabled="true"/>
+
         <receiver
             android:name=".receiver.BootCompletedReceiver"
             android:enabled="true"
@@ -35,10 +41,5 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <activity
-            android:name=".ui.activity.AboutActivity"
-            android:label="@string/about"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
     </application>
 </manifest>
