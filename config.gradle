@@ -1,6 +1,6 @@
 ext {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.0"
 
     app = [
             applicationId   : "me.omico.currentactivity",
@@ -18,7 +18,7 @@ ext {
     ]
 
     dependencies = [
-            supportLibraryVersion  : "25.3.1",
+            supportLibraryVersion  : "26.0.0-alpha1",
             omicoFloatWindowVersion: "1.0.0"
     ]
 }
