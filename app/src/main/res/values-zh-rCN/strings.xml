@@ -23,4 +23,8 @@
 
         "PS：感谢 iAcn（Leon连续）、 drakeet 审察源码"
     </string>
+    <string name="enable">开启</string>
+    <string name="disable">关闭</string>
+    <string name="unavailable">不可用</string>
+    <string name="quick_settings_tile_is_unavailable">快速设置不可用</string>
 </resources>
