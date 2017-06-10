@@ -26,4 +26,8 @@
 
         "PS：Thanks iAcn（Leon连续）, drakeet review my code"
     </string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="quick_settings_tile_is_unavailable">Quick settings tile is unavailable</string>
 </resources>
