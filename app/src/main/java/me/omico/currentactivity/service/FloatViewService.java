@@ -185,26 +185,27 @@ public final class FloatViewService extends Service {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private int getType() {
-        int type;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-                type = WindowManager.LayoutParams.TYPE_PHONE;
-            } else {
-                type = WindowManager.LayoutParams.TYPE_TOAST;
-            }
-        } else {
-            type = WindowManager.LayoutParams.TYPE_PHONE;
+        int type = WindowManager.LayoutParams.TYPE_PHONE;
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            type = WindowManager.LayoutParams.TYPE_TOAST;
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }
+
         return type;
     }
 
     private void setFloatViewContent() {
         view = View.inflate(this, R.layout.pop_view, null);
-        mTextView = (TextView) view.findViewById(R.id.pop_view_text);
-        view.setSystemUiVisibility(view.getSystemUiVisibility()
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        mTextView = view.findViewById(R.id.pop_view_text);
+        view.setSystemUiVisibility(
+                view.getSystemUiVisibility()
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        );
     }
 
     @Override
