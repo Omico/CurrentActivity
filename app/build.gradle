@@ -1,5 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.22.2'
+    }
+}
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -27,6 +41,8 @@ dependencies {
     compile "me.omico.support.widget:floatwindow:$rootProject.ext.dependencies.omicoFloatWindowVersion"
     compile project(':library')
 
-    // Firebase Crash Reporting
-    compile 'com.google.firebase:firebase-crash:9.6.1'
+    // Crashlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
 }

@@ -37,5 +37,4 @@ build/
 
 *.keystore
 
-# Google Services file
-app/google-services.json
+app/fabric.properties
