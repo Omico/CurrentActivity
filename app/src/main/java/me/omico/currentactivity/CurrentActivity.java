@@ -2,19 +2,19 @@ package me.omico.currentactivity;
 
 import android.app.Application;
 
-import com.google.firebase.crash.FirebaseCrash;
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
- * Created by yuwen on 17-4-15.
+ * @author Omico
  */
 
 public class CurrentActivity extends Application {
-    static {
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e) {
-                FirebaseCrash.report(e);
-            }
-        });
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Fabric.with(this, new Crashlytics());
     }
 }
