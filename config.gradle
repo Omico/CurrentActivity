@@ -24,11 +24,13 @@ ext {
 }
 
 static def getVersionCode() {
-    def cmd = 'git rev-list HEAD --count'
-    return cmd.execute().text.trim().toInteger()
+    return readCommand('git rev-list HEAD --count').toInteger()
 }
 
 static def getVersionName() {
-    def cmd = 'git describe --tags --dirty'
+    return readCommand('git describe --tags --dirty')
+}
+
+static def readCommand(String cmd) {
     return cmd.execute().text.trim()
 }
