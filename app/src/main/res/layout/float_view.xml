@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#48000000">
 
     <LinearLayout
-        android:id="@+id/pop_view_content_view"
-        android:layout_width="match_parent"
+        android:id="@+id/float_view_content_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:orientation="vertical"
         android:paddingBottom="16dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="24dp">
+        android:paddingTop="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
             android:includeFontPadding="false"
             android:text="@string/tip"
             android:textColor="#ffffff"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/pop_view_text"
+            android:id="@+id/float_view_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="start"
+            android:layout_marginTop="8dp"
             android:includeFontPadding="false"
             android:textColor="#ffffff"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

@@ -38,6 +38,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$rootProject.ext.dependencies.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.dependencies.supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$rootProject.ext.dependencies.supportConstraintLayoutVersion"
     compile "me.omico.support.widget:floatwindow:$rootProject.ext.dependencies.omicoFloatWindowVersion"
     compile project(':library')
 
