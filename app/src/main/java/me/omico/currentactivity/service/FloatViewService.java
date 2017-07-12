@@ -199,8 +199,8 @@ public final class FloatViewService extends Service {
     }
 
     private void setFloatViewContent() {
-        view = View.inflate(this, R.layout.pop_view, null);
-        mTextView = view.findViewById(R.id.pop_view_text);
+        view = View.inflate(this, R.layout.float_view, null);
+        mTextView = view.findViewById(R.id.float_view_text);
         view.setSystemUiVisibility(
                 view.getSystemUiVisibility()
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
