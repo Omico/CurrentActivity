@@ -34,6 +34,7 @@ public final class FloatViewService extends Service {
 
     private NotificationManager notificationManager;
     private FloatWindow mFloatWindow;
+    private TextView tipTextView;
     private TextView mTextView;
     private View view;
     private Handler handler = new Handler();
@@ -43,7 +44,7 @@ public final class FloatViewService extends Service {
     public void onCreate() {
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
         startForeground(NOTIFICATION_ID, notificationMethod());
-        setFloatViewContent();
+        initFloatViewContent();
         showFloatView();
         setCurrentActivity();
     }
@@ -198,13 +199,23 @@ public final class FloatViewService extends Service {
         return type;
     }
 
-    private void setFloatViewContent() {
+    private void initFloatViewContent() {
         view = View.inflate(this, R.layout.float_view, null);
+        tipTextView = view.findViewById(R.id.float_view_tip);
         mTextView = view.findViewById(R.id.float_view_text);
         view.setSystemUiVisibility(
                 view.getSystemUiVisibility()
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        );
+
+        handler.postDelayed(
+                new Runnable() {
+                    public void run() {
+                        tipTextView.setVisibility(View.GONE);
+                    }
+                },
+                5000
         );
     }
 

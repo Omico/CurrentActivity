@@ -26,12 +26,13 @@
         tools:layout_constraintTop_creator="1">
 
         <TextView
+            android:id="@+id/float_view_tip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:text="@string/tip"
             android:textColor="#ffffff"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/float_view_text"
@@ -40,6 +41,6 @@
             android:layout_marginTop="8dp"
             android:includeFontPadding="false"
             android:textColor="#ffffff"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
