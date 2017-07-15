@@ -69,7 +69,7 @@ public class MainFragment extends PreferenceFragment {
         gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
         gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
 
-        initShortcut();
+        initQuickStartAndShortcut();
     }
 
     @Override
@@ -79,12 +79,21 @@ public class MainFragment extends PreferenceFragment {
         initListener();
     }
 
-    private void initShortcut() {
+    private void initQuickStartAndShortcut() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
-        if (activity.getIntent().getAction().equals(ACTION_QUICK_START) ||
-                activity.getIntent().getBooleanExtra(IS_SHORTCUT_OPEN, false))
+        if (isQuickStartOrShortCutEnable())
             ServiceUtils.startService(activity, FloatViewService.class);
+    }
+
+    private boolean isQuickStartOrShortCutEnable() {
+        Intent intent = activity.getIntent();
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null) return action.equals(ACTION_QUICK_START);
+            return intent.getBooleanExtra(IS_SHORTCUT_OPEN, false);
+        }
+        return false;
     }
 
     private void initData() {
