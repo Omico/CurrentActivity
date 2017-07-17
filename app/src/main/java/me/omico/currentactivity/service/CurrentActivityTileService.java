@@ -12,7 +12,7 @@ import me.omico.util.ServiceUtils;
 import me.omico.util.root.SU;
 
 /**
- * Created by yuwen on 17-6-9.
+ * @author Omico 2017/6/9
  */
 
 @TargetApi(Build.VERSION_CODES.N)
