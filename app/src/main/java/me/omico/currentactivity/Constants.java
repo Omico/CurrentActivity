@@ -1,7 +1,7 @@
 package me.omico.currentactivity;
 
 /**
- * Created by Omico on 2017/2/13.
+ * @author Omico 2017/2/13
  */
 
 public final class Constants {

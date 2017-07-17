@@ -42,7 +42,7 @@ import static me.omico.currentactivity.Constants.IS_SHORTCUT_OPEN;
 import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
 
 /**
- * Created by Omico on 2017/2/13.
+ * @author Omico 2017/2/13
  */
 
 public class MainFragment extends PreferenceFragment {
