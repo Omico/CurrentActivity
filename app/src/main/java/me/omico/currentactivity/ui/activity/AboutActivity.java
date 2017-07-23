@@ -11,6 +11,10 @@ import me.omico.currentactivity.BuildConfig;
 import me.omico.currentactivity.R;
 import me.omico.util.ClipboardUtils;
 
+/**
+ * @author Omico
+ */
+
 public class AboutActivity extends AppCompatActivity {
 
     @Override

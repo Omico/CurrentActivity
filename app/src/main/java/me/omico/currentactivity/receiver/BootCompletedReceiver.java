@@ -11,6 +11,10 @@ import me.omico.util.SharedPreferencesUtils;
 
 import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
 
+/**
+ * @author Omico
+ */
+
 public class BootCompletedReceiver extends WakefulBroadcastReceiver {
 
     @Override

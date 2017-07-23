@@ -9,7 +9,7 @@ import android.widget.Toast;
 import me.omico.R;
 
 /**
- * Created by Omico on 2017/2/7.
+ * @author Omico 2017/2/7
  */
 
 public class ClipboardUtils {

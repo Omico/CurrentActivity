@@ -4,10 +4,11 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 
 /**
- * Created by yuwen on 17-1-22.
+ * @author Omico 2017/1/22
  */
 
 public class SharedPreferencesUtils {
+
     public static String getDefaultSharedPreferences(Context context, String key, String defaultValue) {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, defaultValue);
     }

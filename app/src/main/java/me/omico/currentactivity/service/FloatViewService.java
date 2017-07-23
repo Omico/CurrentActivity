@@ -30,6 +30,10 @@ import static me.omico.currentactivity.Constants.GESTURE_CLICK;
 import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
 
+/**
+ * @author Omico
+ */
+
 public final class FloatViewService extends Service {
 
     private NotificationManager notificationManager;
