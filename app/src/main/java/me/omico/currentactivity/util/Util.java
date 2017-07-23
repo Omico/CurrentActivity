@@ -7,6 +7,10 @@ import me.omico.currentactivity.R;
 import me.omico.util.ApplicationUtil;
 import me.omico.util.root.SU;
 
+/**
+ * @author Omico
+ */
+
 public class Util {
 
     public static String getCurrentActivity(Context context) {

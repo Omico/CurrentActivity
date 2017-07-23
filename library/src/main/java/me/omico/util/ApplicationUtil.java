@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 /**
- * Created by Omico on 2017/2/8.
+ * @author Omico 2017/2/8
  */
 
 public class ApplicationUtil {
+
     public static String getApplicationNameByPackageName(Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         String applicationName = null;

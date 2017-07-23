@@ -8,10 +8,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
- * Created by yuwen on 17-1-20.
+ * @author Omico 2017/1/20
  */
 
 public class SU {
+
     private Process process;
     private BufferedWriter mOutputWriter;
     private BufferedReader mInputReader;

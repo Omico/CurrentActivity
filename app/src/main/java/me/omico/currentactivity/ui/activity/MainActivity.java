@@ -8,6 +8,10 @@ import me.omico.currentactivity.R;
 import me.omico.currentactivity.ui.fragment.MainFragment;
 import me.omico.util.StatusBarUtils;
 
+/**
+ * @author Omico
+ */
+
 public final class MainActivity extends AppCompatActivity {
 
     @Override

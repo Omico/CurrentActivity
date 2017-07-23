@@ -5,6 +5,7 @@ package me.omico.currentactivity;
  */
 
 public final class Constants {
+
     public static final int OVERLAY_PERMISSION_CODE = 0;
     public static final int NOTIFICATION_ID = 1080;
 

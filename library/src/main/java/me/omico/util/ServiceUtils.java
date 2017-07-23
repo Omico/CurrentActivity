@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import java.util.List;
 
 /**
- * Created by yuwen on 17-1-24.
+ * @author Omico 2017/1/24
  */
 
 public class ServiceUtils {

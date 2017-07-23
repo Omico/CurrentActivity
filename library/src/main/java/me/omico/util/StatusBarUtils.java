@@ -8,10 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Omico on 2/16/2017.
+ * @author Omico 2017/2/16
  */
 
 public class StatusBarUtils {
+
     public static void addStatusBarView(Activity activity, @ColorRes int statusBarColor) {
         View statusBarView = new View(activity);
         statusBarView.setBackgroundColor(ContextCompat.getColor(activity, statusBarColor));
