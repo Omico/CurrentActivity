@@ -87,7 +87,7 @@ public class SU {
         return su;
     }
 
-    public static boolean isRoot() {
+    public static boolean isRooted() {
         try {
             Process process = Runtime.getRuntime().exec("su");
             DataOutputStream dataOutputStream = new DataOutputStream(process.getOutputStream());

@@ -27,7 +27,7 @@ public class CurrentActivityTileService extends TileService {
         tile = getQsTile();
         icon = Icon.createWithResource(getApplicationContext(), R.mipmap.ic_launcher);
 
-        if (SU.isRoot()) {
+        if (SU.isRooted()) {
             if (ServiceUtils.isRunning(getApplicationContext(), FloatViewService.class.getName())) {
                 setTile(icon, getString(R.string.enable), Tile.STATE_ACTIVE);
             } else {
