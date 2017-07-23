@@ -29,6 +29,7 @@ import me.omico.currentactivity.ui.activity.MainActivity;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 import me.omico.util.SharedPreferencesUtils;
+import me.omico.util.device.CheckOSVariant;
 import me.omico.util.root.SU;
 
 import static me.omico.currentactivity.Constants.ABOUT;
@@ -40,6 +41,7 @@ import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
 import static me.omico.currentactivity.Constants.IS_SHORTCUT_OPEN;
 import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
+import static me.omico.util.device.CheckOSVariant.ZUI;
 
 /**
  * @author Omico 2017/2/13
@@ -166,23 +168,7 @@ public class MainFragment extends PreferenceFragment {
     private void showPermissionDialog() {
         if (!Settings.canDrawOverlays(activity)) {
             setPreferenceEnable(false);
-            addDialog(activity, "注意", "需要额外授权“允许出现在其他应用上”的权限！")
-                    .setPositiveButton("接受，并授权", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    Uri.parse("package:" + activity.getPackageName()));
-                            startActivityForResult(intent, OVERLAY_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("放弃并退出", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            activity.finish();
-                        }
-                    }).create().show();
+            createOSVariantDialog();
         }
     }
 
@@ -216,6 +202,49 @@ public class MainFragment extends PreferenceFragment {
                 .build();
 
         shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
+    }
+
+    private void createOSVariantDialog() {
+        final Intent intent;
+        String packageName;
+        String className;
+        String tip;
+
+        CheckOSVariant checkOSVariant = new CheckOSVariant().init();
+
+        switch (checkOSVariant.getOSVariant()) {
+            case ZUI:
+                intent = new Intent(Intent.ACTION_VIEW);
+                packageName = "com.zui.appsmanager";
+                className = "com.zui.appsmanager.MainActivity";
+                tip = "ZUI 的用户请选择 【当前进程】 -> 【权限管理】 授予允许 【显示悬浮窗】 的权限";
+                break;
+            default:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("package:" + activity.getPackageName()));
+                packageName = "com.android.settings";
+                className = "com.android.settings.Settings$AppDrawOverlaySettingsActivity";
+                tip = "需要额外授权 【允许出现在其他应用上】 的权限！";
+                break;
+        }
+
+        intent.setClassName(packageName, className);
+
+        addDialog(activity, "注意", tip)
+                .setPositiveButton("接受，并授权", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                        startActivityForResult(intent, OVERLAY_PERMISSION_CODE);
+                    }
+                })
+                .setNegativeButton("放弃并退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        activity.finish();
+                    }
+                }).create().show();
     }
 
     private void setPreferenceEnable(boolean enable) {
