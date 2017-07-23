@@ -148,7 +148,7 @@ public class MainFragment extends PreferenceFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        setPreferenceEnable(SU.isRoot());
+                        setPreferenceEnable(SU.isRooted());
                         SharedPreferencesUtils.setDefaultSharedPreferences(activity, IS_FIRST_OPEN, false);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
                     }
