@@ -13,7 +13,7 @@ public class Property {
     private static final String SYSTEM_PROPERTIES = "android.os.SystemProperties";
     private static final String GET = "get";
     private static final String SET = "set";
-    private static final String UNKNOWN = "unknown";
+    static final String UNKNOWN = "unknown";
 
     private static Class<?> c;
 
