@@ -32,11 +32,14 @@ public class ServiceUtils {
 
     public static boolean isRunning(Context mContext, String serviceClassName) {
         ActivityManager manager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> serviceList = manager.getRunningServices(Integer.MAX_VALUE);
-
-        for (ActivityManager.RunningServiceInfo info : serviceList) {
-            if (TextUtils.equals(serviceClassName, info.service.getClassName())) {
-                return true;
+        if (manager != null) {
+            List<ActivityManager.RunningServiceInfo> serviceList = manager.getRunningServices(Integer.MAX_VALUE);
+            if (serviceList != null) {
+                for (ActivityManager.RunningServiceInfo info : serviceList) {
+                    if (TextUtils.equals(serviceClassName, info.service.getClassName())) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
