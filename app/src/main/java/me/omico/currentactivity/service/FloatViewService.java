@@ -17,18 +17,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import me.omico.currentactivity.R;
+import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.util.Util;
 import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
-import me.omico.util.SharedPreferencesUtils;
 
-import static me.omico.currentactivity.Constants.ACTION_GESTURE_COPY;
-import static me.omico.currentactivity.Constants.ACTION_GESTURE_HIDE;
-import static me.omico.currentactivity.Constants.ACTION_STOP;
-import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
-import static me.omico.currentactivity.Constants.GESTURE_CLICK;
-import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
-import static me.omico.currentactivity.Constants.NOTIFICATION_ID;
+import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
+import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
+import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
+import static me.omico.currentactivity.provider.Settings.ACTION_STOP;
+import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 
 /**
  * @author Omico
@@ -59,7 +59,7 @@ public final class FloatViewService extends Service {
         if (ACTION_STOP.equals(action)) {
             isStop = true;
             handler.removeCallbacks(runnable);
-            SharedPreferencesUtils.setDefaultSharedPreferences(getApplicationContext(), ENABLE_FLOAT_WINDOW, false);
+            Settings.putBoolean(ENABLE_FLOAT_WINDOW, false);
             stopSelf();
         }
 
@@ -178,7 +178,7 @@ public final class FloatViewService extends Service {
     }
 
     private void loadGestureAction(String key) {
-        switch (SharedPreferencesUtils.getDefaultSharedPreferences(getApplicationContext(), key, "")) {
+        switch (Settings.getString(key, "")) {
             case ACTION_GESTURE_HIDE:
                 mFloatWindow.hide();
                 break;
