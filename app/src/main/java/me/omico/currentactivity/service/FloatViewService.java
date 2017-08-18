@@ -49,7 +49,7 @@ public final class FloatViewService extends Service {
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
         startForeground(NOTIFICATION_ID, notificationMethod());
         initFloatViewContent();
-        showFloatView();
+        initFloatView();
         setCurrentActivity();
     }
 
@@ -120,7 +120,7 @@ public final class FloatViewService extends Service {
     }
     */
 
-    private FloatWindow showFloatView() {
+    private void initFloatView() {
         mFloatWindow = new FloatWindow(this);
 
         /*Example:
@@ -175,8 +175,6 @@ public final class FloatViewService extends Service {
                 return true;
             }
         });
-
-        return mFloatWindow;
     }
 
     private void loadGestureAction(String key) {
