@@ -28,19 +28,18 @@ import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.MainActivity;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
-import me.omico.util.SharedPreferencesUtils;
 import me.omico.util.device.CheckOSVariant;
 import me.omico.util.root.SU;
 
-import static me.omico.currentactivity.Constants.ABOUT;
-import static me.omico.currentactivity.Constants.ACTION_QUICK_START;
-import static me.omico.currentactivity.Constants.BOOT_COMPLETED;
-import static me.omico.currentactivity.Constants.ENABLE_FLOAT_WINDOW;
-import static me.omico.currentactivity.Constants.GESTURE_CLICK;
-import static me.omico.currentactivity.Constants.GESTURE_LONG_PRESS;
-import static me.omico.currentactivity.Constants.IS_FIRST_OPEN;
-import static me.omico.currentactivity.Constants.IS_SHORTCUT_OPEN;
-import static me.omico.currentactivity.Constants.OVERLAY_PERMISSION_CODE;
+import static me.omico.currentactivity.CurrentActivity.OVERLAY_PERMISSION_CODE;
+import static me.omico.currentactivity.provider.Settings.ABOUT;
+import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
+import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
+import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.Settings.IS_FIRST_OPEN;
+import static me.omico.currentactivity.provider.Settings.IS_SHORTCUT_OPEN;
 import static me.omico.util.device.CheckOSVariant.ZUI;
 
 /**
@@ -99,7 +98,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     }
 
     private void initData() {
-        if (SharedPreferencesUtils.getDefaultSharedPreferences(activity, IS_FIRST_OPEN, true)) {
+        if (me.omico.currentactivity.provider.Settings.getBoolean(IS_FIRST_OPEN, true)) {
             showNoticeDialog();
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
 
@@ -120,7 +119,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         setPreferenceEnable(SU.isRooted());
-                        SharedPreferencesUtils.setDefaultSharedPreferences(activity, IS_FIRST_OPEN, false);
+                        me.omico.currentactivity.provider.Settings.putBoolean(IS_FIRST_OPEN, false);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) showPermissionDialog();
                     }
                 })
@@ -244,13 +243,13 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 }
                 break;
             case BOOT_COMPLETED:
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, BOOT_COMPLETED, (boolean) o);
+                me.omico.currentactivity.provider.Settings.putBoolean(BOOT_COMPLETED, (boolean) o);
                 break;
             case GESTURE_CLICK:
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_CLICK, (String) o);
+                me.omico.currentactivity.provider.Settings.putString(GESTURE_CLICK, (String) o);
                 break;
             case GESTURE_LONG_PRESS:
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_LONG_PRESS, (String) o);
+                me.omico.currentactivity.provider.Settings.putString(GESTURE_LONG_PRESS, (String) o);
                 break;
         }
         return true;

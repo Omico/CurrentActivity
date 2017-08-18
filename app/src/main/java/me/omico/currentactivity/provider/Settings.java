@@ -1,13 +1,12 @@
-package me.omico.currentactivity;
+package me.omico.currentactivity.provider;
+
+import android.content.Context;
 
 /**
- * @author Omico 2017/2/13
+ * @author Omico 2017/8/17
  */
 
-public final class Constants {
-
-    public static final int OVERLAY_PERMISSION_CODE = 0;
-    public static final int NOTIFICATION_ID = 1080;
+public class Settings extends me.omico.provider.Settings {
 
     public static final String ENABLE_FLOAT_WINDOW = "enable_float_window";
     public static final String BOOT_COMPLETED = "boot_completed";
@@ -22,4 +21,8 @@ public final class Constants {
     public static final String ACTION_GESTURE_HIDE = "me.omico.currentactivity.action.gesture_hide";
     public static final String ACTION_QUICK_START = "me.omico.currentactivity.action.quick_start";
     public static final String ACTION_STOP = "me.omico.currentactivity.action.stop";
+
+    protected Settings(Context context, String sharedPreferences) {
+        super(context, sharedPreferences);
+    }
 }
