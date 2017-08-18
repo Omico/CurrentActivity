@@ -47,7 +47,7 @@ import static me.omico.util.device.CheckOSVariant.ZUI;
  * @author Omico 2017/2/13
  */
 
-public class MainFragment extends PreferenceFragment {
+public class MainFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private Activity activity;
 
@@ -107,41 +107,10 @@ public class MainFragment extends PreferenceFragment {
     }
 
     private void initListener() {
-        enableFloatWindowPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if ((boolean) newValue) {
-                    ServiceUtils.startService(activity, FloatViewService.class);
-                } else {
-                    ServiceUtils.stopService(activity, FloatViewService.class);
-                }
-                return true;
-            }
-        });
-
-        bootCompletedPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, BOOT_COMPLETED, (boolean) newValue);
-                return true;
-            }
-        });
-
-        gestureClickPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_CLICK, (String) newValue);
-                return true;
-            }
-        });
-
-        gestureLongPressPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_LONG_PRESS, (String) newValue);
-                return true;
-            }
-        });
+        enableFloatWindowPreference.setOnPreferenceChangeListener(this);
+        bootCompletedPreference.setOnPreferenceChangeListener(this);
+        gestureClickPreference.setOnPreferenceChangeListener(this);
+        gestureLongPressPreference.setOnPreferenceChangeListener(this);
     }
 
     private void showNoticeDialog() {
@@ -260,6 +229,29 @@ public class MainFragment extends PreferenceFragment {
 
     private void showSnackBarNoAction(String text, int time) {
         Snackbar.make(activity.findViewById(R.id.main_coordinator_layout), text, time).show();
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object o) {
+        switch (preference.getKey()) {
+            case ENABLE_FLOAT_WINDOW:
+                if ((boolean) o) {
+                    ServiceUtils.startService(activity, FloatViewService.class);
+                } else {
+                    ServiceUtils.stopService(activity, FloatViewService.class);
+                }
+                break;
+            case BOOT_COMPLETED:
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, BOOT_COMPLETED, (boolean) o);
+                break;
+            case GESTURE_CLICK:
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_CLICK, (String) o);
+                break;
+            case GESTURE_LONG_PRESS:
+                SharedPreferencesUtils.setDefaultSharedPreferences(activity, GESTURE_LONG_PRESS, (String) o);
+                break;
+        }
+        return true;
     }
 
     @Override
