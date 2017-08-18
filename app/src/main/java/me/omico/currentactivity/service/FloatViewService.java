@@ -91,7 +91,7 @@ public final class FloatViewService extends Service {
     private Notification notificationMethod() {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, FloatViewService.class), 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getClass().getSimpleName())
                 .setContentTitle("当前应用包名，点击查看详细")
                 .setContentText(Util.getCurrentActivity(this))
                 .setContentIntent(pendingIntent)
