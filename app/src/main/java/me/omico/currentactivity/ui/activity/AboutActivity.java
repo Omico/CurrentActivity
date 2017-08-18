@@ -26,8 +26,8 @@ public class AboutActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.about);
 
-        TextView appVersion = (TextView) findViewById(R.id.app_version);
-        TextView about = (TextView) findViewById(R.id.about);
+        TextView appVersion = findViewById(R.id.app_version);
+        TextView about = findViewById(R.id.about);
 
         appVersion.setText(String.format(getString(R.string.version),
                 BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE, BuildConfig.VERSION_CODE));
