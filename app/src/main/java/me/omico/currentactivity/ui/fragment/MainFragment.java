@@ -170,7 +170,9 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 .setIntent(intent)
                 .build();
 
-        shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
+        if (shortcutManager != null) {
+            shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
+        }
     }
 
     private void createOSVariantDialog() {
