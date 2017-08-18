@@ -1,25 +1,22 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
-        minSdkVersion rootProject.ext.library.minSdkVersion
-        targetSdkVersion rootProject.ext.library.targetSdkVersion
-        versionCode rootProject.ext.library.versionCode
-        versionName rootProject.ext.library.versionName
+        minSdkVersion library.MIN_SDK_VERSION
+        targetSdkVersion library.TARGET_SDK_VERSION
+        versionCode library.VERSION_CODE
+        versionName library.VERSION_NAME
     }
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:$rootProject.ext.dependencies.supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$ANDROID_SUPPORT_LIBRARY_VERSION"
 }
