@@ -1,5 +1,7 @@
 package me.omico.util.device;
 
+import android.annotation.SuppressLint;
+
 import java.lang.reflect.Method;
 
 /**
@@ -15,7 +17,8 @@ public class Property {
 
     private static Class<?> c;
 
-    static {
+    @SuppressLint("PrivateApi")
+    Property() {
         try {
             c = Class.forName(SYSTEM_PROPERTIES);
         } catch (ClassNotFoundException e) {
