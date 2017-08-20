@@ -148,16 +148,16 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 }
                 break;
             case BOOT_COMPLETED:
-                me.omico.currentactivity.provider.Settings.putBoolean(BOOT_COMPLETED, (boolean) o);
+                Settings.putBoolean(BOOT_COMPLETED, (boolean) o);
                 break;
             case GESTURE_CLICK:
-                me.omico.currentactivity.provider.Settings.putString(GESTURE_CLICK, (String) o);
+                Settings.putString(GESTURE_CLICK, (String) o);
                 break;
             case GESTURE_LONG_PRESS:
-                me.omico.currentactivity.provider.Settings.putString(GESTURE_LONG_PRESS, (String) o);
+                Settings.putString(GESTURE_LONG_PRESS, (String) o);
                 break;
             case Settings.Mode.SELECTION:
-                me.omico.currentactivity.provider.Settings.putString(Settings.Mode.SELECTION, (String) o);
+                Settings.putString(Settings.Mode.SELECTION, (String) o);
                 switch ((String) o) {
                     case Settings.Mode.ROOT:
                         intentGuideActivity(2, 0);
