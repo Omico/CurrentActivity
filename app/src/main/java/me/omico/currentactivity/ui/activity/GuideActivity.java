@@ -162,7 +162,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollector.finishAll();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && setupStep == 2 || setupStep == 3)
+            ActivityCollector.finishAll();
     }
 
     private void intentDrawOverlaysSetting() {
