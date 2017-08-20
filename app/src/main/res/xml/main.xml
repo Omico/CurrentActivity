@@ -26,6 +26,13 @@
         android:summary="@string/gesture_long_press_label"
         android:title="@string/gesture_long_press"/>
 
+    <ListPreference
+        android:entries="@array/mode_entries"
+        android:entryValues="@array/mode_values"
+        android:key="mode_selection"
+        android:summary="@string/working_mode_label"
+        android:title="@string/suw_working_mode"/>
+
     <Preference
         android:key="reset_setup_wizard"
         android:title="@string/reset_setup_wizard"/>

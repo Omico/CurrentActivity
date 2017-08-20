@@ -13,7 +13,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
-import android.widget.Toast;
 
 import java.util.Collections;
 
@@ -21,6 +20,7 @@ import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
+import me.omico.currentactivity.ui.activity.GuideActivity;
 import me.omico.currentactivity.ui.activity.MainActivity;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
@@ -29,10 +29,12 @@ import static me.omico.currentactivity.provider.Settings.ABOUT;
 import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
+import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
+import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
+import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
-import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
-import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
 import static me.omico.currentactivity.provider.Settings.RESET_SETUP_WIZARD;
 
 /**
@@ -47,6 +49,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     private SwitchPreference bootCompletedPreference;
     private ListPreference gestureClickPreference;
     private ListPreference gestureLongPressPreference;
+    private ListPreference modeSelectionPreference;
 
     public MainFragment() {
     }
@@ -62,6 +65,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         bootCompletedPreference = (SwitchPreference) findPreference(BOOT_COMPLETED);
         gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
         gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
+        modeSelectionPreference = (ListPreference) findPreference(Settings.Mode.SELECTION);
 
         initQuickStartAndShortcut();
     }
@@ -92,6 +96,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private void initData() {
         enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
+        modeSelectionPreference.setValue(Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE));
     }
 
     private void initListener() {
@@ -99,6 +104,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         bootCompletedPreference.setOnPreferenceChangeListener(this);
         gestureClickPreference.setOnPreferenceChangeListener(this);
         gestureLongPressPreference.setOnPreferenceChangeListener(this);
+        modeSelectionPreference.setOnPreferenceChangeListener(this);
     }
 
     @TargetApi(Build.VERSION_CODES.N_MR1)
@@ -122,6 +128,15 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         }
     }
 
+    private void intentGuideActivity(int setupStep, int workingMode) {
+        Settings.putBoolean(EXTRA_FIRST_OPEN, true);
+        Intent intent = new Intent(activity, GuideActivity.class);
+        intent.putExtra(EXTRA_SETUP_STEP, setupStep);
+        intent.putExtra(EXTRA_WORKING_MODE, workingMode);
+        startActivity(intent);
+        activity.finish();
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
         switch (preference.getKey()) {
@@ -141,6 +156,20 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
             case GESTURE_LONG_PRESS:
                 me.omico.currentactivity.provider.Settings.putString(GESTURE_LONG_PRESS, (String) o);
                 break;
+            case Settings.Mode.SELECTION:
+                me.omico.currentactivity.provider.Settings.putString(Settings.Mode.SELECTION, (String) o);
+                switch ((String) o) {
+                    case Settings.Mode.ROOT:
+                        intentGuideActivity(2, 0);
+                        break;
+                    case Settings.Mode.ACCESSIBILITY_SERVICE:
+                        intentGuideActivity(2, 1);
+                        break;
+                    case Settings.Mode.NONE:
+                        intentGuideActivity(0, -1);
+                        break;
+                }
+                break;
         }
         return true;
     }
@@ -149,8 +178,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getKey()) {
             case RESET_SETUP_WIZARD:
-                Settings.putBoolean(EXTRA_FIRST_OPEN, true);
-                Toast.makeText(activity, R.string.setup_wizard_next_time, Toast.LENGTH_LONG).show();
+                intentGuideActivity(0, -1);
                 break;
             case ABOUT:
                 ActivityUtils.startActivity(activity, AboutActivity.class);
