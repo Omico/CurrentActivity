@@ -20,6 +20,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://dl.bintray.com/omico/SetupWizardLib' }
     }
 }
 
@@ -49,6 +50,7 @@ ext {
     ANDROID_SUPPORT_LIBRARY_VERSION = "26.0.0"
     ANDROID_SUPPORT_CONSTRAINT_LAYOUT_VERSION = "1.0.2"
     OMICO_FLOAT_WINDOW_VERSION = "1.1.0"
+    OMICO_SETUP_WIZARD_LIBRARY_VERSION = "0.1.0"
     FABRIC_CRASHLYTICS_SDK_VERSION = "2.6.8@aar"
 }
 

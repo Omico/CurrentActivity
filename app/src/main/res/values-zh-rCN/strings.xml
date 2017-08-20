@@ -12,6 +12,8 @@
     <string name="gesture_hide">隐藏</string>
     <string name="gesture_long_press">长按</string>
     <string name="gesture_long_press_label">长按：%1$s</string>
+    <string name="reset_setup_wizard">重置设置向导</string>
+    <string name="setup_wizard_next_time">设置向导会在下次您打开当前进程后出现。</string>
     <string name="about">关于</string>
     <string name="about_author">
         "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"
@@ -27,4 +29,18 @@
     <string name="disable">关闭</string>
     <string name="unavailable">不可用</string>
     <string name="quick_settings_tile_is_unavailable">快速设置不可用</string>
+    <string name="suw_welcome">欢迎使用当前进程</string>
+    <string name="suw_welcome_introduction">首先我们需要您在使用前来设置它。</string>
+    <string name="suw_working_mode">工作模式</string>
+    <string name="suw_mode_root">ROOT 模式</string>
+    <string name="suw_mode_root_desc">点击下面的按钮开始检查 ROOT 权限</string>
+    <string name="suw_check">检查</string>
+    <string name="suw_go_to_setting">去设置</string>
+    <string name="suw_check_root_fail">检查失败，可能是由于您的设备没有 ROOT 或者请求被 ROOT 管理应用拒绝。</string>
+    <string name="suw_check_success">检查成功</string>
+    <string name="suw_check_fail">检查失败，或许你应该重试一次。</string>
+    <string name="suw_draw_overlay">出现在其他应用上</string>
+    <string name="suw_draw_overlay_check_os_variant_zui">ZUI 的用户请选择 【当前进程】 -> 【权限管理】 授予允许 【显示悬浮窗】 的权限。</string>
+    <string name="suw_draw_overlay_check_os_variant_common">需要额外授权 【允许出现在其他应用上】 的权限。</string>
+    <string name="suw_finish">完成</string>
 </resources>

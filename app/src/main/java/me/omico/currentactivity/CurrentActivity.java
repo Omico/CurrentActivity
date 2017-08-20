@@ -13,7 +13,7 @@ import me.omico.currentactivity.provider.Settings;
 
 public class CurrentActivity extends Application {
 
-    public static final int OVERLAY_PERMISSION_CODE = 0;
+    public static final int PERMISSION_CODE_OVERLAY = 0;
     public static final int NOTIFICATION_ID = 1080;
 
     @Override

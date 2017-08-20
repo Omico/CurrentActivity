@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.setupwizardlib.SetupWizardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    app:suwBackground="@color/suw_background">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        style="@style/SuwContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/suw_description_margin_bottom"
+        android:paddingTop="@dimen/suw_description_margin_top"/>
+</com.android.setupwizardlib.SetupWizardLayout>
