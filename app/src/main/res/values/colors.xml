@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="suw_background">@color/suw_color_accent_light</color>
+    <color name="suw_status_bar">@color/suw_color_accent_light</color>
+
+    <color name="black">#000000</color>
+    <color name="green">#4caf50</color>
+    <color name="red">#f44336</color>
 </resources>

@@ -27,6 +27,10 @@
         android:title="@string/gesture_long_press"/>
 
     <Preference
+        android:key="reset_setup_wizard"
+        android:title="@string/reset_setup_wizard"/>
+
+    <Preference
         android:key="about"
         android:title="@string/about"/>
 </PreferenceScreen>

@@ -25,6 +25,7 @@ dependencies {
     implementation "com.android.support:design:$ANDROID_SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support.constraint:constraint-layout:$ANDROID_SUPPORT_CONSTRAINT_LAYOUT_VERSION"
     implementation "me.omico.support.widget:floatwindow:$OMICO_FLOAT_WINDOW_VERSION"
+    implementation "me.omico.aosp-part:setup-wizard-lib:$OMICO_SETUP_WIZARD_LIBRARY_VERSION"
 
     implementation project(':library')
 

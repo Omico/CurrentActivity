@@ -13,6 +13,8 @@
     <string name="gesture_long_press_label">Long press: %1$s</string>
     <string name="default_gesture_click_value" translatable="false">me.omico.currentactivity.action.gesture_hide</string>
     <string name="default_gesture_long_press_value" translatable="false">me.omico.currentactivity.action.gesture_copy</string>
+    <string name="reset_setup_wizard">Reset setup wizard</string>
+    <string name="setup_wizard_next_time">Setup wizard will show when you open Current Activity next time.</string>
     <string name="about">About</string>
     <string name="version" formatted="false" translatable="false">Version: %1$s:%2$s(%3$d)</string>
     <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>
@@ -30,4 +32,18 @@
     <string name="disable">Disable</string>
     <string name="unavailable">Unavailable</string>
     <string name="quick_settings_tile_is_unavailable">Quick settings tile is unavailable</string>
+    <string name="suw_welcome">Welcome to use Current Activity</string>
+    <string name="suw_welcome_introduction">First we need you to set up, before you use it.</string>
+    <string name="suw_working_mode">Working mode</string>
+    <string name="suw_mode_root">ROOT Mode</string>
+    <string name="suw_mode_root_desc">Tap button below to start ROOT access checking.</string>
+    <string name="suw_check">Check</string>
+    <string name="suw_go_to_setting">Go to setting</string>
+    <string name="suw_check_root_fail">Unable to get ROOT access, maybe your device is not rooted or the request is denied by your ROOT control app.</string>
+    <string name="suw_check_success">Check Complete.</string>
+    <string name="suw_check_fail">Unable to get access, maybe you should try again.</string>
+    <string name="suw_draw_overlay">"Draw over other apps"</string>
+    <string name="suw_draw_overlay_check_os_variant_zui">For users of ZUI, select [Current Activity] -> [Permissions] to grant [Show the suspension window] permission.</string>
+    <string name="suw_draw_overlay_check_os_variant_common">Need to grant [Permit drawing over other apps] permission.</string>
+    <string name="suw_finish">Finish</string>
 </resources>
