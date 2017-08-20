@@ -32,8 +32,11 @@
     <string name="suw_welcome">欢迎使用当前进程</string>
     <string name="suw_welcome_introduction">首先我们需要您在使用前来设置它。</string>
     <string name="suw_working_mode">工作模式</string>
+    <string name="suw_mode_desc">我们推荐使用 ROOT 模式。但在 H₂OS 或 O₂OS 里 shell 会被受限，所以请用无障碍服务模式。</string>
     <string name="suw_mode_root">ROOT 模式</string>
     <string name="suw_mode_root_desc">点击下面的按钮开始检查 ROOT 权限</string>
+    <string name="suw_mode_accessibility_service">无障碍服务模式</string>
+    <string name="suw_mode_accessibility_service_desc">点击下面的按钮开始检查无障碍服务权限</string>
     <string name="suw_check">检查</string>
     <string name="suw_go_to_setting">去设置</string>
     <string name="suw_check_root_fail">检查失败，可能是由于您的设备没有 ROOT 或者请求被 ROOT 管理应用拒绝。</string>

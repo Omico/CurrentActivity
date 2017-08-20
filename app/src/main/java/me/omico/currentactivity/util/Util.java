@@ -6,6 +6,8 @@ import android.text.TextUtils;
 
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
+import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ApplicationUtil;
 import me.omico.util.root.SU;
 
@@ -17,6 +19,10 @@ public class Util {
 
     @NonNull
     public static String getCurrentActivity(Context context) {
+        String packageName = null;
+        String activityName = null;
+        String applicationName;
+
         switch (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE)) {
             case Settings.Mode.ROOT:
                 String request = SU.getSU().runCommand("dumpsys activity | grep \"mFocusedActivity\"");
@@ -24,18 +30,24 @@ public class Util {
                 if (!TextUtils.isEmpty(request)) {
                     String requests[] = request.split(" ")[3].split("/");
 
-                    String packageName = requests[0];
-                    String activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
-                    String applicationName = ApplicationUtil.getApplicationNameByPackageName(context, requests[0]);
-
-                    if (applicationName != null) {
-                        return applicationName + " ( " + packageName + " )" + "\n" + activityName;
-                    } else {
-                        return packageName + "\n" + activityName;
-                    }
+                    packageName = requests[0];
+                    activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
+                }
+                break;
+            case Settings.Mode.ACCESSIBILITY_SERVICE:
+                if (AccessibilityServiceUtils.isAccessibilityServiceEnabled(context, CurrentActivityAccessibilityService.class)) {
+                    packageName = CurrentActivityAccessibilityService.foregroundPackageName();
+                    activityName = CurrentActivityAccessibilityService.foregroundClassName();
                 }
                 break;
         }
-        return context.getString(R.string.failed_to_get);
+
+        applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
+
+        if (packageName != null && activityName != null) {
+            return (applicationName != null) ? (applicationName + " ( " + packageName + " )" + "\n" + activityName) : (packageName + "\n" + activityName);
+        } else {
+            return context.getString(R.string.failed_to_get);
+        }
     }
 }
