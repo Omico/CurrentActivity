@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/suw_mode_accessibility_service_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/suw_description_line_spacing_extra"
+        android:text="@string/suw_mode_accessibility_service_desc"
+        android:textAppearance="@style/TextAppearance.SuwDescription"/>
+
+    <Button
+        android:id="@+id/suw_mode_accessibility_service_intent_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/suw_go_to_setting"/>
+
+    <Button
+        android:id="@+id/suw_mode_accessibility_service_check_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/suw_check"/>
+</LinearLayout>

@@ -35,8 +35,11 @@
     <string name="suw_welcome">Welcome to use Current Activity</string>
     <string name="suw_welcome_introduction">First we need you to set up, before you use it.</string>
     <string name="suw_working_mode">Working mode</string>
+    <string name="suw_mode_desc">We recommended use ROOT Mode. But in H₂OS or O₂OS it will be restricted to use shell. So please use Accessibility Service Mode.</string>
     <string name="suw_mode_root">ROOT Mode</string>
     <string name="suw_mode_root_desc">Tap button below to start ROOT access checking.</string>
+    <string name="suw_mode_accessibility_service">Accessibility Service Mode</string>
+    <string name="suw_mode_accessibility_service_desc">Tap button below to start Accessibility Service access checking.</string>
     <string name="suw_check">Check</string>
     <string name="suw_go_to_setting">Go to setting</string>
     <string name="suw_check_root_fail">Unable to get ROOT access, maybe your device is not rooted or the request is denied by your ROOT control app.</string>

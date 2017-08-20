@@ -5,10 +5,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RadioButton
-        android:id="@+id/suw_mode_root"
-        style="@style/SuwRadioButton"
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/suw_mode_root"
+            style="@style/SuwRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/suw_mode_root"/>
+
+        <RadioButton
+            android:id="@+id/suw_mode_accessibility_service"
+            style="@style/SuwRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/suw_mode_accessibility_service"/>
+    </RadioGroup>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/suw_mode_root"/>
+        android:text="@string/suw_mode_desc"
+        android:textSize="16.0sp"/>
 </LinearLayout>

@@ -29,6 +29,7 @@ public class Settings extends me.omico.provider.Settings {
         public static final String SELECTION = "mode_selection";
         public static final String NONE = "mode_none";
         public static final String ROOT = "mode_root";
+        public static final String ACCESSIBILITY_SERVICE = "mode_accessibility_service";
     }
 
     protected Settings(Context context, String sharedPreferences) {

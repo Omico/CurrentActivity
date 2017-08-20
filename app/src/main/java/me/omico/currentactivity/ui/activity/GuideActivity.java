@@ -18,12 +18,15 @@ import android.widget.TextView;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.base.activity.SetupWizardBaseActivity;
 import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
+import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
 import me.omico.util.StatusBarUtils;
 import me.omico.util.device.CheckOSVariant;
 import me.omico.util.root.SU;
 
+import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_OVERLAY;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
@@ -82,6 +85,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
             case 1:
                 initLayout(viewGroup, R.layout.suw_working_mode, R.string.suw_working_mode, false);
                 initViewOnClickListener(R.id.suw_mode_root);
+                initViewOnClickListener(R.id.suw_mode_accessibility_service);
                 break;
             case 2:
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -90,6 +94,11 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                     case 0:
                         initLayout(viewGroup, R.layout.suw_mode_root, R.string.suw_mode_root, false);
                         initViewOnClickListener(R.id.suw_mode_root_check_button);
+                        break;
+                    case 1:
+                        initLayout(viewGroup, R.layout.suw_mode_accessibility_service, R.string.suw_mode_accessibility_service, false);
+                        initViewOnClickListener(R.id.suw_mode_accessibility_service_intent_setting);
+                        initViewOnClickListener(R.id.suw_mode_accessibility_service_check_button);
                         break;
                 }
                 break;
@@ -111,14 +120,22 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.suw_mode_root:
-                workingMode = 0;
-                setNavigationBarNextButtonEnable(true);
+                setWorkingMode(0);
+                break;
+            case R.id.suw_mode_accessibility_service:
+                setWorkingMode(1);
                 break;
             case R.id.suw_mode_root_check_button:
                 boolean isRooted = SU.isRooted();
                 initColorTextView(R.id.suw_mode_root_desc, isRooted, R.string.suw_check_success, R.string.suw_check_root_fail);
                 setNavigationBarNextButtonEnable(isRooted);
                 if (isRooted) Settings.putString(Settings.Mode.SELECTION, Settings.Mode.ROOT);
+                break;
+            case R.id.suw_mode_accessibility_service_intent_setting:
+                intentAccessibilitySetting();
+                break;
+            case R.id.suw_mode_accessibility_service_check_button:
+                setAccessibilityServiceState();
                 break;
             case R.id.suw_draw_overlays_intent_setting:
                 intentDrawOverlaysSetting();
@@ -133,6 +150,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            case PERMISSION_CODE_ACCESSIBILITY_SERVICE:
+                setAccessibilityServiceState();
+                break;
             case PERMISSION_CODE_OVERLAY:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setDrawOverlaysState();
                 break;
@@ -202,6 +222,25 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
     private void initViewOnClickListener(@IdRes int id) {
         findViewById(id).setOnClickListener(this);
+    }
+
+    private void setWorkingMode(int mode) {
+        workingMode = mode;
+        setNavigationBarNextButtonEnable(true);
+    }
+
+    private void setAccessibilityServiceState() {
+        boolean hasPermission = AccessibilityServiceUtils.isAccessibilityServiceEnabled(this, CurrentActivityAccessibilityService.class);
+        initColorTextView(R.id.suw_mode_accessibility_service_desc, hasPermission, R.string.suw_check_success, R.string.suw_check_fail);
+        setNavigationBarNextButtonEnable(hasPermission);
+        if (hasPermission)
+            Settings.putString(Settings.Mode.SELECTION, Settings.Mode.ACCESSIBILITY_SERVICE);
+    }
+
+    public void intentAccessibilitySetting() {
+        Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivityForResult(intent, PERMISSION_CODE_ACCESSIBILITY_SERVICE);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
