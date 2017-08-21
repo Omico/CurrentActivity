@@ -151,7 +151,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 setAccessibilityServiceState();
                 break;
             case R.id.suw_draw_overlays_intent_setting:
-                intentDrawOverlaysSetting();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) intentDrawOverlaysSetting();
                 break;
             case R.id.suw_draw_overlays_check_button:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setDrawOverlaysState();
@@ -179,8 +179,6 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     @TargetApi(value = Build.VERSION_CODES.M)
     private Intent createOSVariantIntent() {
         Intent intent;
-        String packageName;
-        String className;
         @StringRes int tip;
 
         CheckOSVariant checkOSVariant = new CheckOSVariant().init();
@@ -188,8 +186,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         switch (checkOSVariant.getOSVariant()) {
             case ZUI:
                 intent = new Intent(Intent.ACTION_VIEW);
-                packageName = "com.zui.appsmanager";
-                className = "com.zui.appsmanager.MainActivity";
+                intent.setClassName("com.zui.appsmanager", "com.zui.appsmanager.MainActivity");
                 tip = R.string.suw_draw_overlay_check_os_variant_zui;
                 break;
             default:
@@ -197,13 +194,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                         android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName())
                 );
-                packageName = "com.android.settings";
-                className = "com.android.settings.Settings$AppDrawOverlaySettingsActivity";
                 tip = R.string.suw_draw_overlay_check_os_variant_common;
                 break;
         }
-
-        intent.setClassName(packageName, className);
 
         initColorTextView(R.id.suw_draw_overlays_desc, tip, R.color.black);
 
