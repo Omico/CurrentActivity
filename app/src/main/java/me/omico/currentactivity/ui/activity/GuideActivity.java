@@ -79,7 +79,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && setupStep == 2 || setupStep == 3) {
             Settings.putBoolean(EXTRA_FIRST_OPEN, false);
             ActivityUtils.startActivity(this, MainActivity.class);
-            GuideActivity.this.finish();
+            ActivityCollector.finishAll();
         } else {
             Intent intent = new Intent(this, GuideActivity.class);
             intent.putExtra(EXTRA_SETUP_STEP, setupStep + 1);
@@ -170,13 +170,6 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) setDrawOverlaysState();
                 break;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && setupStep == 2 || setupStep == 3)
-            ActivityCollector.finishAll();
     }
 
     private void intentDrawOverlaysSetting() {
