@@ -38,3 +38,4 @@ build/
 *.keystore
 
 app/fabric.properties
+app/release/
