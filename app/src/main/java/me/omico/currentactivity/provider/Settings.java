@@ -19,6 +19,7 @@ public class Settings extends me.omico.provider.Settings {
     public static final String EXTRA_SETUP_STEP = "me.omico.currentactivity.extra.SETUP_STEP";
     public static final String EXTRA_WORKING_MODE = "me.omico.currentactivity.extra.WORKING_MODE";
     public static final String EXTRA_SHORTCUT_OPEN = "me.omico.currentactivity.extra.SHORTCUT_OPEN";
+    public static final String EXTRA_COME_FROM_MAIN = "me.omico.currentactivity.extra.COME_FROM_MAIN";
 
     public static final String ACTION_GESTURE_COPY = "me.omico.currentactivity.action.gesture_copy";
     public static final String ACTION_GESTURE_HIDE = "me.omico.currentactivity.action.gesture_hide";
