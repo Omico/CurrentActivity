@@ -49,6 +49,7 @@
     <string name="suw_check_fail">Unable to get access, maybe you should try again.</string>
     <string name="suw_draw_overlay">"Draw over other apps"</string>
     <string name="suw_draw_overlay_check_os_variant_zui">For users of ZUI, select [Current Activity] -> [Permissions] to grant [Show the suspension window] permission.</string>
+    <string name="suw_draw_overlay_check_os_variant_flyme">For users of Flyme, need grant [Pop-ups] permission.</string>
     <string name="suw_draw_overlay_check_os_variant_common">Need to grant [Permit drawing over other apps] permission.</string>
     <string name="suw_finish">Finish</string>
 </resources>
