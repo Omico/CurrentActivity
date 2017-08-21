@@ -157,7 +157,6 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 Settings.putString(GESTURE_LONG_PRESS, (String) o);
                 break;
             case Settings.Mode.SELECTION:
-                Settings.putString(Settings.Mode.SELECTION, (String) o);
                 switch ((String) o) {
                     case Settings.Mode.ROOT:
                         intentGuideActivity(2, 0);
