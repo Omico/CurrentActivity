@@ -188,13 +188,12 @@ public final class FloatViewService extends Service {
         }
     }
 
-    @SuppressWarnings("deprecation")
     private int getType() {
         int type = WindowManager.LayoutParams.TYPE_PHONE;
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
             type = WindowManager.LayoutParams.TYPE_TOAST;
-        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }
 
