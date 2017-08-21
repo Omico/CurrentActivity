@@ -44,6 +44,7 @@
     <string name="suw_check_fail">检查失败，或许你应该重试一次。</string>
     <string name="suw_draw_overlay">出现在其他应用上</string>
     <string name="suw_draw_overlay_check_os_variant_zui">ZUI 的用户请选择 【当前进程】 -> 【权限管理】 授予允许 【显示悬浮窗】 的权限。</string>
+    <string name="suw_draw_overlay_check_os_variant_flyme">Flyme 的用户，需要授予允许 【桌面悬浮窗】 的权限。</string>
     <string name="suw_draw_overlay_check_os_variant_common">需要额外授权 【允许出现在其他应用上】 的权限。</string>
     <string name="suw_finish">完成</string>
 </resources>

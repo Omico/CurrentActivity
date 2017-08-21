@@ -32,6 +32,7 @@ import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
+import static me.omico.util.device.CheckOSVariant.FLYME;
 import static me.omico.util.device.CheckOSVariant.ZUI;
 
 /**
@@ -188,6 +189,11 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClassName("com.zui.appsmanager", "com.zui.appsmanager.MainActivity");
                 tip = R.string.suw_draw_overlay_check_os_variant_zui;
+                break;
+            case FLYME:
+                intent = new Intent("com.meizu.safe.security.SHOW_APPSEC");
+                intent.putExtra("packageName", getPackageName());
+                tip = R.string.suw_draw_overlay_check_os_variant_flyme;
                 break;
             default:
                 intent = new Intent(
