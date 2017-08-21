@@ -28,6 +28,7 @@ import me.omico.util.root.SU;
 
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_OVERLAY;
+import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
@@ -54,6 +55,18 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
         setupStep = getIntent().getIntExtra(EXTRA_SETUP_STEP, 0);
         workingMode = getIntent().getIntExtra(EXTRA_WORKING_MODE, -1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getIntent().getBooleanExtra(EXTRA_COME_FROM_MAIN, false)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(EXTRA_SETUP_STEP, setupStep);
+            intent.putExtra(EXTRA_WORKING_MODE, workingMode);
+            intent.putExtra(EXTRA_COME_FROM_MAIN, false);
+            startActivity(intent);
+        }
     }
 
     @Override

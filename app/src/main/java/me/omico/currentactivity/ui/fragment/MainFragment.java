@@ -29,6 +29,7 @@ import static me.omico.currentactivity.provider.Settings.ABOUT;
 import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
@@ -133,6 +134,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         Intent intent = new Intent(activity, GuideActivity.class);
         intent.putExtra(EXTRA_SETUP_STEP, setupStep);
         intent.putExtra(EXTRA_WORKING_MODE, workingMode);
+        if (workingMode != -1) intent.putExtra(EXTRA_COME_FROM_MAIN, true);
         startActivity(intent);
         activity.finish();
     }
