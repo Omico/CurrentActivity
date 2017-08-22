@@ -98,6 +98,8 @@ public final class FloatViewService extends Service {
     }
 
     private Notification notificationMethod() {
+        Notification notification;
+
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, FloatViewService.class), 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getClass().getSimpleName())
@@ -109,7 +111,10 @@ public final class FloatViewService extends Service {
         Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
         builder.addAction(android.R.drawable.ic_delete, "Exit", PendingIntent.getService(this, 0, exitIntent, 0));
 
-        return builder.build();
+        notification = builder.build();
+        notification.flags |= Notification.FLAG_NO_CLEAR;
+
+        return notification;
     }
 
     /*Example:
