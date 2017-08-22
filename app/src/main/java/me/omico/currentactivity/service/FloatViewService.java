@@ -1,6 +1,8 @@
 package me.omico.currentactivity.service;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -47,6 +49,7 @@ public final class FloatViewService extends Service {
     @Override
     public void onCreate() {
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel();
         startForeground(NOTIFICATION_ID, notificationMethod());
         initFloatViewContent();
         initFloatView();
@@ -88,6 +91,12 @@ public final class FloatViewService extends Service {
         mTextView.setText(Util.getCurrentActivity(this));
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
+    private void createNotificationChannel() {
+        NotificationChannel mChannel = new NotificationChannel(getClass().getSimpleName(), getString(R.string.app_name), NotificationManager.IMPORTANCE_LOW);
+        notificationManager.createNotificationChannel(mChannel);
+    }
+
     private Notification notificationMethod() {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, FloatViewService.class), 0);
 
@@ -95,7 +104,6 @@ public final class FloatViewService extends Service {
                 .setContentTitle("当前应用包名，点击查看详细")
                 .setContentText(Util.getCurrentActivity(this))
                 .setContentIntent(pendingIntent)
-                .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
