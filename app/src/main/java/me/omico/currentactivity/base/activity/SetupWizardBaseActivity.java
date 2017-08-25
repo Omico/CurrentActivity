@@ -9,6 +9,7 @@ import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
 import me.omico.currentactivity.R;
+import me.omico.util.ActivityCollector;
 
 /**
  * @author Omico 2017/8/15
@@ -18,6 +19,12 @@ public abstract class SetupWizardBaseActivity extends Activity {
 
     private SetupWizardLayout setupWizardLayout;
     private NavigationBar navigationBar;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
+    }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +48,12 @@ public abstract class SetupWizardBaseActivity extends Activity {
         });
 
         initLayout(viewGroup);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     public SetupWizardLayout getSetupWizardLayout() {

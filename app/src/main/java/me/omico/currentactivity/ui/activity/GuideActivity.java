@@ -48,9 +48,6 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-
-        ActivityCollector.addActivity(this);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             StatusBarUtils.setStatusBarColor(this, R.color.suw_status_bar);
 
