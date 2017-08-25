@@ -10,8 +10,13 @@ android {
         targetSdkVersion app.TARGET_SDK_VERSION
         versionCode app.VERSION_CODE
         versionName app.VERSION_NAME
+        addManifestPlaceholders([APP_NAME: "@string/app_name"])
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            addManifestPlaceholders([APP_NAME: "@string/app_name_debug"])
+        }
         release {
             minifyEnabled true
             shrinkResources true
