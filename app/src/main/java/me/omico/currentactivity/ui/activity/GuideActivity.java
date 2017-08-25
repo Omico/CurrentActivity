@@ -74,16 +74,38 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
     @Override
     protected void onNavigateNext() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && setupStep == 2 || setupStep == 3) {
-            Settings.putBoolean(EXTRA_FIRST_OPEN, false);
-            ActivityUtils.startActivity(this, MainActivity.class);
-            ActivityCollector.finishAll();
-        } else {
-            Intent intent = new Intent(this, GuideActivity.class);
-            intent.putExtra(EXTRA_SETUP_STEP, setupStep + 1);
-            intent.putExtra(EXTRA_WORKING_MODE, workingMode);
-            startActivity(intent);
+        switch (setupStep) {
+            case 0:
+            case 1:
+            case 2:
+                if (noNeedIntentDrawOverlayStep() && setupStep == 2) {
+                    intentMainActivity();
+                } else {
+                    intentNextStep();
+                }
+                break;
+            case 3:
+                intentMainActivity();
+                break;
         }
+    }
+
+    private boolean noNeedIntentDrawOverlayStep() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.provider.Settings.canDrawOverlays(this));
+    }
+
+    private void intentNextStep() {
+        Intent intent = new Intent(this, GuideActivity.class);
+        intent.putExtra(EXTRA_SETUP_STEP, setupStep + 1);
+        intent.putExtra(EXTRA_WORKING_MODE, workingMode);
+        startActivity(intent);
+    }
+
+    private void intentMainActivity() {
+        Settings.putBoolean(EXTRA_FIRST_OPEN, false);
+        ActivityUtils.startActivity(this, MainActivity.class);
+        ActivityCollector.finishAll();
     }
 
     @Override
@@ -99,7 +121,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 initViewOnClickListener(R.id.suw_mode_accessibility_service);
                 break;
             case 2:
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+                if (noNeedIntentDrawOverlayStep())
                     getNavigationBar().getNextButton().setText(R.string.suw_finish);
                 switch (workingMode) {
                     case 0:
