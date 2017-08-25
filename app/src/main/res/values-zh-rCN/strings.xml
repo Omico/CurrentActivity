@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">当前进程</string>
+    <string name="app_name_debug">当前进程 DEBUG</string>
     <string name="tip">点击后隐藏到通知栏</string>
     <string name="failed_to_get">无法获取当前进程。</string>
     <string name="quick_enable">快速打开</string>
