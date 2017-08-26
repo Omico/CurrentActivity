@@ -42,9 +42,8 @@ public class Util {
                 break;
         }
 
-        applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
-
         if (packageName != null && activityName != null) {
+            applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
             return (applicationName != null) ? (applicationName + " ( " + packageName + " )" + "\n" + activityName) : (packageName + "\n" + activityName);
         } else {
             return context.getString(R.string.failed_to_get);
