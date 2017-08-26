@@ -21,10 +21,10 @@ public class Settings extends me.omico.provider.Settings {
     public static final String EXTRA_SHORTCUT_OPEN = "me.omico.currentactivity.extra.SHORTCUT_OPEN";
     public static final String EXTRA_COME_FROM_MAIN = "me.omico.currentactivity.extra.COME_FROM_MAIN";
 
-    public static final String ACTION_GESTURE_COPY = "me.omico.currentactivity.action.gesture_copy";
-    public static final String ACTION_GESTURE_HIDE = "me.omico.currentactivity.action.gesture_hide";
-    public static final String ACTION_QUICK_START = "me.omico.currentactivity.action.quick_start";
-    public static final String ACTION_STOP = "me.omico.currentactivity.action.stop";
+    public static final String ACTION_GESTURE_COPY = "me.omico.currentactivity.action.GESTURE_COPY";
+    public static final String ACTION_GESTURE_HIDE = "me.omico.currentactivity.action.GESTURE_HIDE";
+    public static final String ACTION_QUICK_START = "me.omico.currentactivity.action.QUICK_START";
+    public static final String ACTION_STOP = "me.omico.currentactivity.action.STOP";
 
     public final static class Mode {
         public static final String SELECTION = "mode_selection";

@@ -11,7 +11,7 @@
         android:title="@string/boot_completed"/>
 
     <ListPreference
-        android:defaultValue="@string/default_gesture_click_value"
+        android:defaultValue="@string/gesture_hide_value"
         android:entries="@array/gesture_entries"
         android:entryValues="@array/gesture_values"
         android:key="gesture_click"
@@ -19,7 +19,7 @@
         android:title="@string/gesture_click"/>
 
     <ListPreference
-        android:defaultValue="@string/default_gesture_long_press_value"
+        android:defaultValue="@string/gesture_copy_value"
         android:entries="@array/gesture_entries"
         android:entryValues="@array/gesture_values"
         android:key="gesture_long_press"
