@@ -46,7 +46,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private Activity activity;
 
-    private SwitchPreference enableFloatWindowPreference;
+    public static SwitchPreference enableFloatWindowPreference;
     private SwitchPreference bootCompletedPreference;
     private ListPreference gestureClickPreference;
     private ListPreference gestureLongPressPreference;
