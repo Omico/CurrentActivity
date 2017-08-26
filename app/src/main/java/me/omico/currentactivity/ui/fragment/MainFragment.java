@@ -97,7 +97,17 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private void initData() {
         enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
-        modeSelectionPreference.setValue(Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE));
+
+        switch (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE)) {
+            case Settings.Mode.ROOT:
+            case Settings.Mode.ACCESSIBILITY_SERVICE:
+                modeSelectionPreference.setValue(Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE));
+                break;
+            case Settings.Mode.NONE:
+                modeSelectionPreference.setValue(Settings.Mode.NONE);
+                modeSelectionPreference.setSummary(String.format(getString(R.string.working_mode_label), getString(R.string.mode_none)));
+                break;
+        }
     }
 
     private void initListener() {
@@ -143,7 +153,9 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     public boolean onPreferenceChange(Preference preference, Object o) {
         switch (preference.getKey()) {
             case ENABLE_FLOAT_WINDOW:
-                if ((boolean) o) {
+                if (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE).equals(Settings.Mode.NONE)) {
+                    intentGuideActivity(0, -1);
+                } else if ((boolean) o) {
                     ServiceUtils.startService(activity, FloatViewService.class);
                 } else {
                     ServiceUtils.stopService(activity, FloatViewService.class);

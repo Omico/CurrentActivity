@@ -53,4 +53,6 @@
     <string name="suw_draw_overlay_check_os_variant_flyme">For users of Flyme, need grant [Pop-ups] permission.</string>
     <string name="suw_draw_overlay_check_os_variant_common">Need to grant [Permit drawing over other apps] permission.</string>
     <string name="suw_finish">Finish</string>
+
+    <string name="mode_none">None</string>
 </resources>
