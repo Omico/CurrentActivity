@@ -10,11 +10,11 @@
     <string name="gesture_click">Click</string>
     <string name="gesture_long_press">Long press</string>
     <string name="gesture_copy">Copy</string>
+    <string name="gesture_copy_value" translatable="false">me.omico.currentactivity.action.GESTURE_COPY</string>
     <string name="gesture_hide">Hide</string>
+    <string name="gesture_hide_value" translatable="false">me.omico.currentactivity.action.GESTURE_HIDE</string>
     <string name="gesture_click_label">Click: %1$s</string>
     <string name="gesture_long_press_label">Long press: %1$s</string>
-    <string name="default_gesture_click_value" translatable="false">me.omico.currentactivity.action.gesture_hide</string>
-    <string name="default_gesture_long_press_value" translatable="false">me.omico.currentactivity.action.gesture_copy</string>
     <string name="working_mode_label">Working mode: %1$s</string>
     <string name="mode_root_value" translatable="false">mode_root</string>
     <string name="mode_accessibility_service_value" translatable="false">mode_accessibility_service</string>
