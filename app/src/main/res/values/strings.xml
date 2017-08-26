@@ -2,6 +2,7 @@
     <string name="app_name">Current Activity</string>
     <string name="app_name_debug">Current Activity DEBUG</string>
     <string name="tip">Click and hide into the notification bar</string>
+    <string name="should_re_enable_accessibility_service">Should re-enable accessibility service.</string>
     <string name="failed_to_get">Failed to get current activity.</string>
     <string name="quick_enable">Quick enable</string>
     <string name="enable_float_window">Enable float window</string>
