@@ -11,6 +11,7 @@
     <application
         android:name=".CurrentActivity"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="${APP_NAME}"
         android:roundIcon="@mipmap/ic_launcher_round"
