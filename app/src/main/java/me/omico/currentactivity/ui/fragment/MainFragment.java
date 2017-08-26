@@ -18,6 +18,8 @@ import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.provider.Settings.ABOUT;
+import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
+import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
@@ -68,6 +70,9 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private void initData() {
         enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
+
+        Settings.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
+        Settings.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
 
         switch (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE)) {
             case Settings.Mode.ROOT:
