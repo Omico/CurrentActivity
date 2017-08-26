@@ -2,7 +2,6 @@ package me.omico.util.root;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -89,16 +88,7 @@ public class SU {
     }
 
     public static boolean isRooted() {
-        try {
-            Process process = Runtime.getRuntime().exec("su");
-            DataOutputStream dataOutputStream = new DataOutputStream(process.getOutputStream());
-            dataOutputStream.writeBytes("exit\n");
-            dataOutputStream.flush();
-            process.waitFor();
-            return process.exitValue() != 1;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        SU.getSU().runCommand("");
+        return !su.denied;
     }
 }
