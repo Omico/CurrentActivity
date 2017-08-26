@@ -1,12 +1,7 @@
 package me.omico.currentactivity.ui.fragment;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
-import android.graphics.drawable.Icon;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -14,25 +9,20 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 
-import java.util.Collections;
-
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.GuideActivity;
-import me.omico.currentactivity.ui.activity.MainActivity;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.provider.Settings.ABOUT;
-import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
-import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
@@ -67,8 +57,6 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
         gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
         modeSelectionPreference = (ListPreference) findPreference(Settings.Mode.SELECTION);
-
-        initQuickStartAndShortcut();
     }
 
     @Override
@@ -76,23 +64,6 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         super.onStart();
         initData();
         initListener();
-    }
-
-    private void initQuickStartAndShortcut() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
-
-        if (isQuickStartOrShortCutEnable())
-            ServiceUtils.startService(activity, FloatViewService.class);
-    }
-
-    private boolean isQuickStartOrShortCutEnable() {
-        Intent intent = activity.getIntent();
-        if (intent != null) {
-            String action = intent.getAction();
-            if (action != null) return action.equals(ACTION_QUICK_START);
-            return intent.getBooleanExtra(EXTRA_SHORTCUT_OPEN, false);
-        }
-        return false;
     }
 
     private void initData() {
@@ -116,27 +87,6 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         gestureClickPreference.setOnPreferenceChangeListener(this);
         gestureLongPressPreference.setOnPreferenceChangeListener(this);
         modeSelectionPreference.setOnPreferenceChangeListener(this);
-    }
-
-    @TargetApi(Build.VERSION_CODES.N_MR1)
-    private void createShortcut() {
-        ShortcutManager shortcutManager = activity.getSystemService(ShortcutManager.class);
-
-        Intent intent = new Intent(activity, MainActivity.class);
-        intent.setAction(ACTION_QUICK_START);
-        intent.putExtra(EXTRA_SHORTCUT_OPEN, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(activity, "shortcut_open")
-                .setShortLabel(getString(R.string.quick_enable))
-                .setLongLabel(getString(R.string.enable_float_window))
-                .setIcon(Icon.createWithResource(activity, R.mipmap.ic_launcher))
-                .setIntent(intent)
-                .build();
-
-        if (shortcutManager != null) {
-            shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
-        }
     }
 
     private void intentGuideActivity(int setupStep, int workingMode) {
