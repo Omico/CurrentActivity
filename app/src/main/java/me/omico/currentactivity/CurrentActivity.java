@@ -1,6 +1,8 @@
 package me.omico.currentactivity;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -22,5 +24,29 @@ public class CurrentActivity extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         Settings.init(this);
+        if (BuildConfig.DEBUG) {
+            StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()
+                    .detectCustomSlowCalls()
+                    .penaltyDeath();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                threadPolicyBuilder.detectResourceMismatches();
+            }
+
+            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
+
+            StrictMode.setVmPolicy(
+                    new StrictMode.VmPolicy.Builder()
+                            .detectLeakedSqlLiteObjects()
+                            .detectLeakedClosableObjects()
+                            .detectLeakedRegistrationObjects()
+                            .detectActivityLeaks()
+                            .penaltyDeath()
+                            .build()
+            );
+        }
     }
 }
