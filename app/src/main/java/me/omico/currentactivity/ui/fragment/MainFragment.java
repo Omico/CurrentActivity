@@ -20,6 +20,7 @@ import me.omico.util.ServiceUtils;
 import static me.omico.currentactivity.provider.Settings.ABOUT;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
+import static me.omico.currentactivity.provider.Settings.ACTION_STOP;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
@@ -146,6 +147,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getKey()) {
             case RESET_SETUP_WIZARD:
+                activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_STOP));
                 intentGuideActivity(0, -1);
                 break;
             case ABOUT:
