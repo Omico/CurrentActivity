@@ -38,6 +38,8 @@ public class Util {
                 if (AccessibilityServiceUtils.isAccessibilityServiceEnabled(context, CurrentActivityAccessibilityService.class)) {
                     packageName = CurrentActivityAccessibilityService.foregroundPackageName();
                     activityName = CurrentActivityAccessibilityService.foregroundClassName();
+                } else {
+                    return context.getString(R.string.should_re_enable_accessibility_service);
                 }
                 break;
         }
