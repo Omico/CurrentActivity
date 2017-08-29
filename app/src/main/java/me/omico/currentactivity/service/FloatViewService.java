@@ -110,7 +110,7 @@ public final class FloatViewService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
-        builder.addAction(android.R.drawable.ic_delete, "Exit", PendingIntent.getService(this, 0, exitIntent, 0));
+        builder.addAction(R.drawable.ic_action_exit, getString(R.string.notification_action_exit), PendingIntent.getService(this, 0, exitIntent, 0));
 
         notification = builder.build();
         notification.flags |= Notification.FLAG_NO_CLEAR;

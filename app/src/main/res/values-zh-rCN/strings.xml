@@ -51,4 +51,5 @@
     <string name="suw_finish">完成</string>
 
     <string name="mode_none">无</string>
+    <string name="notification_action_exit">退出</string>
 </resources>
