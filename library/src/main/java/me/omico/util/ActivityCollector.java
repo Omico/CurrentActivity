@@ -1,9 +1,9 @@
 package me.omico.util;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * @author Omico 2017/8/18
@@ -11,21 +11,29 @@ import java.util.List;
 
 public class ActivityCollector {
 
-    private static List<Activity> activities = new ArrayList<>();
+    private static ActivityCollector activityCollector;
+    private static Stack<Activity> activityStack;
 
-    public static void addActivity(Activity activity) {
-        activities.add(activity);
+    private ActivityCollector() {
+        if (activityStack == null) activityStack = new Stack<>();
     }
 
-    public static void removeActivity(Activity activity) {
-        activities.remove(activity);
+    public static ActivityCollector getActivityCollector() {
+        if (activityCollector == null) activityCollector = new ActivityCollector();
+        return activityCollector;
     }
 
-    public static void finishAll() {
-        for (Activity activity : activities) {
-            if (!activity.isFinishing()) {
-                activity.finish();
-            }
-        }
+    public void addActivity(@NonNull Activity activity) {
+        activityStack.add(activity);
+    }
+
+    public void removeActivity(@NonNull Activity activity) {
+        activityStack.remove(activity);
+        activity.finish();
+    }
+
+    public void removeAllActivity() {
+        for (Activity activity : activityStack) if (!activity.isFinishing()) activity.finish();
+        activityStack.clear();
     }
 }
