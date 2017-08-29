@@ -44,6 +44,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     private int setupStep;
     private int workingMode;
 
+    private static long lastClickTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +59,18 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (System.currentTimeMillis() - lastClickTime < 500) return;
+
+        lastClickTime = System.currentTimeMillis();
+
         if (getIntent().getBooleanExtra(EXTRA_COME_FROM_MAIN, false)) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(EXTRA_SETUP_STEP, setupStep);
             intent.putExtra(EXTRA_WORKING_MODE, workingMode);
             intent.putExtra(EXTRA_COME_FROM_MAIN, false);
             startActivity(intent);
+        } else {
+            super.onBackPressed();
         }
     }
 
