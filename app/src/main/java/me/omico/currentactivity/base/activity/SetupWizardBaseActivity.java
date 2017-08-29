@@ -23,7 +23,7 @@ public abstract class SetupWizardBaseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityCollector.addActivity(this);
+        ActivityCollector.getActivityCollector().addActivity(this);
     }
 
     @Override
@@ -53,7 +53,7 @@ public abstract class SetupWizardBaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollector.removeActivity(this);
+        ActivityCollector.getActivityCollector().removeActivity(this);
     }
 
     public SetupWizardLayout getSetupWizardLayout() {

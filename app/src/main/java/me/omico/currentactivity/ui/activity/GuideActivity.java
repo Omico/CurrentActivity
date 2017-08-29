@@ -105,7 +105,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     private void intentMainActivity() {
         Settings.putBoolean(EXTRA_FIRST_OPEN, false);
         ActivityUtils.startActivity(this, MainActivity.class);
-        ActivityCollector.finishAll();
+        ActivityCollector.getActivityCollector().removeAllActivity();
     }
 
     @Override
