@@ -26,10 +26,12 @@ import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
 
 import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_HIDE;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SHOW;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
-import static me.omico.currentactivity.provider.Settings.ACTION_STOP;
-import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 
@@ -50,26 +52,36 @@ public final class FloatViewService extends Service {
     @Override
     public void onCreate() {
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel();
-        startForeground(NOTIFICATION_ID, notificationMethod());
-        initFloatViewContent();
-        initFloatView();
-        setCurrentActivity();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
-        if (ACTION_STOP.equals(action)) {
-            isStop = true;
-            handler.removeCallbacks(runnable);
-            Settings.putBoolean(ENABLE_FLOAT_WINDOW, false);
-            stopSelf();
+        if (action != null) {
+            switch (action) {
+                case ACTION_FLOAT_VIEW_SERVICE_START:
+                    isStop = false;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel();
+                    startForeground(NOTIFICATION_ID, notificationMethod());
+                    initFloatViewContent();
+                    initFloatView();
+                    setCurrentActivity();
+                    handler.postDelayed(runnable, 500);
+                    break;
+                case ACTION_FLOAT_VIEW_SERVICE_STOP:
+                    isStop = true;
+                    stopSelf();
+                    break;
+                case ACTION_FLOAT_VIEW_SHOW:
+                    isStop = false;
+                    mFloatWindow.show();
+                    break;
+                case ACTION_FLOAT_VIEW_HIDE:
+                    isStop = false;
+                    mFloatWindow.hide();
+                    break;
+            }
         }
-
-        if (!isStop) mFloatWindow.show();
-
-        handler.postDelayed(runnable, 500);
 
         updateNotification();
         return super.onStartCommand(intent, flags, startId);
@@ -101,7 +113,7 @@ public final class FloatViewService extends Service {
     private Notification notificationMethod() {
         Notification notification;
 
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, FloatViewService.class), 0);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SHOW), 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getClass().getSimpleName())
                 .setContentTitle("当前应用包名，点击查看详细")
@@ -109,7 +121,7 @@ public final class FloatViewService extends Service {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher);
 
-        Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_STOP);
+        Intent exitIntent = new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_STOP);
         builder.addAction(R.drawable.ic_action_exit, getString(R.string.notification_action_exit), PendingIntent.getService(this, 0, exitIntent, 0));
 
         notification = builder.build();
@@ -194,7 +206,7 @@ public final class FloatViewService extends Service {
     private void loadGestureAction(String key) {
         switch (Settings.getString(key, "")) {
             case ACTION_GESTURE_HIDE:
-                mFloatWindow.hide();
+                startService(new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_HIDE));
                 break;
             case ACTION_GESTURE_COPY:
                 ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
@@ -242,10 +254,10 @@ public final class FloatViewService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        isStop = true;
+        handler.removeCallbacks(runnable);
         stopForeground(true);
         notificationManager.cancel(NOTIFICATION_ID);
-        mFloatWindow.detach();
+        if (mFloatWindow != null) mFloatWindow.detach();
         MainFragment.enableFloatWindowPreference.setChecked(false);
     }
 }

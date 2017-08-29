@@ -24,7 +24,10 @@ public class Settings extends me.omico.provider.Settings {
     public static final String ACTION_GESTURE_COPY = "me.omico.currentactivity.action.GESTURE_COPY";
     public static final String ACTION_GESTURE_HIDE = "me.omico.currentactivity.action.GESTURE_HIDE";
     public static final String ACTION_QUICK_START = "me.omico.currentactivity.action.QUICK_START";
-    public static final String ACTION_STOP = "me.omico.currentactivity.action.STOP";
+    public static final String ACTION_FLOAT_VIEW_SERVICE_START = "me.omico.currentactivity.action.FLOAT_VIEW_SERVICE_START";
+    public static final String ACTION_FLOAT_VIEW_SERVICE_STOP = "me.omico.currentactivity.action.FLOAT_VIEW_SERVICE_STOP";
+    public static final String ACTION_FLOAT_VIEW_SHOW = "me.omico.currentactivity.action.FLOAT_VIEW_SHOW";
+    public static final String ACTION_FLOAT_VIEW_HIDE = "me.omico.currentactivity.action.FLOAT_VIEW_HIDE";
 
     public final static class Mode {
         public static final String SELECTION = "mode_selection";

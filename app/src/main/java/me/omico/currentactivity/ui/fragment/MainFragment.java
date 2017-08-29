@@ -18,9 +18,10 @@ import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.provider.Settings.ABOUT;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
-import static me.omico.currentactivity.provider.Settings.ACTION_STOP;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
@@ -112,9 +113,9 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 if (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE).equals(Settings.Mode.NONE)) {
                     intentGuideActivity(0, -1);
                 } else if ((boolean) o) {
-                    ServiceUtils.startService(activity, FloatViewService.class);
+                    activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
                 } else {
-                    ServiceUtils.stopService(activity, FloatViewService.class);
+                    activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_STOP));
                 }
                 break;
             case BOOT_COMPLETED:
@@ -147,7 +148,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getKey()) {
             case RESET_SETUP_WIZARD:
-                activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_STOP));
+                activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_STOP));
                 intentGuideActivity(0, -1);
                 break;
             case ABOUT:
