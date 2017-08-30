@@ -1,15 +1,26 @@
 package me.omico.currentactivity.service;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import me.omico.currentactivity.R;
+import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.ui.activity.GuideActivity;
 import me.omico.util.ServiceUtils;
-import me.omico.util.root.SU;
+import me.omico.util.StatusBarUtils;
+
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_TILE_SERVICE;
+import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
+import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
 
 /**
  * @author Omico 2017/6/9
@@ -26,16 +37,10 @@ public class CurrentActivityTileService extends TileService {
         super.onStartListening();
         tile = getQsTile();
         icon = Icon.createWithResource(getApplicationContext(), R.mipmap.ic_launcher);
-
-        if (SU.isRooted()) {
-            if (ServiceUtils.isRunning(getApplicationContext(), FloatViewService.class.getName())) {
-                setTile(icon, getString(R.string.enable), Tile.STATE_ACTIVE);
-            } else {
-                setTile(icon.setTint(0x80ffffff), getString(R.string.disable), Tile.STATE_INACTIVE);
-            }
+        if (ServiceUtils.isRunning(getApplicationContext(), FloatViewService.class.getName())) {
+            setEnableTile();
         } else {
-            setTile(icon.setTint(0x80ffffff), getString(R.string.unavailable), Tile.STATE_UNAVAILABLE);
-            Toast.makeText(getApplicationContext(), getString(R.string.quick_settings_tile_is_unavailable), Toast.LENGTH_LONG).show();
+            setDisableTile();
         }
         tile.updateTile();
     }
@@ -43,17 +48,44 @@ public class CurrentActivityTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        switch (tile.getState()) {
-            case Tile.STATE_ACTIVE:
-                ServiceUtils.stopService(getApplicationContext(), FloatViewService.class);
-                setTile(icon.setTint(0x80ffffff), getString(R.string.disable), Tile.STATE_INACTIVE);
-                break;
-            case Tile.STATE_INACTIVE:
-                ServiceUtils.startService(getApplicationContext(), FloatViewService.class);
-                setTile(icon, getString(R.string.enable), Tile.STATE_ACTIVE);
-                break;
+        if (Objects.equals(Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE), Settings.Mode.NONE)) {
+            intentGuideActivity();
+        } else {
+            switch (tile.getState()) {
+                case Tile.STATE_ACTIVE:
+                    setDisableTile();
+                    setAction(ACTION_FLOAT_VIEW_SERVICE_STOP);
+                    break;
+                case Tile.STATE_INACTIVE:
+                    setEnableTile();
+                    setAction(ACTION_FLOAT_VIEW_SERVICE_START);
+                    break;
+            }
+            StatusBarUtils.collapseStatusBar(this);
         }
         tile.updateTile();
+    }
+
+    private void intentGuideActivity() {
+        Intent intent = new Intent(this, GuideActivity.class);
+        intent.putExtra(EXTRA_SETUP_STEP, 0);
+        intent.putExtra(EXTRA_WORKING_MODE, -1);
+        intent.putExtra(EXTRA_COME_FROM_TILE_SERVICE, true);
+        startActivity(intent);
+        StatusBarUtils.collapseStatusBar(this);
+        Toast.makeText(getApplicationContext(), getString(R.string.quick_settings_tile_is_unavailable), Toast.LENGTH_LONG).show();
+    }
+
+    private void setEnableTile() {
+        setTile(icon, getString(R.string.enable), Tile.STATE_ACTIVE);
+    }
+
+    private void setDisableTile() {
+        setTile(icon.setTint(0x80ffffff), getString(R.string.disable), Tile.STATE_INACTIVE);
+    }
+
+    private void setAction(String action) {
+        startService(new Intent(this, FloatViewService.class).setAction(action));
     }
 
     private void setTile(Icon icon, String label, int state) {

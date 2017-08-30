@@ -35,7 +35,7 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="unavailable">Unavailable</string>
-    <string name="quick_settings_tile_is_unavailable">Quick settings tile is unavailable</string>
+    <string name="quick_settings_tile_is_unavailable">Quick settings tile is unavailable. Please select a working mode first.</string>
     <string name="suw_welcome">Welcome to use Current Activity</string>
     <string name="suw_welcome_introduction">First we need you to set up, before you use it.</string>
     <string name="suw_working_mode">Working mode</string>
