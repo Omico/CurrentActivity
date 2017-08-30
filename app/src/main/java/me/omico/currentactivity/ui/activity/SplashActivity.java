@@ -15,8 +15,8 @@ import java.util.Collections;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
-import me.omico.util.ServiceUtils;
 
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
 
@@ -44,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
         if (isQuickStartOrShortCutEnable())
-            ServiceUtils.startService(this, FloatViewService.class);
+            startService(new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
     }
 
     private boolean isQuickStartOrShortCutEnable() {
