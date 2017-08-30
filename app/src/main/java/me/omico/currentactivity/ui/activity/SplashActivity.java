@@ -29,22 +29,16 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        initQuickStartAndShortcut();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
         if (Settings.getBoolean(Settings.EXTRA_FIRST_OPEN, true)) {
             startActivity(new Intent(this, GuideActivity.class));
         } else {
             startActivity(new Intent(this, MainActivity.class));
+            if (isQuickStartOrShortCutEnable())
+                startService(new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
         }
         finish();
-    }
-
-    private void initQuickStartAndShortcut() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
-
-        if (isQuickStartOrShortCutEnable())
-            startService(new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
     }
 
     private boolean isQuickStartOrShortCutEnable() {
@@ -61,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
     private void createShortcut() {
         ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.setAction(ACTION_QUICK_START);
         intent.putExtra(EXTRA_COME_FROM_SHORTCUT, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
