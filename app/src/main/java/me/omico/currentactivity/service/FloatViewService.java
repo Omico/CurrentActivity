@@ -29,7 +29,6 @@ import me.omico.util.LocalBroadcastUtils;
 
 import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
 import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_HIDE;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
 import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SHOW;
 import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
@@ -107,16 +106,8 @@ public final class FloatViewService extends Service {
 
     private void sendLocalBroadcastAction(@NonNull Intent intent) {
         String action = intent.getAction();
-        if (action != null) {
-            switch (action) {
-                case ACTION_FLOAT_VIEW_SERVICE_START:
-                case ACTION_FLOAT_VIEW_SERVICE_STOP:
-                case ACTION_FLOAT_VIEW_SHOW:
-                case ACTION_FLOAT_VIEW_HIDE:
-                    LocalBroadcastUtils.send(this, new Intent(action));
-                    break;
-            }
-        }
+        if (action != null)
+            LocalBroadcastUtils.send(this, new Intent(action));
     }
 
     private void updateNotification() {
