@@ -29,6 +29,7 @@ import me.omico.util.root.SU;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_OVERLAY;
 import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_MAIN;
+import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_TILE_SERVICE;
 import static me.omico.currentactivity.provider.Settings.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
@@ -62,6 +63,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         if (System.currentTimeMillis() - lastClickTime < 500) return;
 
         lastClickTime = System.currentTimeMillis();
+
+        if (getIntent().getBooleanExtra(EXTRA_COME_FROM_TILE_SERVICE, false))
+            if (setupStep == 0) ActivityCollector.getActivityCollector().removeAllActivity();
 
         if (getIntent().getBooleanExtra(EXTRA_COME_FROM_MAIN, false)) {
             Intent intent = new Intent(this, MainActivity.class);
