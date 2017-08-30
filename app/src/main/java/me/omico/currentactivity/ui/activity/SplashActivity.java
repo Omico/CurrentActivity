@@ -18,7 +18,7 @@ import me.omico.currentactivity.service.FloatViewService;
 
 import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
-import static me.omico.currentactivity.provider.Settings.EXTRA_SHORTCUT_OPEN;
+import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_SHORTCUT;
 
 /**
  * @author Omico 2017/8/18
@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
         if (intent != null) {
             String action = intent.getAction();
             if (action != null) return action.equals(ACTION_QUICK_START);
-            return intent.getBooleanExtra(EXTRA_SHORTCUT_OPEN, false);
+            return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false);
         }
         return false;
     }
@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setAction(ACTION_QUICK_START);
-        intent.putExtra(EXTRA_SHORTCUT_OPEN, true);
+        intent.putExtra(EXTRA_COME_FROM_SHORTCUT, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "shortcut_open")
