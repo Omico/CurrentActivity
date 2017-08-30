@@ -137,6 +137,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private void intentGuideActivity(int setupStep, int workingMode) {
         Settings.putBoolean(EXTRA_FIRST_OPEN, true);
+        if (workingMode == -1) Settings.putString(Settings.Mode.SELECTION, Settings.Mode.NONE);
         Intent intent = new Intent(activity, GuideActivity.class);
         intent.putExtra(EXTRA_SETUP_STEP, setupStep);
         intent.putExtra(EXTRA_WORKING_MODE, workingMode);
