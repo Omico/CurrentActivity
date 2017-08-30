@@ -14,7 +14,9 @@ import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.GuideActivity;
+import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
 import me.omico.util.ActivityUtils;
+import me.omico.util.LocalBroadcastUtils;
 import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.provider.Settings.ABOUT;
@@ -40,11 +42,13 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
 
     private Activity activity;
 
-    public static SwitchPreference enableFloatWindowPreference;
+    private SwitchPreference enableFloatWindowPreference;
     private SwitchPreference bootCompletedPreference;
     private ListPreference gestureClickPreference;
     private ListPreference gestureLongPressPreference;
     private ListPreference modeSelectionPreference;
+
+    private FloatViewBroadcastReceiverHelper floatViewBroadcastReceiverHelper;
 
     public MainFragment() {
     }
@@ -61,6 +65,8 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
         gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
         modeSelectionPreference = (ListPreference) findPreference(Settings.Mode.SELECTION);
+
+        initFloatViewBroadcastReceiverHelper();
     }
 
     @Override
@@ -68,6 +74,39 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
         super.onStart();
         initData();
         initListener();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        floatViewBroadcastReceiverHelper.unregister();
+    }
+
+    private void initFloatViewBroadcastReceiverHelper() {
+        floatViewBroadcastReceiverHelper = new FloatViewBroadcastReceiverHelper(activity);
+
+        floatViewBroadcastReceiverHelper
+                .setOnFloatViewStateChangedListener(
+                        new FloatViewBroadcastReceiverHelper.OnFloatViewStateChangedListener() {
+                            @Override
+                            public void onServiceStart() {
+                            }
+
+                            @Override
+                            public void onServiceStop() {
+                                enableFloatWindowPreference.setChecked(false);
+                            }
+
+                            @Override
+                            public void onShown() {
+                            }
+
+                            @Override
+                            public void onHidden() {
+                            }
+                        }
+                )
+                .register();
     }
 
     private void initData() {
@@ -115,7 +154,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
                 } else if ((boolean) o) {
                     activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
                 } else {
-                    activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_STOP));
+                    LocalBroadcastUtils.send(activity, new Intent(ACTION_FLOAT_VIEW_SERVICE_STOP));
                 }
                 break;
             case BOOT_COMPLETED:
@@ -148,7 +187,7 @@ public class MainFragment extends PreferenceFragment implements Preference.OnPre
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getKey()) {
             case RESET_SETUP_WIZARD:
-                activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_STOP));
+                LocalBroadcastUtils.send(activity, new Intent(ACTION_FLOAT_VIEW_SERVICE_STOP));
                 intentGuideActivity(0, -1);
                 break;
             case ABOUT:

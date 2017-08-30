@@ -12,6 +12,7 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.View;
@@ -20,10 +21,11 @@ import android.widget.TextView;
 
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
-import me.omico.currentactivity.ui.fragment.MainFragment;
+import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
 import me.omico.currentactivity.util.Util;
 import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
+import me.omico.util.LocalBroadcastUtils;
 
 import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
 import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_HIDE;
@@ -43,6 +45,7 @@ public final class FloatViewService extends Service {
 
     private NotificationManager notificationManager;
     private FloatWindow mFloatWindow;
+    private FloatViewBroadcastReceiverHelper floatViewBroadcastReceiverHelper;
     private TextView tipTextView;
     private TextView mTextView;
     private View view;
@@ -52,39 +55,68 @@ public final class FloatViewService extends Service {
     @Override
     public void onCreate() {
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
+        initFloatViewBroadcastReceiverHelper();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        sendLocalBroadcastAction(intent);
+        updateNotification();
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void initFloatViewBroadcastReceiverHelper() {
+        floatViewBroadcastReceiverHelper = new FloatViewBroadcastReceiverHelper(this);
+
+        floatViewBroadcastReceiverHelper
+                .setOnFloatViewStateChangedListener(
+                        new FloatViewBroadcastReceiverHelper.OnFloatViewStateChangedListener() {
+                            @Override
+                            public void onServiceStart() {
+                                isStop = false;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                                    createNotificationChannel();
+                                startForeground(NOTIFICATION_ID, notificationMethod());
+                                initFloatViewContent();
+                                initFloatView();
+                                setCurrentActivity();
+                                handler.postDelayed(runnable, 500);
+                            }
+
+                            @Override
+                            public void onServiceStop() {
+                                isStop = true;
+                                stopSelf();
+                            }
+
+                            @Override
+                            public void onShown() {
+                                isStop = false;
+                                mFloatWindow.show();
+                            }
+
+                            @Override
+                            public void onHidden() {
+                                isStop = false;
+                                mFloatWindow.hide();
+                            }
+                        }
+                )
+                .register();
+    }
+
+    private void sendLocalBroadcastAction(@NonNull Intent intent) {
         String action = intent.getAction();
         if (action != null) {
             switch (action) {
                 case ACTION_FLOAT_VIEW_SERVICE_START:
-                    isStop = false;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel();
-                    startForeground(NOTIFICATION_ID, notificationMethod());
-                    initFloatViewContent();
-                    initFloatView();
-                    setCurrentActivity();
-                    handler.postDelayed(runnable, 500);
-                    break;
                 case ACTION_FLOAT_VIEW_SERVICE_STOP:
-                    isStop = true;
-                    stopSelf();
-                    break;
                 case ACTION_FLOAT_VIEW_SHOW:
-                    isStop = false;
-                    mFloatWindow.show();
-                    break;
                 case ACTION_FLOAT_VIEW_HIDE:
-                    isStop = false;
-                    mFloatWindow.hide();
+                    LocalBroadcastUtils.send(this, new Intent(action));
                     break;
             }
         }
-
-        updateNotification();
-        return super.onStartCommand(intent, flags, startId);
     }
 
     private void updateNotification() {
@@ -206,7 +238,7 @@ public final class FloatViewService extends Service {
     private void loadGestureAction(String key) {
         switch (Settings.getString(key, "")) {
             case ACTION_GESTURE_HIDE:
-                startService(new Intent(this, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_HIDE));
+                LocalBroadcastUtils.send(this, new Intent(ACTION_FLOAT_VIEW_HIDE));
                 break;
             case ACTION_GESTURE_COPY:
                 ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
@@ -258,6 +290,6 @@ public final class FloatViewService extends Service {
         stopForeground(true);
         notificationManager.cancel(NOTIFICATION_ID);
         if (mFloatWindow != null) mFloatWindow.detach();
-        MainFragment.enableFloatWindowPreference.setChecked(false);
+        floatViewBroadcastReceiverHelper.unregister();
     }
 }
