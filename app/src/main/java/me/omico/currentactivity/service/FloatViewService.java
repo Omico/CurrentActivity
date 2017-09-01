@@ -91,13 +91,13 @@ public final class FloatViewService extends Service {
                             @Override
                             public void onShown() {
                                 isStop = false;
-                                mFloatWindow.show();
+                                if (mFloatWindow != null) mFloatWindow.show();
                             }
 
                             @Override
                             public void onHidden() {
                                 isStop = false;
-                                mFloatWindow.hide();
+                                if (mFloatWindow != null) mFloatWindow.hide();
                             }
                         }
                 )
