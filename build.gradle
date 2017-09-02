@@ -20,7 +20,6 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
-        maven { url 'https://dl.bintray.com/omico/SetupWizardLib' }
     }
 }
 
