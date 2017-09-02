@@ -22,31 +22,36 @@ public class CurrentActivity extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
         Settings.init(this);
-        if (BuildConfig.DEBUG) {
-            StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
-                    .detectDiskReads()
-                    .detectDiskWrites()
-                    .detectNetwork()
-                    .detectCustomSlowCalls()
-                    .penaltyDeath();
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                threadPolicyBuilder.detectResourceMismatches();
-            }
-
-            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
-
-            StrictMode.setVmPolicy(
-                    new StrictMode.VmPolicy.Builder()
-                            .detectLeakedSqlLiteObjects()
-                            .detectLeakedClosableObjects()
-                            .detectLeakedRegistrationObjects()
-                            .detectActivityLeaks()
-                            .penaltyDeath()
-                            .build()
-            );
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, new Crashlytics());
+        } else {
+            initStrictMode();
         }
+    }
+
+    private void initStrictMode() {
+        StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .detectNetwork()
+                .detectCustomSlowCalls()
+                .penaltyDeath();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            threadPolicyBuilder.detectResourceMismatches();
+        }
+
+        StrictMode.setThreadPolicy(threadPolicyBuilder.build());
+
+        StrictMode.setVmPolicy(
+                new StrictMode.VmPolicy.Builder()
+                        .detectLeakedSqlLiteObjects()
+                        .detectLeakedClosableObjects()
+                        .detectLeakedRegistrationObjects()
+                        .detectActivityLeaks()
+                        .penaltyDeath()
+                        .build()
+        );
     }
 }
