@@ -1,5 +1,6 @@
 package me.omico.currentactivity.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ public final class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getFragmentManager().beginTransaction().replace(R.id.main_fragment, new MainFragment()).commit();
 
-        StatusBarUtils.addStatusBarView(this, R.color.colorPrimary);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            StatusBarUtils.setStatusBarColor(this, R.color.colorPrimary);
     }
 }
