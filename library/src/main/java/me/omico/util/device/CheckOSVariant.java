@@ -1,7 +1,5 @@
 package me.omico.util.device;
 
-import java.util.Objects;
-
 /**
  * @author Omico 2017/7/22
  */
@@ -38,18 +36,5 @@ public class CheckOSVariant extends Property {
 
     public static boolean isFlyme() {
         return checkPropExist(PROP_FLYME_MODEL) || checkPropContain(PROP_COMMON_BUILD_DISPLAY_ID, "Flyme");
-    }
-
-    private static boolean checkProp(String prop) {
-        String value = getProperty(prop);
-        return value != null && !Objects.equals(value, UNKNOWN);
-    }
-
-    private static boolean checkPropExist(String prop) {
-        return checkProp(prop) && !getProperty(prop).isEmpty();
-    }
-
-    private static boolean checkPropContain(String prop, String containString) {
-        return checkProp(prop) && getProperty(prop).contains(containString);
     }
 }
