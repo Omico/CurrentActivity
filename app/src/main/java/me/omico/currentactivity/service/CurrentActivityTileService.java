@@ -85,7 +85,7 @@ public class CurrentActivityTileService extends TileService {
     }
 
     private void setAction(String action) {
-        startService(new Intent(this, FloatViewService.class).setAction(action));
+        ServiceUtils.startService(this, FloatViewService.class, action);
     }
 
     private void setTile(Icon icon, String label, int state) {
