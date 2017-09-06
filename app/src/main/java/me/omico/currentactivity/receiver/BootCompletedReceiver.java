@@ -9,7 +9,7 @@ import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ServiceUtils;
 
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 
 /**

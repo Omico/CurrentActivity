@@ -7,10 +7,10 @@ import android.content.IntentFilter;
 
 import me.omico.util.LocalBroadcastUtils;
 
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_HIDE;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SHOW;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_HIDE;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SHOW;
 
 /**
  * @author Omico 2017/8/29

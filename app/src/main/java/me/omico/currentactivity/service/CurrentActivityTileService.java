@@ -16,11 +16,11 @@ import me.omico.currentactivity.ui.activity.GuideActivity;
 import me.omico.util.ServiceUtils;
 import me.omico.util.StatusBarUtils;
 
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
-import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_TILE_SERVICE;
-import static me.omico.currentactivity.provider.Settings.EXTRA_SETUP_STEP;
-import static me.omico.currentactivity.provider.Settings.EXTRA_WORKING_MODE;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_TILE_SERVICE;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
 
 /**
  * @author Omico 2017/6/9
