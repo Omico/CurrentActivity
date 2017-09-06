@@ -27,12 +27,12 @@ import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
 import me.omico.util.LocalBroadcastUtils;
 
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_HIDE;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SHOW;
+import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_COPY;
+import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_HIDE;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_STOP;
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SHOW;
-import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_COPY;
-import static me.omico.currentactivity.provider.Settings.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 

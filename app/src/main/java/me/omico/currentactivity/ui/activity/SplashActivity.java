@@ -18,9 +18,10 @@ import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
-import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
-import static me.omico.currentactivity.provider.Settings.ACTION_QUICK_START;
-import static me.omico.currentactivity.provider.Settings.EXTRA_COME_FROM_SHORTCUT;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
+import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_FIRST_OPEN;
 
 /**
  * @author Omico 2017/8/18
@@ -33,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
-        if (Settings.getBoolean(Settings.EXTRA_FIRST_OPEN, true)) {
+        if (Settings.getBoolean(EXTRA_FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
         } else {
             ActivityUtils.startActivity(this, MainActivity.class);
