@@ -238,7 +238,7 @@ public final class FloatViewService extends Service {
                 LocalBroadcastUtils.send(this, new Intent(ACTION_FLOAT_VIEW_HIDE));
                 break;
             case ACTION_GESTURE_COPY:
-                ClipboardUtils.copyToClipboard(getApplicationContext(), mTextView.getText().toString());
+                ClipboardUtils.copyToClipboard(currentActivity, mTextView.getText().toString());
                 break;
         }
     }
