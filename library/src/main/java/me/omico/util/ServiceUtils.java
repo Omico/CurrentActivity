@@ -19,6 +19,11 @@ public class ServiceUtils {
         context.startService(serviceIntent);
     }
 
+    public static void startService(Context context, Class<? extends Service> service, String action) {
+        Intent serviceIntent = new Intent(context, service).setAction(action);
+        context.startService(serviceIntent);
+    }
+
     public static void stopService(Context context, Class<? extends Service> service) {
         Intent serviceIntent = new Intent(context, service);
         context.stopService(serviceIntent);

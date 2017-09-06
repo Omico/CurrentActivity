@@ -9,6 +9,7 @@ import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ServiceUtils;
 
+import static me.omico.currentactivity.provider.Settings.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 
 /**
@@ -19,7 +20,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Settings.getBoolean(BOOT_COMPLETED, false))
-            ServiceUtils.startService(context, FloatViewService.class);
+        String action = intent.getAction();
+        if (action != null && action.equals(Intent.ACTION_BOOT_COMPLETED) && Settings.getBoolean(BOOT_COMPLETED, false))
+            ServiceUtils.startService(context, FloatViewService.class, ACTION_FLOAT_VIEW_SERVICE_START);
     }
 }
