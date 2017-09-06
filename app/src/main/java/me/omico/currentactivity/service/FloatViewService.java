@@ -170,6 +170,10 @@ public final class FloatViewService extends Service {
     */
 
     private void initFloatView() {
+        if (mFloatWindow != null) {
+            LocalBroadcastUtils.send(this, new Intent(ACTION_FLOAT_VIEW_SHOW));
+            return;
+        }
         mFloatWindow = new FloatWindow(this);
 
         /*Example:
