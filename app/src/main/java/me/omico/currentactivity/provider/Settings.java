@@ -12,6 +12,7 @@ public class Settings extends me.omico.provider.Settings {
     public static final String BOOT_COMPLETED = "boot_completed";
     public static final String GESTURE_CLICK = "gesture_click";
     public static final String GESTURE_LONG_PRESS = "gesture_long_press";
+    public static final String WORKING_MODE = "working_mode";
     public static final String RESET_SETUP_WIZARD = "reset_setup_wizard";
     public static final String ABOUT = "about";
 
