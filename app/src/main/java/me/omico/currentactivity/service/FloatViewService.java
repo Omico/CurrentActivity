@@ -19,10 +19,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
-import me.omico.currentactivity.util.Util;
 import me.omico.support.widget.floatwindow.FloatWindow;
 import me.omico.util.ClipboardUtils;
 import me.omico.util.LocalBroadcastUtils;
@@ -42,6 +42,7 @@ import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 
 public final class FloatViewService extends Service {
 
+    private CurrentActivity currentActivity;
     private NotificationManager notificationManager;
     private FloatWindow mFloatWindow;
     private FloatViewBroadcastReceiverHelper floatViewBroadcastReceiverHelper;
@@ -53,6 +54,7 @@ public final class FloatViewService extends Service {
 
     @Override
     public void onCreate() {
+        currentActivity = (CurrentActivity) getApplication();
         notificationManager = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
         initFloatViewBroadcastReceiverHelper();
     }
@@ -124,7 +126,7 @@ public final class FloatViewService extends Service {
     };
 
     private void setCurrentActivity() {
-        mTextView.setText(Util.getCurrentActivity(this));
+        mTextView.setText(currentActivity.getCurrentActivity());
     }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -140,7 +142,7 @@ public final class FloatViewService extends Service {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getClass().getSimpleName())
                 .setContentTitle("当前应用包名，点击查看详细")
-                .setContentText(Util.getCurrentActivity(this))
+                .setContentText(currentActivity.getCurrentActivity())
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher);
 
