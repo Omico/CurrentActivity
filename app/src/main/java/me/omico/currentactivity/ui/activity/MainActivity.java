@@ -14,7 +14,7 @@ import me.omico.util.StatusBarUtils;
  * @author Omico
  */
 
-public final class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
