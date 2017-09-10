@@ -35,6 +35,11 @@ import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.provider.Settings.RESET_SETUP_WIZARD;
 import static me.omico.currentactivity.provider.Settings.WORKING_MODE;
+import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_ACCESSIBILITY_SERVICE;
+import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_NONE;
+import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_ROOT;
+import static me.omico.currentactivity.ui.activity.GuideActivity.PAGE_GETTING_MODE_PERMISSION;
+import static me.omico.currentactivity.ui.activity.GuideActivity.PAGE_WELCOME;
 
 /**
  * @author Omico 2017/9/5
@@ -85,7 +90,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         switch (preference.getKey()) {
             case ENABLE_FLOAT_WINDOW:
                 if (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE).equals(Settings.Mode.NONE)) {
-                    intentGuideActivity(0, -1);
+                    intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                 } else if ((boolean) newValue) {
                     activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
                 } else {
@@ -104,13 +109,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
             case WORKING_MODE:
                 switch ((String) newValue) {
                     case Settings.Mode.ROOT:
-                        intentGuideActivity(2, 0);
+                        intentGuideActivity(PAGE_GETTING_MODE_PERMISSION, MODE_ROOT);
                         break;
                     case Settings.Mode.ACCESSIBILITY_SERVICE:
-                        intentGuideActivity(2, 1);
+                        intentGuideActivity(PAGE_GETTING_MODE_PERMISSION, MODE_ACCESSIBILITY_SERVICE);
                         break;
                     case Settings.Mode.NONE:
-                        intentGuideActivity(0, -1);
+                        intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                         break;
                 }
                 break;
@@ -123,7 +128,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         switch (preference.getKey()) {
             case RESET_SETUP_WIZARD:
                 LocalBroadcastUtils.send(activity, new Intent(ACTION_FLOAT_VIEW_SERVICE_STOP));
-                intentGuideActivity(0, -1);
+                intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                 break;
             case ABOUT:
                 ActivityUtils.startActivity(activity, AboutActivity.class);
@@ -183,11 +188,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
     private void intentGuideActivity(int setupStep, int workingMode) {
         Settings.putBoolean(EXTRA_FIRST_OPEN, true);
-        if (workingMode == -1) Settings.putString(Settings.Mode.SELECTION, Settings.Mode.NONE);
+        if (workingMode == MODE_NONE)
+            Settings.putString(Settings.Mode.SELECTION, Settings.Mode.NONE);
         Intent intent = new Intent(activity, GuideActivity.class);
         intent.putExtra(EXTRA_SETUP_STEP, setupStep);
         intent.putExtra(EXTRA_WORKING_MODE, workingMode);
-        if (workingMode != -1) intent.putExtra(EXTRA_COME_FROM_MAIN, true);
+        if (workingMode != MODE_NONE) intent.putExtra(EXTRA_COME_FROM_MAIN, true);
         startActivity(intent);
         activity.finish();
     }
