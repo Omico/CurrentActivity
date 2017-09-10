@@ -21,6 +21,8 @@ import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_TILE_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
+import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_NONE;
+import static me.omico.currentactivity.ui.activity.GuideActivity.PAGE_WELCOME;
 
 /**
  * @author Omico 2017/6/9
@@ -68,8 +70,8 @@ public class CurrentActivityTileService extends TileService {
 
     private void intentGuideActivity() {
         Intent intent = new Intent(this, GuideActivity.class);
-        intent.putExtra(EXTRA_SETUP_STEP, 0);
-        intent.putExtra(EXTRA_WORKING_MODE, -1);
+        intent.putExtra(EXTRA_SETUP_STEP, PAGE_WELCOME);
+        intent.putExtra(EXTRA_WORKING_MODE, MODE_NONE);
         intent.putExtra(EXTRA_COME_FROM_TILE_SERVICE, true);
         startActivity(intent);
         StatusBarUtils.collapseStatusBar(this);

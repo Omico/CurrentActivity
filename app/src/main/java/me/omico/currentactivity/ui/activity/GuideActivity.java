@@ -42,6 +42,15 @@ import static me.omico.util.device.CheckOSVariant.ZUI;
 
 public class GuideActivity extends SetupWizardBaseActivity implements View.OnClickListener {
 
+    public final static int PAGE_WELCOME = 0;
+    public final static int PAGE_MODE_SELECTION = 1;
+    public final static int PAGE_GETTING_MODE_PERMISSION = 2;
+    public final static int PAGE_GETTING_OVERLAY_PERMISSION = 3;
+
+    public final static int MODE_NONE = -1;
+    public final static int MODE_ROOT = 0;
+    public final static int MODE_ACCESSIBILITY_SERVICE = 1;
+
     private int setupStep;
     private int workingMode;
 
@@ -54,8 +63,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             StatusBarUtils.setStatusBarColor(this, R.color.suw_status_bar);
 
-        setupStep = getIntent().getIntExtra(EXTRA_SETUP_STEP, 0);
-        workingMode = getIntent().getIntExtra(EXTRA_WORKING_MODE, -1);
+        setupStep = getIntent().getIntExtra(EXTRA_SETUP_STEP, PAGE_WELCOME);
+        workingMode = getIntent().getIntExtra(EXTRA_WORKING_MODE, MODE_NONE);
     }
 
     @Override
@@ -64,8 +73,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
         lastClickTime = System.currentTimeMillis();
 
-        if (getIntent().getBooleanExtra(EXTRA_COME_FROM_TILE_SERVICE, false))
-            if (setupStep == 0) ActivityCollector.getActivityCollector().removeAllActivity();
+        if (getIntent().getBooleanExtra(EXTRA_COME_FROM_TILE_SERVICE, false) && setupStep == PAGE_WELCOME)
+            ActivityCollector.getActivityCollector().removeAllActivity();
 
         if (getIntent().getBooleanExtra(EXTRA_COME_FROM_MAIN, false)) {
             Intent intent = new Intent(this, MainActivity.class);
@@ -86,16 +95,16 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     @Override
     protected void onNavigateNext() {
         switch (setupStep) {
-            case 0:
-            case 1:
-            case 2:
-                if (noNeedIntentDrawOverlayStep() && setupStep == 2) {
+            case PAGE_WELCOME:
+            case PAGE_MODE_SELECTION:
+            case PAGE_GETTING_MODE_PERMISSION:
+                if (noNeedIntentDrawOverlayStep() && setupStep == PAGE_GETTING_MODE_PERMISSION) {
                     intentMainActivity();
                 } else {
                     intentNextStep();
                 }
                 break;
-            case 3:
+            case PAGE_GETTING_OVERLAY_PERMISSION:
                 intentMainActivity();
                 break;
         }
@@ -122,31 +131,31 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     @Override
     protected void initLayout(ViewGroup viewGroup) {
         switch (setupStep) {
-            case 0:
+            case PAGE_WELCOME:
                 getNavigationBar().getBackButton().setVisibility(View.GONE);
                 initLayout(viewGroup, R.layout.suw_introduction, R.string.suw_welcome, true);
                 break;
-            case 1:
+            case PAGE_MODE_SELECTION:
                 initLayout(viewGroup, R.layout.suw_working_mode, R.string.suw_working_mode, false);
                 initViewOnClickListener(R.id.suw_mode_root);
                 initViewOnClickListener(R.id.suw_mode_accessibility_service);
                 break;
-            case 2:
+            case PAGE_GETTING_MODE_PERMISSION:
                 if (noNeedIntentDrawOverlayStep())
                     getNavigationBar().getNextButton().setText(R.string.suw_finish);
                 switch (workingMode) {
-                    case 0:
+                    case MODE_ROOT:
                         initLayout(viewGroup, R.layout.suw_mode_root, R.string.suw_mode_root, false);
                         initViewOnClickListener(R.id.suw_mode_root_check_button);
                         break;
-                    case 1:
+                    case MODE_ACCESSIBILITY_SERVICE:
                         initLayout(viewGroup, R.layout.suw_mode_accessibility_service, R.string.suw_mode_accessibility_service, false);
                         initViewOnClickListener(R.id.suw_mode_accessibility_service_intent_setting);
                         initViewOnClickListener(R.id.suw_mode_accessibility_service_check_button);
                         break;
                 }
                 break;
-            case 3:
+            case PAGE_GETTING_OVERLAY_PERMISSION:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     getNavigationBar().getNextButton().setText(R.string.suw_finish);
 
@@ -164,10 +173,10 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.suw_mode_root:
-                setWorkingMode(0);
+                setWorkingMode(MODE_ROOT);
                 break;
             case R.id.suw_mode_accessibility_service:
-                setWorkingMode(1);
+                setWorkingMode(MODE_ACCESSIBILITY_SERVICE);
                 break;
             case R.id.suw_mode_root_check_button:
                 boolean isRooted = SU.isRooted();
