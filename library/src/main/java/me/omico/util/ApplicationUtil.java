@@ -14,7 +14,7 @@ public class ApplicationUtil {
         String applicationName = null;
         try {
             applicationName = packageManager.getApplicationLabel(packageManager.getApplicationInfo(
-                    packageName, PackageManager.GET_META_DATA)).toString();
+                    packageName, 0)).toString();
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
