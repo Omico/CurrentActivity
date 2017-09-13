@@ -2,6 +2,7 @@ package me.omico.currentactivity.service;
 
 
 import android.accessibilityservice.AccessibilityService;
+import android.support.annotation.NonNull;
 import android.view.accessibility.AccessibilityEvent;
 
 /**
@@ -10,22 +11,24 @@ import android.view.accessibility.AccessibilityEvent;
 
 public class CurrentActivityAccessibilityService extends AccessibilityService {
 
-    private static volatile String foregroundPackageName;
-    private static volatile String foregroundClassName;
+    private static volatile CharSequence foregroundPackageName;
+    private static volatile CharSequence foregroundClassName;
 
+    @NonNull
     public static String foregroundPackageName() {
-        return foregroundPackageName;
+        return foregroundPackageName.toString();
     }
 
+    @NonNull
     public static String foregroundClassName() {
-        return foregroundClassName;
+        return foregroundClassName.toString();
     }
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         if (accessibilityEvent.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
-            foregroundPackageName = accessibilityEvent.getPackageName().toString();
-            foregroundClassName = accessibilityEvent.getClassName().toString();
+            foregroundPackageName = accessibilityEvent.getPackageName();
+            foregroundClassName = accessibilityEvent.getClassName();
         }
     }
 
