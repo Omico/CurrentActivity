@@ -1,12 +1,11 @@
 package me.omico.currentactivity.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import me.omico.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.BuildConfig;
 import me.omico.currentactivity.R;
 import me.omico.util.ClipboardUtils;
@@ -15,22 +14,22 @@ import me.omico.util.ClipboardUtils;
  * @author Omico
  */
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.about);
+        setStatusBarColor(R.color.colorPrimary);
 
         TextView appVersion = findViewById(R.id.app_version);
         TextView about = findViewById(R.id.about);
 
-        appVersion.setText(String.format(getString(R.string.version),
-                BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE, BuildConfig.VERSION_CODE));
+        appVersion.setText(
+                String.format(
+                        getString(R.string.version),
+                        BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE, BuildConfig.VERSION_CODE
+                )
+        );
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +37,26 @@ public class AboutActivity extends AppCompatActivity {
                 ClipboardUtils.copyToClipboard(AboutActivity.this, R.string.open_source_address);
             }
         });
+    }
+
+    @Override
+    protected int setContentView() {
+        return R.layout.activity_about;
+    }
+
+    @Override
+    protected int setSupportActionBar() {
+        return R.id.toolbar;
+    }
+
+    @Override
+    protected boolean setDisplayHomeAsUpEnabled() {
+        return true;
+    }
+
+    @Override
+    protected CharSequence setTitle() {
+        return getString(R.string.about);
     }
 
     @Override
