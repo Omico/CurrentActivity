@@ -34,6 +34,7 @@ import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START;
 import static me.omico.currentactivity.provider.Settings.RESET_SETUP_WIZARD;
 import static me.omico.currentactivity.provider.Settings.WORKING_MODE;
 import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_ACCESSIBILITY_SERVICE;
@@ -52,6 +53,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
     private SwitchPreferenceCompat enableFloatWindowPreference;
     private SwitchPreferenceCompat bootCompletedPreference;
+    private SwitchPreferenceCompat openMainActivityWhenQuickStartPreference;
     private ListPreference gestureClickPreference;
     private ListPreference gestureLongPressPreference;
     private ListPreference workingModePreference;
@@ -66,6 +68,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
         enableFloatWindowPreference = (SwitchPreferenceCompat) findPreference(ENABLE_FLOAT_WINDOW);
         bootCompletedPreference = (SwitchPreferenceCompat) findPreference(BOOT_COMPLETED);
+        openMainActivityWhenQuickStartPreference = (SwitchPreferenceCompat) findPreference(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START);
         gestureClickPreference = (ListPreference) findPreference(GESTURE_CLICK);
         gestureLongPressPreference = (ListPreference) findPreference(GESTURE_LONG_PRESS);
         workingModePreference = (ListPreference) findPreference(WORKING_MODE);
@@ -101,6 +104,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                 break;
             case BOOT_COMPLETED:
                 Settings.putBoolean(BOOT_COMPLETED, (boolean) newValue);
+                break;
+            case OPEN_MAIN_ACTIVITY_WHEN_QUICK_START:
+                Settings.putBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, (boolean) newValue);
                 break;
             case GESTURE_CLICK:
                 Settings.putString(GESTURE_CLICK, (String) newValue);
@@ -183,6 +189,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     private void initListener() {
         enableFloatWindowPreference.setOnPreferenceChangeListener(this);
         bootCompletedPreference.setOnPreferenceChangeListener(this);
+        openMainActivityWhenQuickStartPreference.setOnPreferenceChangeListener(this);
         gestureClickPreference.setOnPreferenceChangeListener(this);
         gestureLongPressPreference.setOnPreferenceChangeListener(this);
         workingModePreference.setOnPreferenceChangeListener(this);

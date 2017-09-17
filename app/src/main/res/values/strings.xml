@@ -7,6 +7,7 @@
     <string name="quick_enable">Quick enable</string>
     <string name="enable_float_window">Enable float window</string>
     <string name="boot_completed">Boot completed</string>
+    <string name="open_main_activity_when_quick_start">Open main activity when quick start</string>
     <string name="gesture_click">Click</string>
     <string name="gesture_long_press">Long press</string>
     <string name="gesture_copy">Copy</string>
