@@ -26,12 +26,12 @@ import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE
 import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_MAIN;
-import static me.omico.currentactivity.CurrentActivity.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
 import static me.omico.currentactivity.provider.Settings.ABOUT;
 import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
 import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START;
@@ -196,7 +196,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void intentGuideActivity(int setupStep, int workingMode) {
-        Settings.putBoolean(EXTRA_FIRST_OPEN, true);
+        Settings.putBoolean(FIRST_OPEN, true);
         if (workingMode == MODE_NONE)
             Settings.putString(Settings.Mode.SELECTION, Settings.Mode.NONE);
         Intent intent = new Intent(activity, GuideActivity.class);

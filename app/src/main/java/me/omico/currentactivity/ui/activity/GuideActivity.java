@@ -28,11 +28,11 @@ import me.omico.util.root.SU;
 
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_TILE_SERVICE;
-import static me.omico.currentactivity.CurrentActivity.EXTRA_FIRST_OPEN;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_OVERLAY;
+import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
 import static me.omico.util.device.CheckOSVariant.FLYME;
 import static me.omico.util.device.CheckOSVariant.ZUI;
 
@@ -123,7 +123,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     }
 
     private void intentMainActivity() {
-        Settings.putBoolean(EXTRA_FIRST_OPEN, false);
+        Settings.putBoolean(FIRST_OPEN, false);
         ActivityUtils.startActivity(this, MainActivity.class);
         ActivityCollector.getActivityCollector().removeAllActivity();
     }

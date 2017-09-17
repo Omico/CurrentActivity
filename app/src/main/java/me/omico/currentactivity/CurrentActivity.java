@@ -22,7 +22,6 @@ import me.omico.util.root.SU;
 
 public class CurrentActivity extends Application {
 
-    public static final String EXTRA_FIRST_OPEN = "me.omico.currentactivity.extra.FIRST_OPEN";
     public static final String EXTRA_SETUP_STEP = "me.omico.currentactivity.extra.SETUP_STEP";
     public static final String EXTRA_WORKING_MODE = "me.omico.currentactivity.extra.WORKING_MODE";
     public static final String EXTRA_COME_FROM_MAIN = "me.omico.currentactivity.extra.COME_FROM_MAIN";

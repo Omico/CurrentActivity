@@ -17,6 +17,8 @@ public class Settings extends me.omico.provider.Settings {
     public static final String RESET_SETUP_WIZARD = "reset_setup_wizard";
     public static final String ABOUT = "about";
 
+    public static final String FIRST_OPEN = "first_open";
+
     public final static class Mode {
         public static final String SELECTION = "mode_selection";
         public static final String NONE = "mode_none";
