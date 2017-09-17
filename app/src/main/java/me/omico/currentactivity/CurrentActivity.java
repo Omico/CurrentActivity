@@ -27,6 +27,7 @@ public class CurrentActivity extends Application {
     public static final String EXTRA_COME_FROM_MAIN = "me.omico.currentactivity.extra.COME_FROM_MAIN";
     public static final String EXTRA_COME_FROM_TILE_SERVICE = "me.omico.currentactivity.extra.COME_FROM_TILE_SERVICE";
     public static final String EXTRA_COME_FROM_SHORTCUT = "me.omico.currentactivity.extra.COME_FROM_SHORTCUT";
+    public static final String EXTRA_COME_FROM_ASSISTANT = "me.omico.currentactivity.extra.COME_FROM_ASSISTANT";
 
     public static final String ACTION_QUICK_START = "me.omico.currentactivity.action.QUICK_START";
     public static final String ACTION_GESTURE_COPY = "me.omico.currentactivity.action.GESTURE_COPY";
