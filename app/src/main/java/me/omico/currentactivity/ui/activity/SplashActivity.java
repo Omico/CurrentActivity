@@ -20,6 +20,7 @@ import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START;
+import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_ASSISTANT;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
 import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START;
@@ -37,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
         if (Settings.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
-        } else if (isQuickStartOrShortCutEnable()) {
+        } else if (isQuickStartOrShortCutEnable() || getIntent().getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false)) {
             if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, false))
                 ActivityUtils.startActivity(this, MainActivity.class);
             ServiceUtils.startService(this, FloatViewService.class, ACTION_FLOAT_VIEW_SERVICE_START);

@@ -27,6 +27,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activity.SplashActivityFromAssistant">
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.activity.GuideActivity"
             android:theme="@style/SuwThemeMaterial.Light"/>
         <activity
@@ -69,6 +76,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <meta-data
+            android:name="com.android.systemui.action_assist_icon"
+            android:resource="@drawable/ic_action_assistant"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="1eb0b9615ed046b8338d1d54644e6c53831cdf51"/>
