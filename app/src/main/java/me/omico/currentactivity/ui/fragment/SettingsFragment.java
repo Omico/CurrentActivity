@@ -16,6 +16,7 @@ import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.GuideActivity;
 import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
+import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
 import me.omico.util.LocalBroadcastUtils;
 import me.omico.util.ServiceUtils;
@@ -90,6 +91,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         switch (preference.getKey()) {
             case ENABLE_FLOAT_WINDOW:
                 if (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE).equals(Settings.Mode.NONE)) {
+                    ActivityCollector.getActivityCollector().removeAllActivity();
                     intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                 } else if ((boolean) newValue) {
                     activity.startService(new Intent(activity, FloatViewService.class).setAction(ACTION_FLOAT_VIEW_SERVICE_START));
