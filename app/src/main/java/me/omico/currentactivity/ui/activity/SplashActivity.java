@@ -8,7 +8,10 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.util.Collections;
 
@@ -34,6 +37,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTransparentBackground();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
         if (Settings.getBoolean(FIRST_OPEN, true)) {
@@ -78,5 +83,11 @@ public class SplashActivity extends AppCompatActivity {
         if (shortcutManager != null) {
             shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
         }
+    }
+
+    private void setTransparentBackground() {
+        Window window = getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.getDecorView().setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
     }
 }
