@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
         if (Settings.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
-        } else if (isQuickStartOrShortCutEnable() || getIntent().getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false)) {
+        } else if (isQuickStart()) {
             if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, false))
                 ActivityUtils.startActivity(this, MainActivity.class);
             ServiceUtils.startService(this, FloatViewService.class, ACTION_FLOAT_VIEW_SERVICE_START);
@@ -48,12 +48,13 @@ public class SplashActivity extends AppCompatActivity {
         SplashActivity.this.finish();
     }
 
-    private boolean isQuickStartOrShortCutEnable() {
+    private boolean isQuickStart() {
         Intent intent = getIntent();
         if (intent != null) {
             String action = intent.getAction();
             if (action != null) return action.equals(ACTION_QUICK_START);
-            return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false);
+            return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false) ||
+                    intent.getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false);
         }
         return false;
     }
