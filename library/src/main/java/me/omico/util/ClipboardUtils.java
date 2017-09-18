@@ -37,8 +37,9 @@ public class ClipboardUtils {
 
     public static void copyToClipboard(Context context, String name, String text) {
         try {
-            ((ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE))
-                    .setPrimaryClip(ClipData.newPlainText(name, text));
+            ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboardManager != null)
+                clipboardManager.setPrimaryClip(ClipData.newPlainText(name, text));
             Toast.makeText(context, R.string.copy_success, Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Toast.makeText(context, R.string.copy_failed, Toast.LENGTH_LONG).show();
