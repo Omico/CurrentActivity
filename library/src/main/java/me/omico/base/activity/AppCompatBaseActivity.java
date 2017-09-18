@@ -1,6 +1,5 @@
 package me.omico.base.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,9 +35,9 @@ public abstract class AppCompatBaseActivity extends AppCompatActivity {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setStatusBarColor(@ColorRes int statusBarColor) {
-        StatusBarUtils.setStatusBarColor(this, statusBarColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            StatusBarUtils.setStatusBarColor(this, statusBarColor);
     }
 
     protected void replaceSupportFragment(@IdRes int fragmentContainer, Context context, @NonNull String fragmentName) {
