@@ -78,9 +78,7 @@ public final class FloatViewService extends Service {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                                     createNotificationChannel();
                                 startForeground(NOTIFICATION_ID, notificationMethod());
-                                initFloatViewContent();
-                                initFloatView();
-                                setCurrentActivity();
+                                LocalBroadcastUtils.send(currentActivity, new Intent(ACTION_FLOAT_VIEW_SHOW));
                                 handler.postDelayed(runnable, 500);
                             }
 
@@ -93,7 +91,13 @@ public final class FloatViewService extends Service {
                             @Override
                             public void onShown() {
                                 isStop = false;
-                                if (mFloatWindow != null) mFloatWindow.show();
+                                if (mFloatWindow == null) {
+                                    initFloatViewContent();
+                                    initFloatView();
+                                    setCurrentActivity();
+                                } else {
+                                    mFloatWindow.show();
+                                }
                             }
 
                             @Override
