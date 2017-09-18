@@ -84,6 +84,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         floatViewBroadcastReceiverHelper.unregister();
@@ -173,8 +179,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void initData() {
-        enableFloatWindowPreference.setChecked(ServiceUtils.isRunning(activity, FloatViewService.class.getName()));
-
         Settings.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
         Settings.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
 
