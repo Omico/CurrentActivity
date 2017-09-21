@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_ASSISTANT;
 
 /**
@@ -17,6 +18,7 @@ public class SplashActivityFromAssistant extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, SplashActivity.class);
+        intent.setAction(ACTION_QUICK_START);
         intent.putExtra(EXTRA_COME_FROM_ASSISTANT, true);
         startActivity(intent);
         SplashActivityFromAssistant.this.finish();

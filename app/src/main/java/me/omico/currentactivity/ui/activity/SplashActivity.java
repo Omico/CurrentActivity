@@ -57,9 +57,10 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String action = intent.getAction();
-            if (action != null) return action.equals(ACTION_QUICK_START);
-            return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false) ||
-                    intent.getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false);
+            if (action != null && action.equals(ACTION_QUICK_START)) {
+                return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false) ||
+                        intent.getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false);
+            }
         }
         return false;
     }
