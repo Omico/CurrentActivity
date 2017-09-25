@@ -75,4 +75,23 @@ public class FloatViewBroadcastReceiverHelper {
 
         void onHidden();
     }
+
+    public static class OnFloatViewStateChangedListenerAdapter implements FloatViewBroadcastReceiverHelper.OnFloatViewStateChangedListener {
+
+        @Override
+        public void onServiceStart() {
+        }
+
+        @Override
+        public void onServiceStop() {
+        }
+
+        @Override
+        public void onShown() {
+        }
+
+        @Override
+        public void onHidden() {
+        }
+    }
 }
