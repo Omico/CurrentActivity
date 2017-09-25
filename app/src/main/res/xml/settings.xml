@@ -14,8 +14,8 @@
 
     <android.support.v7.preference.SwitchPreferenceCompat
         android:defaultValue="false"
-        android:key="open_main_activity_when_quick_start"
-        android:title="@string/open_main_activity_when_quick_start"/>
+        android:key="open_main_activity_when_quick_start_or_quick_stop"
+        android:title="@string/open_main_activity_when_quick_start_or_quick_stop"/>
 
     <android.support.v7.preference.ListPreference
         android:defaultValue="@string/gesture_hide_value"

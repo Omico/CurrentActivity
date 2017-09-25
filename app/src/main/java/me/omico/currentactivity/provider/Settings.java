@@ -10,7 +10,7 @@ public class Settings extends me.omico.provider.Settings {
 
     public static final String ENABLE_FLOAT_WINDOW = "enable_float_window";
     public static final String BOOT_COMPLETED = "boot_completed";
-    public static final String OPEN_MAIN_ACTIVITY_WHEN_QUICK_START = "open_main_activity_when_quick_start";
+    public static final String OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP = "open_main_activity_when_quick_start_or_quick_stop";
     public static final String GESTURE_CLICK = "gesture_click";
     public static final String GESTURE_LONG_PRESS = "gesture_long_press";
     public static final String WORKING_MODE = "working_mode";

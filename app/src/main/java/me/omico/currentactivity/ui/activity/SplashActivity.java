@@ -23,10 +23,11 @@ import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
-import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START;
+import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START_OR_QUICK_STOP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
 import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
-import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START;
+import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
 
 /**
  * @author Omico 2017/8/18
@@ -43,25 +44,26 @@ public class SplashActivity extends AppCompatActivity {
 
         if (Settings.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
-        } else if (isQuickStart()) {
-            if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, false)) {
+        } else if (isQuickStartOrQuickStop()) {
+            if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, false)) {
                 ActivityUtils.startActivity(this, MainActivity.class);
             } else {
                 ActivityCollector.getActivityCollector().removeAllActivity();
             }
-            ServiceUtils.startService(this, FloatViewService.class, ACTION_FLOAT_VIEW_SERVICE_START);
+            boolean isRunning = ServiceUtils.isRunning(getApplicationContext(), FloatViewService.class.getName());
+            ServiceUtils.startService(this, FloatViewService.class, isRunning ? ACTION_FLOAT_VIEW_SERVICE_STOP : ACTION_FLOAT_VIEW_SERVICE_START);
         } else {
             ActivityUtils.startActivity(this, MainActivity.class);
         }
         SplashActivity.this.finish();
     }
 
-    private boolean isQuickStart() {
+    private boolean isQuickStartOrQuickStop() {
         Intent intent = getIntent();
         if (intent != null) {
             String action = intent.getAction();
             if (action != null)
-                return action.equals(ACTION_QUICK_START) || action.equals(Intent.ACTION_ASSIST);
+                return action.equals(ACTION_QUICK_START_OR_QUICK_STOP) || action.equals(Intent.ACTION_ASSIST);
             return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false);
         }
         return false;
@@ -72,7 +74,7 @@ public class SplashActivity extends AppCompatActivity {
         ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
 
         Intent intent = new Intent(this, SplashActivity.class);
-        intent.setAction(ACTION_QUICK_START);
+        intent.setAction(ACTION_QUICK_START_OR_QUICK_STOP);
         intent.putExtra(EXTRA_COME_FROM_SHORTCUT, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
