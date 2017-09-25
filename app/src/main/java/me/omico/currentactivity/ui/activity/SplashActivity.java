@@ -18,6 +18,7 @@ import java.util.Collections;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
+import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
 import me.omico.util.ServiceUtils;
 
@@ -43,8 +44,11 @@ public class SplashActivity extends AppCompatActivity {
         if (Settings.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
         } else if (isQuickStart()) {
-            if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, false))
+            if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START, false)) {
                 ActivityUtils.startActivity(this, MainActivity.class);
+            } else {
+                ActivityCollector.getActivityCollector().removeAllActivity();
+            }
             ServiceUtils.startService(this, FloatViewService.class, ACTION_FLOAT_VIEW_SERVICE_START);
         } else {
             ActivityUtils.startActivity(this, MainActivity.class);
