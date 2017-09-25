@@ -156,22 +156,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
         floatViewBroadcastReceiverHelper
                 .setOnFloatViewStateChangedListener(
-                        new FloatViewBroadcastReceiverHelper.OnFloatViewStateChangedListener() {
-                            @Override
-                            public void onServiceStart() {
-                            }
-
+                        new FloatViewBroadcastReceiverHelper.OnFloatViewStateChangedListenerAdapter() {
                             @Override
                             public void onServiceStop() {
+                                super.onServiceStop();
                                 enableFloatWindowPreference.setChecked(false);
-                            }
-
-                            @Override
-                            public void onShown() {
-                            }
-
-                            @Override
-                            public void onHidden() {
                             }
                         }
                 )
