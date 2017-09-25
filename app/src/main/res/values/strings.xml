@@ -5,6 +5,7 @@
     <string name="should_re_enable_accessibility_service">Should re-enable accessibility service.</string>
     <string name="failed_to_get">Failed to get current activity.</string>
     <string name="quick_enable">Quick enable</string>
+    <string name="shortcut_quick_switch">Quick switch</string>
     <string name="enable_float_window">Enable float window</string>
     <string name="boot_completed">Boot completed</string>
     <string name="open_main_activity_when_quick_start_or_quick_stop">Open main activity when quick start or quick stop</string>

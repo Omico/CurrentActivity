@@ -78,9 +78,8 @@ public class SplashActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_COME_FROM_SHORTCUT, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "shortcut_open")
-                .setShortLabel(getString(R.string.quick_enable))
-                .setLongLabel(getString(R.string.enable_float_window))
+        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "shortcut_quick_switch")
+                .setShortLabel(getString(R.string.shortcut_quick_switch))
                 .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
                 .setIntent(intent)
                 .build();

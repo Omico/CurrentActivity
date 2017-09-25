@@ -6,6 +6,7 @@
     <string name="should_re_enable_accessibility_service">需要重新开启无障碍服务。</string>
     <string name="failed_to_get">无法获取当前进程。</string>
     <string name="quick_enable">快速打开</string>
+    <string name="shortcut_quick_switch">快捷开关</string>
     <string name="enable_float_window">开启悬浮窗</string>
     <string name="boot_completed">开机启动</string>
     <string name="open_main_activity_when_quick_start_or_quick_stop">在快速启动或快速停止时打开主进程</string>
