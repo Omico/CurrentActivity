@@ -18,7 +18,6 @@
         android:title="@string/open_main_activity_when_quick_start_or_quick_stop"/>
 
     <android.support.v7.preference.ListPreference
-        android:defaultValue="@string/gesture_hide_value"
         android:entries="@array/gesture_entries"
         android:entryValues="@array/gesture_values"
         android:key="gesture_click"
@@ -26,7 +25,6 @@
         android:title="@string/gesture_click"/>
 
     <android.support.v7.preference.ListPreference
-        android:defaultValue="@string/gesture_copy_value"
         android:entries="@array/gesture_entries"
         android:entryValues="@array/gesture_values"
         android:key="gesture_long_press"
