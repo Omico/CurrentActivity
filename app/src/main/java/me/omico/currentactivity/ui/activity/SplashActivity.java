@@ -23,7 +23,6 @@ import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START;
-import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_ASSISTANT;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
 import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START;
@@ -57,10 +56,9 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String action = intent.getAction();
-            if (action != null && action.equals(ACTION_QUICK_START)) {
-                return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false) ||
-                        intent.getBooleanExtra(EXTRA_COME_FROM_ASSISTANT, false);
-            }
+            if (action != null)
+                return action.equals(ACTION_QUICK_START) || action.equals(Intent.ACTION_ASSIST);
+            return intent.getBooleanExtra(EXTRA_COME_FROM_SHORTCUT, false);
         }
         return false;
     }
