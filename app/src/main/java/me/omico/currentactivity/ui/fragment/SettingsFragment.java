@@ -179,8 +179,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void initData() {
-        Settings.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
-        Settings.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
+        gestureClickPreference.setValue(Settings.getString(GESTURE_CLICK, ACTION_GESTURE_HIDE));
+        gestureLongPressPreference.setValue(Settings.getString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY));
 
         String mode = Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE);
 
