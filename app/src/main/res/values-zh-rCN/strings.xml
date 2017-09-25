@@ -8,7 +8,7 @@
     <string name="quick_enable">快速打开</string>
     <string name="enable_float_window">开启悬浮窗</string>
     <string name="boot_completed">开机启动</string>
-    <string name="open_main_activity_when_quick_start">在快速启动时打开主进程</string>
+    <string name="open_main_activity_when_quick_start_or_quick_stop">在快速启动或快速停止时打开主进程</string>
     <string name="gesture_click">点击</string>
     <string name="gesture_click_label">点击：%1$s</string>
     <string name="gesture_copy">复制</string>
