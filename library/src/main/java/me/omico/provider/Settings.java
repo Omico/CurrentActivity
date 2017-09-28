@@ -9,13 +9,18 @@ import android.support.annotation.NonNull;
  */
 
 public class Settings {
-    private static final String XML_NAME = "settings";
+
+    private static final String DEFAULT_XML_NAME = "settings";
 
     private static Settings settings;
     private SharedPreferences sharedPreferences;
 
     public static void init(@NonNull Context context) {
-        if (settings == null) settings = new Settings(context, XML_NAME);
+        init(context, DEFAULT_XML_NAME);
+    }
+
+    public static void init(@NonNull Context context, @NonNull String sharedPreferences) {
+        if (settings == null) settings = new Settings(context, sharedPreferences);
         settings();
     }
 
