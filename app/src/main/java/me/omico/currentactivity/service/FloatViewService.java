@@ -12,7 +12,6 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.View;
@@ -110,10 +109,11 @@ public final class FloatViewService extends Service {
                 .register();
     }
 
-    private void sendLocalBroadcastAction(@NonNull Intent intent) {
-        String action = intent.getAction();
-        if (action != null)
-            LocalBroadcastUtils.send(this, new Intent(action));
+    private void sendLocalBroadcastAction(Intent intent) {
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null) LocalBroadcastUtils.send(this, new Intent(action));
+        }
     }
 
     private void updateNotification() {
