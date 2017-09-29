@@ -106,6 +106,7 @@ public class CurrentActivity extends Application {
                 if (AccessibilityServiceUtils.isAccessibilityServiceEnabled(context, CurrentActivityAccessibilityService.class)) {
                     packageName = CurrentActivityAccessibilityService.foregroundPackageName();
                     activityName = CurrentActivityAccessibilityService.foregroundClassName();
+                    if (packageName.equals("null") || activityName.equals("null")) return "";
                 } else {
                     return context.getString(R.string.should_re_enable_accessibility_service);
                 }
