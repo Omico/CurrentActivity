@@ -31,9 +31,12 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
     @Override
     public void onBindViewHolder(CurrentActivityDataViewHolder holder, int position) {
         if (data != null) {
-            holder.packageNameTextView.setText(data.get(position).getPackageName());
+            CurrentActivityData itemData = data.get(position);
+            holder.applicationTextView.setText(itemData.getApplicationName());
+            holder.packageNameTextView.setText(itemData.getPackageName());
+            holder.activityNameTextView.setText(itemData.getActivityName());
+            setOnClickListener(holder.applicationTextView);
             setOnClickListener(holder.packageNameTextView);
-            holder.activityNameTextView.setText(data.get(position).getActivityName());
             setOnClickListener(holder.activityNameTextView);
         }
     }
@@ -48,11 +51,13 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
     }
 
     static class CurrentActivityDataViewHolder extends RecyclerView.ViewHolder {
+        TextView applicationTextView;
         TextView packageNameTextView;
         TextView activityNameTextView;
 
         CurrentActivityDataViewHolder(View itemView) {
             super(itemView);
+            applicationTextView = itemView.findViewById(R.id.application_name);
             packageNameTextView = itemView.findViewById(R.id.package_name);
             activityNameTextView = itemView.findViewById(R.id.activity_name);
         }

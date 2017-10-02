@@ -129,19 +129,21 @@ public class CurrentActivity extends Application {
 
         if (packageName != null && activityName != null) {
             applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
-
-            RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
-
-            if (!Objects.equals(packageName, getPackageName())) {
-                if (results.isEmpty()) {
-                    saveCurrentActivityData(packageName, activityName);
-                } else {
-                    CurrentActivityData lastData = results.get(results.size() - 1);
-                    if (!Objects.equals(lastData.getPackageName(), packageName) || !Objects.equals(lastData.getActivityName(), activityName))
-                        saveCurrentActivityData(packageName, activityName);
+            if (applicationName != null) {
+                RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
+                if (!Objects.equals(packageName, getPackageName())) {
+                    if (results.isEmpty()) {
+                        saveCurrentActivityData(applicationName, packageName, activityName);
+                    } else {
+                        CurrentActivityData lastData = results.get(results.size() - 1);
+                        if (!Objects.equals(lastData.getPackageName(), packageName) || !Objects.equals(lastData.getActivityName(), activityName))
+                            saveCurrentActivityData(applicationName, packageName, activityName);
+                    }
                 }
+                return (applicationName + " ( " + packageName + " )" + "\n" + activityName);
+            } else {
+                return (packageName + "\n" + activityName);
             }
-            return (applicationName != null) ? (applicationName + " ( " + packageName + " )" + "\n" + activityName) : (packageName + "\n" + activityName);
         } else {
             return context.getString(R.string.failed_to_get);
         }
@@ -157,11 +159,12 @@ public class CurrentActivity extends Application {
         return realmConfiguration;
     }
 
-    private void saveCurrentActivityData(final String packageName, final String activityName) {
+    private void saveCurrentActivityData(final String applicationName, final String packageName, final String activityName) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(@NonNull Realm realm) {
                 CurrentActivityData currentActivityData = realm.createObject(CurrentActivityData.class);
+                currentActivityData.setApplicationName(applicationName);
                 currentActivityData.setActivityName(activityName);
                 currentActivityData.setPackageName(packageName);
             }
