@@ -43,6 +43,10 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".ui.activity.HistoryActivity"
+            android:label="@string/history"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ui.activity.AboutActivity"
             android:label="@string/about"
             android:theme="@style/AppTheme.NoActionBar"/>

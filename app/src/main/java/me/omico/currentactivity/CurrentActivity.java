@@ -5,11 +5,20 @@ import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.crashlytics.android.Crashlytics;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+import me.omico.currentactivity.model.CurrentActivityData;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
 import me.omico.util.AccessibilityServiceUtils;
@@ -41,10 +50,15 @@ public class CurrentActivity extends Application {
 
     public static final int NOTIFICATION_ID = 1080;
 
+    private Realm realm;
+    private RealmConfiguration realmConfiguration;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Settings.init(this);
+        Realm.init(this);
+        realm = Realm.getInstance(getRealmConfiguration());
         if (!BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
         } else {
@@ -86,7 +100,7 @@ public class CurrentActivity extends Application {
     }
 
     @NonNull
-    private static String getCurrentActivity(Context context) {
+    private String getCurrentActivity(Context context) {
         String packageName = null;
         String activityName = null;
         String applicationName;
@@ -115,9 +129,69 @@ public class CurrentActivity extends Application {
 
         if (packageName != null && activityName != null) {
             applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
+
+            RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
+
+            if (!Objects.equals(packageName, getPackageName())) {
+                if (results.isEmpty()) {
+                    saveCurrentActivityData(packageName, activityName);
+                } else {
+                    CurrentActivityData lastData = results.get(results.size() - 1);
+                    if (!Objects.equals(lastData.getPackageName(), packageName) || !Objects.equals(lastData.getActivityName(), activityName))
+                        saveCurrentActivityData(packageName, activityName);
+                }
+            }
             return (applicationName != null) ? (applicationName + " ( " + packageName + " )" + "\n" + activityName) : (packageName + "\n" + activityName);
         } else {
             return context.getString(R.string.failed_to_get);
         }
+    }
+
+    public RealmConfiguration getRealmConfiguration() {
+        if (realmConfiguration == null)
+            realmConfiguration = new RealmConfiguration
+                    .Builder()
+                    .deleteRealmIfMigrationNeeded()
+                    .name("current_activity")
+                    .build();
+        return realmConfiguration;
+    }
+
+    private void saveCurrentActivityData(final String packageName, final String activityName) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                CurrentActivityData currentActivityData = realm.createObject(CurrentActivityData.class);
+                currentActivityData.setActivityName(activityName);
+                currentActivityData.setPackageName(packageName);
+            }
+        });
+    }
+
+    @Nullable
+    public List<CurrentActivityData> loadCurrentActivityData() {
+        RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
+        if (!results.isEmpty()) {
+            List<CurrentActivityData> data = new ArrayList<>();
+            int resultsNum = results.size() - 1;
+            if (resultsNum >= 10) {
+                for (int i = resultsNum; i >= resultsNum - 10; i--)
+                    data.add(results.get(i));
+            } else {
+                for (int i = resultsNum; i >= 0; i--) data.add(results.get(i));
+            }
+            return data;
+        }
+        return null;
+    }
+
+    public void clearCurrentActivityData() {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
+                results.deleteAllFromRealm();
+            }
+        });
     }
 }

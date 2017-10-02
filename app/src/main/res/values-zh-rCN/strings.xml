@@ -19,6 +19,8 @@
     <string name="working_mode_label">工作模式：%1$s</string>
     <string name="reset_setup_wizard">重置设置向导</string>
     <string name="about">关于</string>
+    <string name="history">历史的进程</string>
+    <string name="action_clear_history">遗忘历史</string>
     <string name="about_author">
         "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"
 
