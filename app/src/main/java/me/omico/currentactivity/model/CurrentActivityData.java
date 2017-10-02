@@ -8,8 +8,17 @@ import io.realm.RealmObject;
 
 public class CurrentActivityData extends RealmObject {
 
+    private String applicationName;
     private String packageName;
     private String activityName;
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
 
     public String getPackageName() {
         return packageName;
