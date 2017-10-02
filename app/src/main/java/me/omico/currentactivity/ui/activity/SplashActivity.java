@@ -24,9 +24,13 @@ import me.omico.util.ServiceUtils;
 
 import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_START;
 import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SERVICE_STOP;
+import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_COPY;
+import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START_OR_QUICK_STOP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
 import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
+import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
 import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
 
 /**
@@ -44,6 +48,8 @@ public class SplashActivity extends AppCompatActivity {
 
         if (Settings.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
+            Settings.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
+            Settings.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
         } else if (isQuickStartOrQuickStop()) {
             if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, false)) {
                 ActivityUtils.startActivity(this, MainActivity.class);
