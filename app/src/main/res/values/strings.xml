@@ -21,6 +21,8 @@
     <string name="mode_root_value" translatable="false">mode_root</string>
     <string name="mode_accessibility_service_value" translatable="false">mode_accessibility_service</string>
     <string name="reset_setup_wizard">Reset setup wizard</string>
+    <string name="history">History</string>
+    <string name="action_clear_history">Clear history</string>
     <string name="about">About</string>
     <string name="version" formatted="false" translatable="false">Version: %1$s:%2$s(%3$d)</string>
     <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>

@@ -15,6 +15,7 @@ import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.GuideActivity;
+import me.omico.currentactivity.ui.activity.HistoryActivity;
 import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
 import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
@@ -34,6 +35,7 @@ import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
 import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
 import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
 import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.Settings.HISTORY;
 import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
 import static me.omico.currentactivity.provider.Settings.RESET_SETUP_WIZARD;
 import static me.omico.currentactivity.provider.Settings.WORKING_MODE;
@@ -143,6 +145,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
             case RESET_SETUP_WIZARD:
                 LocalBroadcastUtils.send(activity, new Intent(ACTION_FLOAT_VIEW_SERVICE_STOP));
                 intentGuideActivity(PAGE_WELCOME, MODE_NONE);
+                break;
+            case HISTORY:
+                ActivityUtils.startActivity(activity, HistoryActivity.class);
                 break;
             case ABOUT:
                 ActivityUtils.startActivity(activity, AboutActivity.class);

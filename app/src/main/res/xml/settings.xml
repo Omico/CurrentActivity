@@ -43,6 +43,10 @@
         android:title="@string/reset_setup_wizard"/>
 
     <android.support.v7.preference.Preference
+        android:key="history"
+        android:title="@string/history"/>
+
+    <android.support.v7.preference.Preference
         android:key="about"
         android:title="@string/about"/>
 
