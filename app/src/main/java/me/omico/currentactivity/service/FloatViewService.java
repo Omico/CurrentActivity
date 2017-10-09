@@ -22,7 +22,7 @@ import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.Settings;
 import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
-import me.omico.support.widget.floatwindow.FloatWindow;
+import me.omico.support.widget.FloatWindow;
 import me.omico.util.ClipboardUtils;
 import me.omico.util.LocalBroadcastUtils;
 
