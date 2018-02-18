@@ -30,7 +30,6 @@ task clean(type: Delete) {
 
 ext {
     COMPILE_SDK_VERSION = 26
-    BUILD_TOOLS_VERSION = "26.0.2"
 
     app = [
             APPLICATION_ID    : "me.omico.currentactivity",

@@ -4,7 +4,6 @@ apply plugin: 'realm-android'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId app.APPLICATION_ID
         minSdkVersion app.MIN_SDK_VERSION
