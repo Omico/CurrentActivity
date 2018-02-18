@@ -30,7 +30,6 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:drawableTop="@mipmap/ic_launcher"
                 android:gravity="center"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_collapseMode="parallax"/>
 

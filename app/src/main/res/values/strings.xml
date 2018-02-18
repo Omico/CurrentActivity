@@ -24,7 +24,7 @@
     <string name="history">History</string>
     <string name="action_clear_history">Clear history</string>
     <string name="about">About</string>
-    <string name="version" formatted="false" translatable="false">Version: %1$s:%2$s(%3$d)</string>
+    <string name="version"  translatable="false">Version: %1$s:%2$s(%3$d)</string>
     <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>
     <string name="about_author">
         "Author: 宇文 (Also you can tell me \"龙天宇\", \"Omico\", \"Yuwen\"）\n\n"

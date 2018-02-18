@@ -13,7 +13,7 @@ public class Settings {
     private static final String DEFAULT_XML_NAME = "settings";
 
     private static Settings settings;
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
     public static void init(@NonNull Context context) {
         init(context, DEFAULT_XML_NAME);

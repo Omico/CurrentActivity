@@ -2,8 +2,6 @@ package me.omico.currentactivity;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Build;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -59,36 +57,7 @@ public class CurrentActivity extends Application {
         Settings.init(this);
         Realm.init(this);
         realm = Realm.getInstance(getRealmConfiguration());
-        if (!BuildConfig.DEBUG) {
-            Fabric.with(this, new Crashlytics());
-        } else {
-            initStrictMode();
-        }
-    }
-
-    private void initStrictMode() {
-        StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads()
-                .detectDiskWrites()
-                .detectNetwork()
-                .detectCustomSlowCalls()
-                .penaltyDeath();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            threadPolicyBuilder.detectResourceMismatches();
-        }
-
-        StrictMode.setThreadPolicy(threadPolicyBuilder.build());
-
-        StrictMode.setVmPolicy(
-                new StrictMode.VmPolicy.Builder()
-                        .detectLeakedSqlLiteObjects()
-                        .detectLeakedClosableObjects()
-                        .detectLeakedRegistrationObjects()
-                        .detectActivityLeaks()
-                        .penaltyDeath()
-                        .build()
-        );
+        if (!BuildConfig.DEBUG) Fabric.with(this, new Crashlytics());
     }
 
     public String getCurrentActivity() {

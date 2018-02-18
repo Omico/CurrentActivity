@@ -7,6 +7,8 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 
 import java.lang.reflect.Method;
@@ -16,6 +18,8 @@ import java.lang.reflect.Method;
  */
 
 public class StatusBarUtils {
+
+    private static final String TAG = "StatusBarUtils";
 
     /**
      * Need permission: <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
@@ -46,5 +50,31 @@ public class StatusBarUtils {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void setStatusBarColor(Activity activity, @ColorRes int statusBarColor) {
         setStatusBarColor(activity.getWindow(), statusBarColor);
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public static boolean setStatusBarDarkMode(Window window, boolean darkMode) {
+        boolean result = false;
+        if (window != null) {
+            View decorView = window.getDecorView();
+            try {
+                int systemUiVisibility = decorView.getSystemUiVisibility();
+                if (darkMode) {
+                    systemUiVisibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else {
+                    systemUiVisibility &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                }
+                decorView.setSystemUiVisibility(systemUiVisibility);
+                result = true;
+            } catch (Exception e) {
+                Log.e(TAG, "setCommonStatusBarDarkMode: failed");
+            }
+        }
+        return result;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public static boolean setStatusBarDarkMode(Activity activity, boolean darkMode) {
+        return setStatusBarDarkMode(activity.getWindow(), darkMode);
     }
 }

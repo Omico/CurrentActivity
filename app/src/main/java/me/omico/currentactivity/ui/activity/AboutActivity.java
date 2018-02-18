@@ -19,7 +19,8 @@ public class AboutActivity extends AppCompatBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBarColor(R.color.colorPrimary);
+        setStatusBarColor(R.color.colorPrimaryDark);
+        setStatusBarDarkMode(true);
 
         TextView appVersion = findViewById(R.id.app_version);
         TextView about = findViewById(R.id.about);

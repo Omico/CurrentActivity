@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBarColor(R.color.colorPrimary);
+        setStatusBarColor(R.color.colorPrimaryDark);
+        setStatusBarDarkMode(true);
 
         replaceSupportFragment(R.id.main_fragment, MainActivity.this,
                 SettingsFragment.class.getCanonicalName());

@@ -40,6 +40,10 @@ public abstract class AppCompatBaseActivity extends AppCompatActivity {
             StatusBarUtils.setStatusBarColor(this, statusBarColor);
     }
 
+    protected boolean setStatusBarDarkMode(boolean darkMode) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && StatusBarUtils.setStatusBarDarkMode(this, darkMode);
+    }
+
     protected void replaceSupportFragment(@IdRes int fragmentContainer, Context context, @NonNull String fragmentName) {
         getSupportFragmentManager()
                 .beginTransaction()
