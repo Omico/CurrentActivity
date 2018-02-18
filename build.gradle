@@ -29,7 +29,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    COMPILE_SDK_VERSION = 26
+    COMPILE_SDK_VERSION = 27
 
     app = [
             APPLICATION_ID    : "me.omico.currentactivity",
@@ -46,7 +46,7 @@ ext {
             VERSION_NAME      : "1.0.0"
     ]
 
-    ANDROID_SUPPORT_LIBRARY_VERSION = "26.1.0"
+    ANDROID_SUPPORT_LIBRARY_VERSION = "27.0.2"
     ANDROID_SUPPORT_CONSTRAINT_LAYOUT_VERSION = "1.0.2"
     OMICO_FLOAT_WINDOW_VERSION = "1.2.0"
     OMICO_SETUP_WIZARD_LIBRARY_VERSION = "0.1.0"
