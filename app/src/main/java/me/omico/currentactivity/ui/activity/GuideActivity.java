@@ -60,8 +60,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            StatusBarUtils.setStatusBarColor(this, R.color.suw_status_bar);
+        StatusBarUtils.setStatusBarColor(this, R.color.suw_status_bar);
+        StatusBarUtils.setStatusBarDarkMode(this, true);
 
         setupStep = getIntent().getIntExtra(EXTRA_SETUP_STEP, PAGE_WELCOME);
         workingMode = getIntent().getIntExtra(EXTRA_WORKING_MODE, MODE_NONE);
@@ -299,6 +299,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         View inflate = LayoutInflater.from(this).inflate(layout, viewGroup, false);
         viewGroup.addView(inflate);
         getSetupWizardLayout().setHeaderText(title);
+        getSetupWizardLayout().getHeaderTextView().setTextColor(ContextCompat.getColor(viewGroup.getContext(), R.color.colorAccent));
         setNavigationBarNextButtonEnable(nextButtonEnable);
     }
 

@@ -25,7 +25,8 @@ public class HistoryActivity extends AppCompatBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBarColor(R.color.colorPrimary);
+        setStatusBarColor(R.color.colorPrimaryDark);
+        setStatusBarDarkMode(true);
         currentActivity = (CurrentActivity) getApplication();
         initView();
         initAdapter();
