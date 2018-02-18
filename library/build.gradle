@@ -4,9 +4,6 @@ android {
     compileSdkVersion COMPILE_SDK_VERSION
     defaultConfig {
         minSdkVersion library.MIN_SDK_VERSION
-        targetSdkVersion library.TARGET_SDK_VERSION
-        versionCode library.VERSION_CODE
-        versionName library.VERSION_NAME
     }
     buildTypes {
         release {
