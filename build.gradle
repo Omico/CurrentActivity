@@ -40,10 +40,7 @@ ext {
     ]
 
     library = [
-            MIN_SDK_VERSION   : 19,
-            TARGET_SDK_VERSION: COMPILE_SDK_VERSION,
-            VERSION_CODE      : 1,
-            VERSION_NAME      : "1.0.0"
+            MIN_SDK_VERSION   : 19
     ]
 
     ANDROID_SUPPORT_LIBRARY_VERSION = "27.0.2"
