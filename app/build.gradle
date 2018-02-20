@@ -45,7 +45,7 @@ dependencies {
 
     implementation project(':library')
 
-    // Crashlytics
+    // Fabric Crashlytics
     implementation("com.crashlytics.sdk.android:crashlytics:$FABRIC_CRASHLYTICS_SDK_VERSION") {
         transitive = true
     }
