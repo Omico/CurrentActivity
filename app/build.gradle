@@ -45,8 +45,12 @@ dependencies {
 
     implementation project(':library')
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:11.4.2'
+
     // Fabric Crashlytics
     implementation("com.crashlytics.sdk.android:crashlytics:$FABRIC_CRASHLYTICS_SDK_VERSION") {
         transitive = true
     }
 }
+apply plugin: 'com.google.gms.google-services'
