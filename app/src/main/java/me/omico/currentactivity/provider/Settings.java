@@ -20,14 +20,14 @@ public class Settings extends me.omico.provider.Settings {
 
     public static final String FIRST_OPEN = "first_open";
 
+    protected Settings(Context context, String sharedPreferences) {
+        super(context, sharedPreferences);
+    }
+
     public final static class Mode {
         public static final String SELECTION = "mode_selection";
         public static final String NONE = "mode_none";
         public static final String ROOT = "mode_root";
         public static final String ACCESSIBILITY_SERVICE = "mode_accessibility_service";
-    }
-
-    protected Settings(Context context, String sharedPreferences) {
-        super(context, sharedPreferences);
     }
 }

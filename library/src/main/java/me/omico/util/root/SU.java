@@ -12,13 +12,13 @@ import java.io.OutputStreamWriter;
 
 public class SU {
 
+    private static SU su;
     private Process process;
     private BufferedWriter mOutputWriter;
     private BufferedReader mInputReader;
     private boolean closed;
     private boolean denied;
     private boolean firstTry;
-    private static SU su;
 
     private SU() {
         try {
@@ -30,6 +30,21 @@ public class SU {
             denied = true;
             closed = true;
         }
+    }
+
+    public static SU getSU() {
+        if (su == null || su.closed || su.denied) {
+            if (su != null && !su.closed) {
+                su.close();
+            }
+            su = new SU();
+        }
+        return su;
+    }
+
+    public static boolean isRooted() {
+        SU.getSU().runCommand("");
+        return !su.denied;
     }
 
     public synchronized String runCommand(final String command) {
@@ -75,20 +90,5 @@ public class SU {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static SU getSU() {
-        if (su == null || su.closed || su.denied) {
-            if (su != null && !su.closed) {
-                su.close();
-            }
-            su = new SU();
-        }
-        return su;
-    }
-
-    public static boolean isRooted() {
-        SU.getSU().runCommand("");
-        return !su.denied;
     }
 }

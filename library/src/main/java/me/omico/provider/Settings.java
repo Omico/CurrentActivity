@@ -15,6 +15,10 @@ public class Settings {
     private static Settings settings;
     private final SharedPreferences sharedPreferences;
 
+    protected Settings(@NonNull Context context, String sharedPreferences) {
+        this.sharedPreferences = context.getSharedPreferences(sharedPreferences, Context.MODE_PRIVATE);
+    }
+
     public static void init(@NonNull Context context) {
         init(context, DEFAULT_XML_NAME);
     }
@@ -22,10 +26,6 @@ public class Settings {
     public static void init(@NonNull Context context, @NonNull String sharedPreferences) {
         if (settings == null) settings = new Settings(context, sharedPreferences);
         settings();
-    }
-
-    protected Settings(@NonNull Context context, String sharedPreferences) {
-        this.sharedPreferences = context.getSharedPreferences(sharedPreferences, Context.MODE_PRIVATE);
     }
 
     private static Settings settings() {

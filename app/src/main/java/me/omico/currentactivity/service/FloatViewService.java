@@ -50,6 +50,14 @@ public final class FloatViewService extends Service {
     private View view;
     private Handler handler = new Handler();
     private boolean isStop = false;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            setCurrentActivity();
+            updateNotification();
+            handler.postDelayed(this, 500);
+        }
+    };
 
     @Override
     public void onCreate() {
@@ -119,15 +127,6 @@ public final class FloatViewService extends Service {
     private void updateNotification() {
         if (!isStop) notificationManager.notify(NOTIFICATION_ID, notificationMethod());
     }
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            setCurrentActivity();
-            updateNotification();
-            handler.postDelayed(this, 500);
-        }
-    };
 
     private void setCurrentActivity() {
         mTextView.setText(currentActivity.getCurrentActivity());
