@@ -2,6 +2,7 @@ package me.omico.currentactivity;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -76,7 +77,10 @@ public class CurrentActivity extends Application {
 
         switch (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE)) {
             case Settings.Mode.ROOT:
-                String request = SU.getSU().runCommand("dumpsys activity | grep \"mFocusedActivity\"");
+                String dumpCommand = "dumpsys activity | grep \"mFocusedActivity\"";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    dumpCommand = "dumpsys activity | grep \"mResumedActivity\"";
+                String request = SU.getSU().runCommand(dumpCommand);
 
                 if (!TextUtils.isEmpty(request)) {
                     String requests[] = request.split(" ")[3].split("/");
