@@ -16,6 +16,14 @@ public class CheckOSVariant extends Property {
 
     private static String variant;
 
+    public static boolean isZui() {
+        return checkPropExist(PROP_ZUI_VERSION);
+    }
+
+    public static boolean isFlyme() {
+        return checkPropExist(PROP_FLYME_MODEL) || checkPropContain(PROP_COMMON_BUILD_DISPLAY_ID, "Flyme");
+    }
+
     public CheckOSVariant init() {
         variant = COMMON;
         if (isZui()) {
@@ -28,13 +36,5 @@ public class CheckOSVariant extends Property {
 
     public String getOSVariant() {
         return variant;
-    }
-
-    public static boolean isZui() {
-        return checkPropExist(PROP_ZUI_VERSION);
-    }
-
-    public static boolean isFlyme() {
-        return checkPropExist(PROP_FLYME_MODEL) || checkPropContain(PROP_COMMON_BUILD_DISPLAY_ID, "Flyme");
     }
 }

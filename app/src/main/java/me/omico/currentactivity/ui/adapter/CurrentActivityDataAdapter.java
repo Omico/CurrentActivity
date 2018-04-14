@@ -1,5 +1,6 @@
 package me.omico.currentactivity.ui.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,14 +23,15 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
     @Nullable
     private List<CurrentActivityData> data;
 
+    @NonNull
     @Override
-    public CurrentActivityDataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CurrentActivityDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history, parent, false);
         return new CurrentActivityDataViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CurrentActivityDataViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CurrentActivityDataViewHolder holder, int position) {
         if (data != null) {
             CurrentActivityData itemData = data.get(position);
             holder.applicationTextView.setText(itemData.getApplicationName());
@@ -50,19 +52,6 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
         this.data = data;
     }
 
-    static class CurrentActivityDataViewHolder extends RecyclerView.ViewHolder {
-        TextView applicationTextView;
-        TextView packageNameTextView;
-        TextView activityNameTextView;
-
-        CurrentActivityDataViewHolder(View itemView) {
-            super(itemView);
-            applicationTextView = itemView.findViewById(R.id.application_name);
-            packageNameTextView = itemView.findViewById(R.id.package_name);
-            activityNameTextView = itemView.findViewById(R.id.activity_name);
-        }
-    }
-
     private void setOnClickListener(final TextView textView) {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,5 +59,18 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
                 ClipboardUtils.copyToClipboard(view.getContext(), textView.getText().toString());
             }
         });
+    }
+
+    static class CurrentActivityDataViewHolder extends RecyclerView.ViewHolder {
+        private final TextView applicationTextView;
+        private final TextView packageNameTextView;
+        private final TextView activityNameTextView;
+
+        CurrentActivityDataViewHolder(View itemView) {
+            super(itemView);
+            applicationTextView = itemView.findViewById(R.id.application_name);
+            packageNameTextView = itemView.findViewById(R.id.package_name);
+            activityNameTextView = itemView.findViewById(R.id.activity_name);
+        }
     }
 }

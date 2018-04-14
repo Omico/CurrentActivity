@@ -50,11 +50,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     public final static int MODE_NONE = -1;
     public final static int MODE_ROOT = 0;
     public final static int MODE_ACCESSIBILITY_SERVICE = 1;
-
+    private static long lastClickTime = 0;
     private int setupStep;
     private int workingMode;
-
-    private static long lastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +109,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     }
 
     private boolean noNeedIntentDrawOverlayStep() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.provider.Settings.canDrawOverlays(this));
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || android.provider.Settings.canDrawOverlays(this);
     }
 
     private void intentNextStep() {
@@ -282,7 +279,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
             Settings.putString(Settings.Mode.SELECTION, Settings.Mode.ACCESSIBILITY_SERVICE);
     }
 
-    public void intentAccessibilitySetting() {
+    private void intentAccessibilitySetting() {
         Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivityForResult(intent, PERMISSION_CODE_ACCESSIBILITY_SERVICE);

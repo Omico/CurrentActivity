@@ -56,11 +56,11 @@ public abstract class SetupWizardBaseActivity extends Activity {
         ActivityCollector.getActivityCollector().removeActivity(this);
     }
 
-    public SetupWizardLayout getSetupWizardLayout() {
+    protected SetupWizardLayout getSetupWizardLayout() {
         return setupWizardLayout;
     }
 
-    public NavigationBar getNavigationBar() {
+    protected NavigationBar getNavigationBar() {
         return navigationBar;
     }
 
