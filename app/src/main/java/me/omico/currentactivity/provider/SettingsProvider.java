@@ -1,12 +1,15 @@
 package me.omico.currentactivity.provider;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
+import me.omico.provider.Provider;
 
 /**
  * @author Omico 2017/8/17
  */
 
-public class Settings extends me.omico.provider.Settings {
+public class SettingsProvider extends Provider {
 
     public static final String ENABLE_FLOAT_WINDOW = "enable_float_window";
     public static final String BOOT_COMPLETED = "boot_completed";
@@ -20,8 +23,12 @@ public class Settings extends me.omico.provider.Settings {
 
     public static final String FIRST_OPEN = "first_open";
 
-    protected Settings(Context context, String sharedPreferences) {
-        super(context, sharedPreferences);
+    protected SettingsProvider(@NonNull Context context, @NonNull String name, int mode) {
+        super(context, name, mode);
+    }
+
+    public static void init(@NonNull Context context) {
+        init(context, "settings");
     }
 
     public final static class Mode {

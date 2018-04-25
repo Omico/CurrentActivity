@@ -5,9 +5,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import me.omico.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.BuildConfig;
 import me.omico.currentactivity.R;
+import me.omico.currentactivity.base.activity.AppCompatBaseActivity;
 import me.omico.util.ClipboardUtils;
 
 /**

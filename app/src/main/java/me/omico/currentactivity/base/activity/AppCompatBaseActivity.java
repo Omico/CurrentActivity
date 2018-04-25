@@ -1,4 +1,4 @@
-package me.omico.base.activity;
+package me.omico.currentactivity.base.activity;
 
 import android.content.Context;
 import android.os.Build;
@@ -36,8 +36,7 @@ public abstract class AppCompatBaseActivity extends AppCompatActivity {
     }
 
     protected void setStatusBarColor(@ColorRes int statusBarColor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            StatusBarUtils.setStatusBarColor(this, statusBarColor);
+        StatusBarUtils.setStatusBarColor(this, statusBarColor);
     }
 
     protected boolean setStatusBarDarkMode(boolean darkMode) {

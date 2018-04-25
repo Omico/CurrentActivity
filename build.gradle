@@ -7,9 +7,9 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'com.google.gms:google-services:3.1.0'
-        classpath 'io.fabric.tools:gradle:1.25.1'
+        classpath 'io.fabric.tools:gradle:1.25.3'
         classpath "io.realm:realm-gradle-plugin:3.7.2"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,6 +22,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://dl.bintray.com/omico/OmicoLibrary' }
     }
 }
 
@@ -34,7 +35,7 @@ ext {
 
     app = [
             APPLICATION_ID    : "me.omico.currentactivity",
-            MIN_SDK_VERSION   : 21,
+            MIN_SDK_VERSION   : 23,
             TARGET_SDK_VERSION: COMPILE_SDK_VERSION,
             VERSION_CODE      : getVersionCode(),
             VERSION_NAME      : getVersionName()

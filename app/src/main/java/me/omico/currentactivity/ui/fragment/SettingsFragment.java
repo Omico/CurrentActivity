@@ -11,7 +11,7 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 import java.util.Objects;
 
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.currentactivity.ui.activity.AboutActivity;
 import me.omico.currentactivity.ui.activity.GuideActivity;
@@ -29,16 +29,16 @@ import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
-import static me.omico.currentactivity.provider.Settings.ABOUT;
-import static me.omico.currentactivity.provider.Settings.BOOT_COMPLETED;
-import static me.omico.currentactivity.provider.Settings.ENABLE_FLOAT_WINDOW;
-import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
-import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
-import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
-import static me.omico.currentactivity.provider.Settings.HISTORY;
-import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
-import static me.omico.currentactivity.provider.Settings.RESET_SETUP_WIZARD;
-import static me.omico.currentactivity.provider.Settings.WORKING_MODE;
+import static me.omico.currentactivity.provider.SettingsProvider.ABOUT;
+import static me.omico.currentactivity.provider.SettingsProvider.BOOT_COMPLETED;
+import static me.omico.currentactivity.provider.SettingsProvider.ENABLE_FLOAT_WINDOW;
+import static me.omico.currentactivity.provider.SettingsProvider.FIRST_OPEN;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.SettingsProvider.HISTORY;
+import static me.omico.currentactivity.provider.SettingsProvider.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
+import static me.omico.currentactivity.provider.SettingsProvider.RESET_SETUP_WIZARD;
+import static me.omico.currentactivity.provider.SettingsProvider.WORKING_MODE;
 import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_NONE;
 import static me.omico.currentactivity.ui.activity.GuideActivity.MODE_ROOT;
@@ -101,7 +101,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case ENABLE_FLOAT_WINDOW:
-                if (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE).equals(Settings.Mode.NONE)) {
+                if (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE).equals(SettingsProvider.Mode.NONE)) {
                     ActivityCollector.getActivityCollector().removeAllActivity();
                     intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                 } else if ((boolean) newValue) {
@@ -111,26 +111,26 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                 }
                 break;
             case BOOT_COMPLETED:
-                Settings.putBoolean(BOOT_COMPLETED, (boolean) newValue);
+                SettingsProvider.putBoolean(BOOT_COMPLETED, (boolean) newValue);
                 break;
             case OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP:
-                Settings.putBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, (boolean) newValue);
+                SettingsProvider.putBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, (boolean) newValue);
                 break;
             case GESTURE_CLICK:
-                Settings.putString(GESTURE_CLICK, (String) newValue);
+                SettingsProvider.putString(GESTURE_CLICK, (String) newValue);
                 break;
             case GESTURE_LONG_PRESS:
-                Settings.putString(GESTURE_LONG_PRESS, (String) newValue);
+                SettingsProvider.putString(GESTURE_LONG_PRESS, (String) newValue);
                 break;
             case WORKING_MODE:
                 switch ((String) newValue) {
-                    case Settings.Mode.ROOT:
+                    case SettingsProvider.Mode.ROOT:
                         intentGuideActivity(PAGE_GETTING_MODE_PERMISSION, MODE_ROOT);
                         break;
-                    case Settings.Mode.ACCESSIBILITY_SERVICE:
+                    case SettingsProvider.Mode.ACCESSIBILITY_SERVICE:
                         intentGuideActivity(PAGE_GETTING_MODE_PERMISSION, MODE_ACCESSIBILITY_SERVICE);
                         break;
-                    case Settings.Mode.NONE:
+                    case SettingsProvider.Mode.NONE:
                         intentGuideActivity(PAGE_WELCOME, MODE_NONE);
                         break;
                 }
@@ -173,14 +173,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void initData() {
-        gestureClickPreference.setValue(Settings.getString(GESTURE_CLICK, ACTION_GESTURE_HIDE));
-        gestureLongPressPreference.setValue(Settings.getString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY));
+        gestureClickPreference.setValue(SettingsProvider.getString(GESTURE_CLICK, ACTION_GESTURE_HIDE));
+        gestureLongPressPreference.setValue(SettingsProvider.getString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY));
 
-        String mode = Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE);
+        String mode = SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE);
 
         workingModePreference.setValue(mode);
 
-        if (Objects.equals(mode, Settings.Mode.NONE))
+        if (Objects.equals(mode, SettingsProvider.Mode.NONE))
             workingModePreference.setSummary(String.format(getString(R.string.working_mode_label), getString(R.string.mode_none)));
     }
 
@@ -194,9 +194,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void intentGuideActivity(int setupStep, int workingMode) {
-        Settings.putBoolean(FIRST_OPEN, true);
+        SettingsProvider.putBoolean(FIRST_OPEN, true);
         if (workingMode == MODE_NONE)
-            Settings.putString(Settings.Mode.SELECTION, Settings.Mode.NONE);
+            SettingsProvider.putString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE);
         Intent intent = new Intent(activity, GuideActivity.class);
         intent.putExtra(EXTRA_SETUP_STEP, setupStep);
         intent.putExtra(EXTRA_WORKING_MODE, workingMode);

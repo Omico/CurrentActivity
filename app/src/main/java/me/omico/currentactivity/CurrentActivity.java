@@ -18,11 +18,11 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import me.omico.currentactivity.model.CurrentActivityData;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
+import me.omico.root.SU;
 import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ApplicationUtil;
-import me.omico.util.root.SU;
 
 /**
  * @author Omico
@@ -55,7 +55,7 @@ public class CurrentActivity extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Settings.init(this);
+        SettingsProvider.init(this);
         Realm.init(this);
         realm = Realm.getInstance(getRealmConfiguration());
         if (!BuildConfig.DEBUG) Fabric.with(this, new Crashlytics());
@@ -75,8 +75,8 @@ public class CurrentActivity extends Application {
         String activityName = null;
         String applicationName;
 
-        switch (Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE)) {
-            case Settings.Mode.ROOT:
+        switch (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE)) {
+            case SettingsProvider.Mode.ROOT:
                 String dumpCommand = "dumpsys activity | grep \"mFocusedActivity\"";
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                     dumpCommand = "dumpsys activity | grep \"mResumedActivity\"";
@@ -89,8 +89,8 @@ public class CurrentActivity extends Application {
                     activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
                 }
                 break;
-            case Settings.Mode.ACCESSIBILITY_SERVICE:
-                if (AccessibilityServiceUtils.isAccessibilityServiceEnabled(context, CurrentActivityAccessibilityService.class)) {
+            case SettingsProvider.Mode.ACCESSIBILITY_SERVICE:
+                if (AccessibilityServiceUtils.isEnabled(context, CurrentActivityAccessibilityService.class)) {
                     packageName = CurrentActivityAccessibilityService.foregroundPackageName();
                     activityName = CurrentActivityAccessibilityService.foregroundClassName();
                     if (packageName.equals("null") || activityName.equals("null")) return "";
