@@ -8,9 +8,9 @@ import android.view.MenuItem;
 
 import java.util.List;
 
-import me.omico.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
+import me.omico.currentactivity.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.model.CurrentActivityData;
 import me.omico.currentactivity.ui.adapter.CurrentActivityDataAdapter;
 

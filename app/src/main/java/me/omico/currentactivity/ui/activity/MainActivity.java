@@ -2,8 +2,8 @@ package me.omico.currentactivity.ui.activity;
 
 import android.os.Bundle;
 
-import me.omico.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.R;
+import me.omico.currentactivity.base.activity.AppCompatBaseActivity;
 import me.omico.currentactivity.ui.fragment.SettingsFragment;
 
 /**

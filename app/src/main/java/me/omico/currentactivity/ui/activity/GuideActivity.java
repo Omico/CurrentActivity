@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -15,16 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import me.omico.base.activity.SetupWizardBaseActivity;
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.base.activity.SetupWizardBaseActivity;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
+import me.omico.device.CheckOSVariant;
+import me.omico.root.SU;
 import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
 import me.omico.util.StatusBarUtils;
-import me.omico.util.device.CheckOSVariant;
-import me.omico.util.root.SU;
 
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_MAIN;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_TILE_SERVICE;
@@ -32,9 +33,9 @@ import static me.omico.currentactivity.CurrentActivity.EXTRA_SETUP_STEP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_WORKING_MODE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_ACCESSIBILITY_SERVICE;
 import static me.omico.currentactivity.CurrentActivity.PERMISSION_CODE_OVERLAY;
-import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
-import static me.omico.util.device.CheckOSVariant.FLYME;
-import static me.omico.util.device.CheckOSVariant.ZUI;
+import static me.omico.currentactivity.provider.SettingsProvider.FIRST_OPEN;
+import static me.omico.device.CheckOSVariant.FLYME;
+import static me.omico.device.CheckOSVariant.ZUI;
 
 /**
  * @author Omico 2017/8/15
@@ -60,6 +61,8 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
         setContentView(R.layout.activity_guide);
         StatusBarUtils.setStatusBarColor(this, R.color.suw_status_bar);
         StatusBarUtils.setStatusBarDarkMode(this, true);
+
+        ActivityCollector.getActivityCollector().addActivity(this);
 
         setupStep = getIntent().getIntExtra(EXTRA_SETUP_STEP, PAGE_WELCOME);
         workingMode = getIntent().getIntExtra(EXTRA_WORKING_MODE, MODE_NONE);
@@ -109,7 +112,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     }
 
     private boolean noNeedIntentDrawOverlayStep() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || android.provider.Settings.canDrawOverlays(this);
+        return Settings.canDrawOverlays(this);
     }
 
     private void intentNextStep() {
@@ -120,7 +123,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
     }
 
     private void intentMainActivity() {
-        Settings.putBoolean(FIRST_OPEN, false);
+        SettingsProvider.putBoolean(FIRST_OPEN, false);
         ActivityUtils.startActivity(this, MainActivity.class);
         ActivityCollector.getActivityCollector().removeAllActivity();
     }
@@ -178,8 +181,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
             case R.id.suw_mode_root_check_button:
                 boolean isRooted = SU.isRooted();
                 initColorTextView(R.id.suw_mode_root_desc, isRooted, R.string.suw_check_success, R.string.suw_check_root_fail);
-                setNavigationBarNextButtonEnable(isRooted);
-                if (isRooted) Settings.putString(Settings.Mode.SELECTION, Settings.Mode.ROOT);
+                setNavigationBarNextButtonEnabled(isRooted);
+                if (isRooted)
+                    SettingsProvider.putString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.ROOT);
                 break;
             case R.id.suw_mode_accessibility_service_intent_setting:
                 intentAccessibilitySetting();
@@ -233,7 +237,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 break;
             default:
                 intent = new Intent(
-                        android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName())
                 );
                 tip = R.string.suw_draw_overlay_check_os_variant_common;
@@ -242,9 +246,9 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
         initColorTextView(R.id.suw_draw_overlays_desc, tip, R.color.black);
 
-        if (android.provider.Settings.canDrawOverlays(this)) {
+        if (Settings.canDrawOverlays(this)) {
             initColorTextView(R.id.suw_draw_overlays_desc, R.string.suw_check_success, R.color.green);
-            setNavigationBarNextButtonEnable(true);
+            setNavigationBarNextButtonEnabled(true);
         }
 
         return intent;
@@ -268,40 +272,36 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
 
     private void setWorkingMode(int mode) {
         workingMode = mode;
-        setNavigationBarNextButtonEnable(true);
+        setNavigationBarNextButtonEnabled(true);
     }
 
     private void setAccessibilityServiceState() {
-        boolean hasPermission = AccessibilityServiceUtils.isAccessibilityServiceEnabled(this, CurrentActivityAccessibilityService.class);
+        boolean hasPermission = AccessibilityServiceUtils.isEnabled(this, CurrentActivityAccessibilityService.class);
         initColorTextView(R.id.suw_mode_accessibility_service_desc, hasPermission, R.string.suw_check_success, R.string.suw_check_fail);
-        setNavigationBarNextButtonEnable(hasPermission);
+        setNavigationBarNextButtonEnabled(hasPermission);
         if (hasPermission)
-            Settings.putString(Settings.Mode.SELECTION, Settings.Mode.ACCESSIBILITY_SERVICE);
+            SettingsProvider.putString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.ACCESSIBILITY_SERVICE);
     }
 
     private void intentAccessibilitySetting() {
-        Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivityForResult(intent, PERMISSION_CODE_ACCESSIBILITY_SERVICE);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     private void setDrawOverlaysState() {
-        boolean hasPermission = android.provider.Settings.canDrawOverlays(this);
+        boolean hasPermission = Settings.canDrawOverlays(this);
         initColorTextView(R.id.suw_draw_overlays_desc, hasPermission, R.string.suw_check_success, R.string.suw_check_fail);
-        setNavigationBarNextButtonEnable(hasPermission);
+        setNavigationBarNextButtonEnabled(hasPermission);
     }
 
     private void initLayout(ViewGroup viewGroup, @LayoutRes int layout, @StringRes int title, boolean nextButtonEnable) {
         View inflate = LayoutInflater.from(this).inflate(layout, viewGroup, false);
         viewGroup.addView(inflate);
         getSetupWizardLayout().setHeaderText(title);
-        getSetupWizardLayout().getHeaderTextView().setTextColor(ContextCompat.getColor(viewGroup.getContext(), R.color.colorAccent));
-        setNavigationBarNextButtonEnable(nextButtonEnable);
-    }
-
-    private void setNavigationBarNextButtonEnable(boolean enable) {
-        getNavigationBar().getNextButton().setEnabled(enable);
+        getSetupWizardLayout().getHeaderTextView().setTextColor(viewGroup.getContext().getColor(R.color.colorAccent));
+        setNavigationBarNextButtonEnabled(nextButtonEnable);
     }
 }
 

@@ -43,7 +43,16 @@ dependencies {
     implementation "me.omico.support.widget:float-window:$OMICO_FLOAT_WINDOW_VERSION"
     implementation "me.omico.aosp-part:setup-wizard-lib-compat:$OMICO_SETUP_WIZARD_LIBRARY_VERSION"
 
-    implementation project(':library')
+    implementation 'me.omico:base-activity-setup-wizard:1.0.0'
+    implementation 'me.omico:device:1.0.0'
+    implementation 'me.omico:provider:1.0.0'
+    implementation 'me.omico:root:1.0.0'
+    implementation 'me.omico:utils-activity:1.0.0'
+    implementation 'me.omico:utils-application:1.0.0'
+    implementation 'me.omico:utils-broadcast:1.0.0'
+    implementation 'me.omico:utils-clipboard:1.0.0'
+    implementation 'me.omico:utils-service:1.0.0'
+    implementation 'me.omico:utils-statusbar:1.0.0'
 
     // Firebase
     implementation "com.google.firebase:firebase-core:$FIREBASE_CORE_VERSION"

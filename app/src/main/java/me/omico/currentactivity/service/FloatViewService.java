@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.util.FloatViewBroadcastReceiverHelper;
 import me.omico.support.widget.FloatWindow;
 import me.omico.util.ClipboardUtils;
@@ -32,8 +32,8 @@ import static me.omico.currentactivity.CurrentActivity.ACTION_FLOAT_VIEW_SHOW;
 import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.NOTIFICATION_ID;
-import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
-import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_LONG_PRESS;
 
 /**
  * @author Omico
@@ -236,7 +236,7 @@ public final class FloatViewService extends Service {
     }
 
     private void loadGestureAction(String key) {
-        switch (Settings.getString(key, "")) {
+        switch (SettingsProvider.getString(key, "")) {
             case ACTION_GESTURE_HIDE:
                 LocalBroadcastUtils.send(this, new Intent(ACTION_FLOAT_VIEW_HIDE));
                 break;

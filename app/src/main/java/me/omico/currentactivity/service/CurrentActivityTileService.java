@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.Objects;
 
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.ui.activity.GuideActivity;
 import me.omico.util.ServiceUtils;
 import me.omico.util.StatusBarUtils;
@@ -50,7 +50,7 @@ public class CurrentActivityTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        if (Objects.equals(Settings.getString(Settings.Mode.SELECTION, Settings.Mode.NONE), Settings.Mode.NONE)) {
+        if (Objects.equals(SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE), SettingsProvider.Mode.NONE)) {
             intentGuideActivity();
         } else {
             switch (tile.getState()) {

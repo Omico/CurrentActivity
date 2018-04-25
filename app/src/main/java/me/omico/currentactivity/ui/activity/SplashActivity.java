@@ -16,7 +16,7 @@ import android.view.WindowManager;
 import java.util.Collections;
 
 import me.omico.currentactivity.R;
-import me.omico.currentactivity.provider.Settings;
+import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.FloatViewService;
 import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
@@ -28,10 +28,10 @@ import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_COPY;
 import static me.omico.currentactivity.CurrentActivity.ACTION_GESTURE_HIDE;
 import static me.omico.currentactivity.CurrentActivity.ACTION_QUICK_START_OR_QUICK_STOP;
 import static me.omico.currentactivity.CurrentActivity.EXTRA_COME_FROM_SHORTCUT;
-import static me.omico.currentactivity.provider.Settings.FIRST_OPEN;
-import static me.omico.currentactivity.provider.Settings.GESTURE_CLICK;
-import static me.omico.currentactivity.provider.Settings.GESTURE_LONG_PRESS;
-import static me.omico.currentactivity.provider.Settings.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
+import static me.omico.currentactivity.provider.SettingsProvider.FIRST_OPEN;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_CLICK;
+import static me.omico.currentactivity.provider.SettingsProvider.GESTURE_LONG_PRESS;
+import static me.omico.currentactivity.provider.SettingsProvider.OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP;
 
 /**
  * @author Omico 2017/8/18
@@ -46,12 +46,12 @@ public class SplashActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) createShortcut();
 
-        if (Settings.getBoolean(FIRST_OPEN, true)) {
+        if (SettingsProvider.getBoolean(FIRST_OPEN, true)) {
             ActivityUtils.startActivity(this, GuideActivity.class);
-            Settings.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
-            Settings.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
+            SettingsProvider.putString(GESTURE_CLICK, ACTION_GESTURE_HIDE);
+            SettingsProvider.putString(GESTURE_LONG_PRESS, ACTION_GESTURE_COPY);
         } else if (isQuickStartOrQuickStop()) {
-            if (Settings.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, false)) {
+            if (SettingsProvider.getBoolean(OPEN_MAIN_ACTIVITY_WHEN_QUICK_START_OR_QUICK_STOP, false)) {
                 ActivityUtils.startActivity(this, MainActivity.class);
             } else {
                 ActivityCollector.getActivityCollector().removeAllActivity();

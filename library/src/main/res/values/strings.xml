@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="copy_success">Content has been copied to clipboard.</string>
-    <string name="copy_failed">Content could not copy to clipboard.</string>
-</resources>
