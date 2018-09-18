@@ -1,18 +1,16 @@
 package me.omico.currentactivity.base.activity;
 
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import me.omico.util.StatusBarUtils;
 
 /**
@@ -40,13 +38,13 @@ public abstract class AppCompatBaseActivity extends AppCompatActivity {
     }
 
     protected boolean setStatusBarDarkMode(boolean darkMode) {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && StatusBarUtils.setStatusBarDarkMode(this, darkMode);
+        return StatusBarUtils.setStatusBarDarkMode(this, darkMode);
     }
 
-    protected void replaceSupportFragment(@IdRes int fragmentContainer, Context context, @NonNull String fragmentName) {
+    protected void replaceSupportFragment(@IdRes int fragmentContainer, @NonNull Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(fragmentContainer, Fragment.instantiate(context, fragmentName))
+                .replace(fragmentContainer, fragment)
                 .commit();
     }
 

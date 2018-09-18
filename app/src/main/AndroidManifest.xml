@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="me.omico.currentactivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.omico.currentactivity">
 
     <uses-permission
         android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".CurrentActivity"
@@ -25,8 +25,8 @@
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -34,46 +34,46 @@
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
-                <action android:name="android.intent.action.ASSIST"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.GuideActivity"
-            android:theme="@style/AppTheme.SetupWizard"/>
+            android:theme="@style/AppTheme.SetupWizard" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.HistoryActivity"
             android:label="@string/history"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.AboutActivity"
             android:label="@string/about"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".service.FloatViewService"
-            android:enabled="true"/>
+            android:enabled="true" />
         <service
             android:name=".service.CurrentActivityTileService"
             android:label="@string/quick_enable"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
         <service
             android:name=".service.CurrentActivityAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService"/>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service"/>
+                android:resource="@xml/accessibility_service" />
         </service>
 
         <receiver
@@ -81,15 +81,15 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <meta-data
             android:name="com.android.systemui.action_assist_icon"
-            android:resource="@drawable/ic_action_assistant"/>
+            android:resource="@drawable/ic_action_assistant" />
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="1eb0b9615ed046b8338d1d54644e6c53831cdf51"/>
+            android:value="1eb0b9615ed046b8338d1d54644e6c53831cdf51" />
     </application>
 </manifest>
