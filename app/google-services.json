@@ -8,58 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:42378534230:android:b1951ceed3823143",
-        "android_client_info": {
-          "package_name": "me.omico.currentactivity.debug"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "42378534230-nkvvpdpbpsc4etka8ru33ok08r3511t0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "me.omico.currentactivity.debug",
-            "certificate_hash": "3429648b8166231b62abb9b6ca0c3cd99503fa82"
-          }
-        },
-        {
-          "client_id": "42378534230-977ec87ma5q1r9tki438758dua6a8237.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "me.omico.currentactivity.debug",
-            "certificate_hash": "cd4ff4846843686ab60997c2ab2cff9bbb217c13"
-          }
-        },
-        {
-          "client_id": "42378534230-sgieupaqq9p0g4uvgrh60kap1gkdqop1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDGa73_fqqqjOZYWApZnIn3FfrnrjIfFkE"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "42378534230-sgieupaqq9p0g4uvgrh60kap1gkdqop1.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:42378534230:android:697650f3334f73a0",
         "android_client_info": {
           "package_name": "me.omico.currentactivity"
@@ -100,7 +48,69 @@
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-7779378921974777~4230813031"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42378534230:android:b1951ceed3823143",
+        "android_client_info": {
+          "package_name": "me.omico.currentactivity.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42378534230-977ec87ma5q1r9tki438758dua6a8237.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.omico.currentactivity.debug",
+            "certificate_hash": "cd4ff4846843686ab60997c2ab2cff9bbb217c13"
+          }
+        },
+        {
+          "client_id": "42378534230-nkvvpdpbpsc4etka8ru33ok08r3511t0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.omico.currentactivity.debug",
+            "certificate_hash": "3429648b8166231b62abb9b6ca0c3cd99503fa82"
+          }
+        },
+        {
+          "client_id": "42378534230-uoog0c3jf0k4hjuadm2qfvfi2n37cdpn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.omico.currentactivity.debug",
+            "certificate_hash": "f9fa5e03ac8906fa7bfbc13879829c46884b3893"
+          }
+        },
+        {
+          "client_id": "42378534230-sgieupaqq9p0g4uvgrh60kap1gkdqop1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa73_fqqqjOZYWApZnIn3FfrnrjIfFkE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42378534230-sgieupaqq9p0g4uvgrh60kap1gkdqop1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-7779378921974777~8743529841"
     }
   ],
   "configuration_version": "1"

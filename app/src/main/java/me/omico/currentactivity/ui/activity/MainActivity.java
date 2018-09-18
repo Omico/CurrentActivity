@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatBaseActivity {
         setStatusBarColor(R.color.colorPrimaryDark);
         setStatusBarDarkMode(true);
 
-        replaceSupportFragment(R.id.main_fragment, MainActivity.this,
-                SettingsFragment.class.getCanonicalName());
+        replaceSupportFragment(R.id.main_fragment, new SettingsFragment());
     }
 
     @Override

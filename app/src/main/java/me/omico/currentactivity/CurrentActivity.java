@@ -2,9 +2,6 @@ package me.omico.currentactivity;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.crashlytics.android.Crashlytics;
@@ -13,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -77,13 +76,11 @@ public class CurrentActivity extends Application {
 
         switch (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE)) {
             case SettingsProvider.Mode.ROOT:
-                String dumpCommand = "dumpsys activity | grep \"mFocusedActivity\"";
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                    dumpCommand = "dumpsys activity | grep \"mResumedActivity\"";
+                String dumpCommand = "dumpsys activity r | grep realActivity | head -1";
                 String request = SU.getSU().runCommand(dumpCommand);
 
                 if (!TextUtils.isEmpty(request)) {
-                    String requests[] = request.split(" ")[3].split("/");
+                    String requests[] = request.replace("realActivity=", "").replaceAll(" ", "").split("/");
 
                     packageName = requests[0];
                     activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
@@ -100,7 +97,7 @@ public class CurrentActivity extends Application {
                 break;
         }
 
-        if (packageName != null && activityName != null) {
+        if (packageName != null) {
             applicationName = ApplicationUtil.getApplicationNameByPackageName(context, packageName);
             if (applicationName != null) {
                 RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
@@ -109,7 +106,7 @@ public class CurrentActivity extends Application {
                         saveCurrentActivityData(applicationName, packageName, activityName);
                     } else {
                         CurrentActivityData lastData = results.get(results.size() - 1);
-                        if (!Objects.equals(lastData.getPackageName(), packageName) || !Objects.equals(lastData.getActivityName(), activityName))
+                        if (lastData != null && (!Objects.equals(lastData.getPackageName(), packageName) || !Objects.equals(lastData.getActivityName(), activityName)))
                             saveCurrentActivityData(applicationName, packageName, activityName);
                     }
                 }

@@ -12,12 +12,12 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.core.app.NotificationCompat;
 import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.SettingsProvider;
@@ -249,9 +249,7 @@ public final class FloatViewService extends Service {
     private int getType() {
         int type = WindowManager.LayoutParams.TYPE_PHONE;
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-            type = WindowManager.LayoutParams.TYPE_TOAST;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }
 
