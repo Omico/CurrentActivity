@@ -2,7 +2,6 @@ package me.omico.currentactivity.ui.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import me.omico.currentactivity.BuildConfig;
@@ -32,12 +31,7 @@ public class AboutActivity extends AppCompatBaseActivity {
                 )
         );
 
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardUtils.copyToClipboard(AboutActivity.this, R.string.open_source_address);
-            }
-        });
+        about.setOnClickListener(v -> ClipboardUtils.copyToClipboard(AboutActivity.this, R.string.open_source_address));
     }
 
     @Override

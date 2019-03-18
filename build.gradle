@@ -7,10 +7,10 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-rc03'
-        classpath 'com.google.gms:google-services:4.0.1'
-        classpath 'io.fabric.tools:gradle:1.25.4'
-        classpath "io.realm:realm-gradle-plugin:5.5.0"
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'io.fabric.tools:gradle:1.27.1'
+        classpath "io.realm:realm-gradle-plugin:5.9.1"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,6 +23,7 @@ allprojects {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
         maven { url 'https://dl.bintray.com/omico/OmicoLibrary' }
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -44,14 +45,6 @@ ext {
     library = [
             MIN_SDK_VERSION: 19
     ]
-
-    ANDROID_X_VERSION = "1.0.0-rc01"
-    ANDROID_X_CONSTRAINT_LAYOUT_VERSION = "2.0.0-alpha2"
-    OMICO_FLOAT_WINDOW_VERSION = "1.2.0"
-    OMICO_SETUP_WIZARD_LIBRARY_VERSION = "0.2.0"
-    OMICO_LIBRARY="1.0.2"
-    FIREBASE_CORE_VERSION = "16.0.3"
-    FABRIC_CRASHLYTICS_SDK_VERSION = "2.9.5@aar"
 }
 
 static int getVersionCode() {
