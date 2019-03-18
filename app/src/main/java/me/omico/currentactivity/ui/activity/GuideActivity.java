@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.topjohnwu.superuser.Shell;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -21,7 +23,6 @@ import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
 import me.omico.device.CheckOSVariant;
-import me.omico.root.SU;
 import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ActivityCollector;
 import me.omico.util.ActivityUtils;
@@ -179,7 +180,7 @@ public class GuideActivity extends SetupWizardBaseActivity implements View.OnCli
                 setWorkingMode(MODE_ACCESSIBILITY_SERVICE);
                 break;
             case R.id.suw_mode_root_check_button:
-                boolean isRooted = SU.isRooted();
+                boolean isRooted = Shell.su("echo").exec().isSuccess();
                 initColorTextView(R.id.suw_mode_root_desc, isRooted, R.string.suw_check_success, R.string.suw_check_root_fail);
                 setNavigationBarNextButtonEnabled(isRooted);
                 if (isRooted)

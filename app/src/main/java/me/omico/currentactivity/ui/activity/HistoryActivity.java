@@ -77,12 +77,9 @@ public class HistoryActivity extends AppCompatBaseActivity {
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         recyclerView = findViewById(R.id.recycler_view);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                updateAdapter();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            updateAdapter();
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 

@@ -53,12 +53,7 @@ public class CurrentActivityDataAdapter extends RecyclerView.Adapter<CurrentActi
     }
 
     private void setOnClickListener(final TextView textView) {
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClipboardUtils.copyToClipboard(view.getContext(), textView.getText().toString());
-            }
-        });
+        textView.setOnClickListener(view -> ClipboardUtils.copyToClipboard(view.getContext(), textView.getText().toString()));
     }
 
     static class CurrentActivityDataViewHolder extends RecyclerView.ViewHolder {

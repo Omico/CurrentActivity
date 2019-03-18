@@ -2,9 +2,12 @@ package me.omico.currentactivity;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.crashlytics.android.Crashlytics;
+import com.topjohnwu.superuser.Shell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,6 @@ import io.realm.RealmResults;
 import me.omico.currentactivity.model.CurrentActivityData;
 import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.CurrentActivityAccessibilityService;
-import me.omico.root.SU;
 import me.omico.util.AccessibilityServiceUtils;
 import me.omico.util.ApplicationUtil;
 
@@ -77,7 +79,7 @@ public class CurrentActivity extends Application {
         switch (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE)) {
             case SettingsProvider.Mode.ROOT:
                 String dumpCommand = "dumpsys activity r | grep realActivity | head -1";
-                String request = SU.getSU().runCommand(dumpCommand);
+                String request = Shell.su(dumpCommand).exec().getOut().get(0);
 
                 if (!TextUtils.isEmpty(request)) {
                     String requests[] = request.replace("realActivity=", "").replaceAll(" ", "").split("/");
@@ -92,6 +94,9 @@ public class CurrentActivity extends Application {
                     activityName = CurrentActivityAccessibilityService.foregroundClassName();
                     if (packageName.equals("null") || activityName.equals("null")) return "";
                 } else {
+                    Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                     return context.getString(R.string.should_re_enable_accessibility_service);
                 }
                 break;
@@ -130,14 +135,11 @@ public class CurrentActivity extends Application {
     }
 
     private void saveCurrentActivityData(final String applicationName, final String packageName, final String activityName) {
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(@NonNull Realm realm) {
-                CurrentActivityData currentActivityData = realm.createObject(CurrentActivityData.class);
-                currentActivityData.setApplicationName(applicationName);
-                currentActivityData.setActivityName(activityName);
-                currentActivityData.setPackageName(packageName);
-            }
+        realm.executeTransaction(realm -> {
+            CurrentActivityData currentActivityData = realm.createObject(CurrentActivityData.class);
+            currentActivityData.setApplicationName(applicationName);
+            currentActivityData.setActivityName(activityName);
+            currentActivityData.setPackageName(packageName);
         });
     }
 
@@ -159,12 +161,9 @@ public class CurrentActivity extends Application {
     }
 
     public void clearCurrentActivityData() {
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(@NonNull Realm realm) {
-                RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
-                results.deleteAllFromRealm();
-            }
+        realm.executeTransaction(realm -> {
+            RealmResults<CurrentActivityData> results = realm.where(CurrentActivityData.class).findAll();
+            results.deleteAllFromRealm();
         });
     }
 }
