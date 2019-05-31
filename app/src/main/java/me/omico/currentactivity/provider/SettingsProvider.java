@@ -3,6 +3,7 @@ package me.omico.currentactivity.provider;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+
 import me.omico.provider.Provider;
 
 /**

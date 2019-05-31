@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.crashlytics.android.Crashlytics;
 import com.topjohnwu.superuser.Shell;
 
@@ -13,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
