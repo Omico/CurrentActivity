@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 apply plugin: 'realm-android'
+apply plugin: 'AndResGuard'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -24,6 +25,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            setReleaseSigningConfig(project.rootProject.file('release.properties'))
         }
     }
     applicationVariants.all { variant ->
@@ -67,3 +69,59 @@ dependencies {
         transitive = true
     }
 }
+
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    keepRoot = false
+    whiteList = [
+            "R.mipmap.*",
+            "R.string.com.crashlytics.*",
+            "R.string.google_app_id",
+            "R.string.gcm_defaultSenderId",
+            "R.string.default_web_client_id",
+            "R.string.ga_trackingId",
+            "R.string.firebase_database_url",
+            "R.string.google_api_key",
+            "R.string.google_crash_reporting_api_key"
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.2.16'
+    }
+    finalApkBackupPath = "${project.rootDir}/app/release/CurrentActivity-${app.VERSION_NAME}.apk"
+}
+
+def setReleaseSigningConfig(propertiesFile) {
+    android {
+        signingConfigs {
+            release {
+                if (propertiesFile.exists()) {
+                    Properties localProperties = new Properties()
+                    localProperties.load(propertiesFile.newDataInputStream())
+                    keyAlias localProperties['key.alias']
+                    keyPassword localProperties['key.password']
+                    storeFile file(localProperties['store.file'])
+                    storePassword localProperties['store.password']
+                } else {
+                    logger.error('=============================================')
+                    logger.error('==== release.properties does not exists. ====')
+                    logger.error('=============================================')
+                }
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
