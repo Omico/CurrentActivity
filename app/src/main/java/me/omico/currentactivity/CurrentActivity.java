@@ -3,6 +3,7 @@ package me.omico.currentactivity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -79,12 +80,20 @@ public class CurrentActivity extends Application {
 
         switch (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE)) {
             case SettingsProvider.Mode.ROOT:
-                String dumpCommand = "dumpsys activity r | grep realActivity | head -1";
+                String dumpCommand;
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) {
+                    dumpCommand = "dumpsys activity activities | grep \"Run #\" | head -1 | awk '{print $5}'";
+                } else {
+                    dumpCommand = "dumpsys activity r | grep realActivity | head -1";
+                }
                 String request = Shell.su(dumpCommand).exec().getOut().get(0);
-
                 if (!TextUtils.isEmpty(request)) {
-                    String requests[] = request.replace("realActivity=", "").replaceAll(" ", "").split("/");
-
+                    String[] requests;
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) {
+                        requests = request.split("/");
+                    } else {
+                        requests = request.replace("realActivity=", "").replaceAll(" ", "").split("/");
+                    }
                     packageName = requests[0];
                     activityName = requests[1].substring(0, 1).equals(".") ? requests[0] + requests[1] : requests[1];
                 }
