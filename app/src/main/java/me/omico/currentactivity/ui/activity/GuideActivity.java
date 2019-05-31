@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.topjohnwu.superuser.Shell;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+
+import com.topjohnwu.superuser.Shell;
+
 import me.omico.base.activity.SetupWizardBaseActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.SettingsProvider;

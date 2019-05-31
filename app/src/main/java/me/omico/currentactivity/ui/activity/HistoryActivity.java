@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.List;
+
 import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.base.activity.AppCompatBaseActivity;

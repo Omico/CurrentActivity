@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.util.Objects;
-
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
+
+import java.util.Objects;
+
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.SettingsProvider;
 import me.omico.currentactivity.service.FloatViewService;

@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
 import me.omico.util.StatusBarUtils;
 
 /**
@@ -24,7 +24,7 @@ public abstract class AppCompatBaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(this.setContentView());
 
-        setSupportActionBar((Toolbar) findViewById(this.setSupportActionBar()));
+        setSupportActionBar(findViewById(this.setSupportActionBar()));
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {

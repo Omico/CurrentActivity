@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+
 import me.omico.currentactivity.CurrentActivity;
 import me.omico.currentactivity.R;
 import me.omico.currentactivity.provider.SettingsProvider;
