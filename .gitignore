@@ -22,3 +22,5 @@ build/
 
 app/fabric.properties
 app/release/
+
+app/mapping\.txt
