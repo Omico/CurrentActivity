@@ -17,6 +17,21 @@ buildscript {
     }
 }
 
+plugins {
+    // https://plugins.gradle.org/plugin/com.gradle.build-scan
+    id "com.gradle.build-scan" version "2.3"
+}
+
+buildScan {
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
+
+    // Keep this while optimizing your builds,
+    // but then remove it once you're done — unless you want to share all future builds with Gradle.
+    // If removed, you can still get build scans by using the --scan option.
+    publishAlways()
+}
+
 allprojects {
     repositories {
         google()
