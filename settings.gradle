@@ -1,1 +1,18 @@
+plugins {
+    // https://plugins.gradle.org/plugin/com.gradle.enterprise
+    id "com.gradle.enterprise" version "3.0"
+}
+
+gradleEnterprise {
+    buildScan {
+        setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+        setTermsOfServiceAgree("yes")
+
+        // Keep this while optimizing your builds,
+        // but then remove it once you're done — unless you want to share all future builds with Gradle.
+        // If removed, you can still get build scans by using the --scan option.
+        publishAlways()
+    }
+}
+
 include ':app'

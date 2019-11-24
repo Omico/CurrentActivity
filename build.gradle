@@ -7,27 +7,12 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath 'com.google.gms:google-services:4.2.0'
-        classpath 'io.fabric.tools:gradle:1.28.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.google.gms:google-services:4.3.3'
+        classpath 'io.fabric.tools:gradle:1.31.2'
         classpath "io.realm:realm-gradle-plugin:5.11.0"
-        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.16'
+        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.17'
     }
-}
-
-plugins {
-    // https://plugins.gradle.org/plugin/com.gradle.build-scan
-    id "com.gradle.build-scan" version "2.3"
-}
-
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
-
-    // Keep this while optimizing your builds,
-    // but then remove it once you're done — unless you want to share all future builds with Gradle.
-    // If removed, you can still get build scans by using the --scan option.
-    publishAlways()
 }
 
 allprojects {
@@ -45,7 +30,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    COMPILE_SDK_VERSION = 28
+    COMPILE_SDK_VERSION = 29
 
     app = [
             APPLICATION_ID    : "me.omico.currentactivity",
