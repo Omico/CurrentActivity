@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#48000000">
+    android:background="#CBFFFFFF">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/tip"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/float_view_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="14sp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
