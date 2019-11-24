@@ -81,7 +81,7 @@ public class CurrentActivity extends Application {
         switch (SettingsProvider.getString(SettingsProvider.Mode.SELECTION, SettingsProvider.Mode.NONE)) {
             case SettingsProvider.Mode.ROOT:
                 String dumpCommand;
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     dumpCommand = "dumpsys activity activities | grep \"Run #\" | head -1 | awk '{print $5}'";
                 } else {
                     dumpCommand = "dumpsys activity r | grep realActivity | head -1";
