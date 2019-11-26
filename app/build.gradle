@@ -49,26 +49,18 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+    implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
-
-    implementation 'com.github.topjohnwu.libsu:core:2.3.1'
-
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.github.topjohnwu.libsu:core:2.5.1'
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'me.omico.aosp-part:setup-wizard-lib-compat:0.5.0'
+    implementation 'me.omico.support.widget:float-window:1.2.0'
     implementation 'me.omico:base-activity-setup-wizard:1.0.3'
     implementation 'me.omico:device:1.0.3'
     implementation 'me.omico:provider:1.0.3'
     implementation 'me.omico:utils:1.0.4'
-    implementation 'me.omico.aosp-part:setup-wizard-lib-compat:0.5.0'
-    implementation 'me.omico.support.widget:float-window:1.2.0'
-
-    // Firebase
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-
-    // Fabric Crashlytics
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1') {
-        transitive = true
-    }
 }
 
 andResGuard {
