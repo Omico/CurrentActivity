@@ -1,14 +1,13 @@
 # CurrentActivity 当前进程
 
-A current activity watcher.
+A current activity monitor that implements MVVM architecture using pure Kotlin, Android Jetpack, Kotlin Coroutines.
 
-一个当前活动监视器。
+一个当前活动监视器，使用纯 Kotlin、Android Jetpack、Kotlin 协程实现 MVVM 架构。
 
-## Screenshot 屏幕截图
+## Branch
 
-![Screenshot_1.png](https://ooo.0o0.ooo/2017/06/08/59392c282bc69.png)
-
-![Screenshot_2.png](https://ooo.0o0.ooo/2017/06/08/59392c26015c7.png)
+- [main](https://github.com/Omico/CurrentActivity/tree/main) WIP, currently only support Shizuku mode.
+- [3.x](https://github.com/Omico/CurrentActivity/tree/3.x) The previous version, support root and accessibility modes.
 
 ## License 许可证
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <id name="graph_app" type="id" />
+    <item name="fragment_setup" type="id" />
+    <item name="fragment_settings" type="id" />
+</resources>

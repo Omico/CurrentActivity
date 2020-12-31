@@ -1,53 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <androidx.preference.SwitchPreferenceCompat
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:key="display_over_other_apps"
+        android:summary="@string/preference_display_over_other_apps_summary"
+        android:title="@string/preference_display_over_other_apps_title"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
+    <Preference
+        android:key="shizuku_state"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false" />
+    <SwitchPreference
         android:defaultValue="false"
-        android:key="enable_float_window"
-        android:title="@string/enable_float_window"/>
-
-    <androidx.preference.SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="boot_completed"
-        android:title="@string/boot_completed"/>
-
-    <androidx.preference.SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="open_main_activity_when_quick_start_or_quick_stop"
-        android:title="@string/open_main_activity_when_quick_start_or_quick_stop"/>
-
-    <androidx.preference.ListPreference
-        android:entries="@array/gesture_entries"
-        android:entryValues="@array/gesture_values"
-        android:key="gesture_click"
-        android:summary="@string/gesture_click_label"
-        android:title="@string/gesture_click"/>
-
-    <androidx.preference.ListPreference
-        android:entries="@array/gesture_entries"
-        android:entryValues="@array/gesture_values"
-        android:key="gesture_long_press"
-        android:summary="@string/gesture_long_press_label"
-        android:title="@string/gesture_long_press"/>
-
-    <androidx.preference.ListPreference
-        android:entries="@array/mode_entries"
-        android:entryValues="@array/mode_values"
-        android:key="working_mode"
-        android:summary="@string/working_mode_label"
-        android:title="@string/suw_working_mode"/>
-
-    <androidx.preference.Preference
-        android:key="reset_setup_wizard"
-        android:title="@string/reset_setup_wizard"/>
-
-    <androidx.preference.Preference
-        android:key="history"
-        android:title="@string/history"/>
-
-    <androidx.preference.Preference
-        android:key="about"
-        android:title="@string/about"/>
-
-</androidx.preference.PreferenceScreen>
+        android:key="floating_monitor"
+        android:summaryOff="@string/preference_floating_monitor_summary_off"
+        android:summaryOn="@string/preference_floating_monitor_summary_on"
+        android:title="@string/preference_floating_monitor_title"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

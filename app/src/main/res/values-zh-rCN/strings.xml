@@ -1,58 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">当前进程</string>
-    <string name="app_name_debug">当前进程 DEBUG</string>
-    <string name="tip">点击后隐藏到通知栏</string>
-    <string name="should_re_enable_accessibility_service">需要重新开启无障碍服务。</string>
-    <string name="failed_to_get">无法获取当前进程。</string>
-    <string name="quick_enable">快速打开</string>
-    <string name="shortcut_quick_switch">快捷开关</string>
-    <string name="enable_float_window">开启悬浮窗</string>
-    <string name="boot_completed">开机启动</string>
-    <string name="open_main_activity_when_quick_start_or_quick_stop">在快速启动或快速停止时打开主进程</string>
-    <string name="gesture_click">点击</string>
-    <string name="gesture_click_label">点击：%1$s</string>
-    <string name="gesture_copy">复制</string>
-    <string name="gesture_hide">隐藏</string>
-    <string name="gesture_long_press">长按</string>
-    <string name="gesture_long_press_label">长按：%1$s</string>
-    <string name="working_mode_label">工作模式：%1$s</string>
-    <string name="reset_setup_wizard">重置设置向导</string>
-    <string name="about">关于</string>
-    <string name="history">历史的进程</string>
-    <string name="action_clear_history">遗忘历史</string>
-    <string name="about_author">
-        "作者：宇文（你也可以叫我 龙天宇 、Omico 、Yuwen）\n\n"
-
-        "此应用开源到我的 Github 上，欢迎查阅。\n\n"
-
-        "地址（点击复制)：\n"
-        "https://github.com/Omico/CurrentActivity\n\n"
-
-        "PS：感谢 iAcn（Leon连续）、 drakeet 审察源码"
-    </string>
-    <string name="enable">开启</string>
-    <string name="disable">关闭</string>
-    <string name="quick_settings_tile_is_unavailable">快速设置不可用，请先选择一个工作模式。</string>
-    <string name="suw_welcome">欢迎使用当前进程</string>
-    <string name="suw_welcome_introduction">首先我们需要您在使用前来设置它。</string>
-    <string name="suw_working_mode">工作模式</string>
-    <string name="suw_mode_desc">我们推荐使用 ROOT 模式。但在 H₂OS 或 O₂OS 里 shell 会被受限，所以请用无障碍服务模式。</string>
-    <string name="suw_mode_root">ROOT 模式</string>
-    <string name="suw_mode_root_desc">点击下面的按钮开始检查 ROOT 权限</string>
-    <string name="suw_mode_accessibility_service">无障碍服务模式</string>
-    <string name="suw_mode_accessibility_service_desc">点击下面的按钮开始检查无障碍服务权限</string>
-    <string name="suw_check">检查</string>
-    <string name="suw_go_to_setting">去设置</string>
-    <string name="suw_check_root_fail">检查失败，可能是由于您的设备没有 ROOT 或者请求被 ROOT 管理应用拒绝。</string>
-    <string name="suw_check_success">检查成功</string>
-    <string name="suw_check_fail">检查失败，或许你应该重试一次。</string>
-    <string name="suw_draw_overlay">出现在其他应用上</string>
-    <string name="suw_draw_overlay_check_os_variant_zui">ZUI 的用户请选择 【当前进程】 -> 【权限管理】 授予允许 【显示悬浮窗】 的权限。</string>
-    <string name="suw_draw_overlay_check_os_variant_flyme">Flyme 的用户，需要授予允许 【桌面悬浮窗】 的权限。</string>
-    <string name="suw_draw_overlay_check_os_variant_common">需要额外授权 【允许出现在其他应用上】 的权限。</string>
-    <string name="suw_finish">完成</string>
-
-    <string name="mode_none">无</string>
-    <string name="notification_action_exit">退出</string>
+    <string name="app_name">当前 Activity</string>
+    <string name="notification_action_stop">停止</string>
+    <string name="notification_channel_floating_monitor_service">悬浮监视器服务</string>
+    <string name="notification_content_title_closing">关闭中。。。</string>
+    <string name="notification_content_title_monitoring">监视中。。。</string>
+    <string name="preference_display_over_other_apps_summary">需要【显示在其他应用的上层】的权限。</string>
+    <string name="preference_display_over_other_apps_title">显示在其他应用的上层</string>
+    <string name="preference_floating_monitor_summary_off">悬浮监视器未运行。</string>
+    <string name="preference_floating_monitor_summary_on">悬浮监视器正在运行。</string>
+    <string name="preference_floating_monitor_title">悬浮监视器</string>
+    <string name="preference_shizuku_state_summary_click_here_go_to_shizuku">点击此处跳转到 Shizuku。</string>
+    <string name="preference_shizuku_state_summary_click_here_to_authorize">点击此处进行授权。</string>
+    <string name="preference_shizuku_state_title_shizuku_is_not_installed">Shizuku 未安装</string>
+    <string name="preference_shizuku_state_title_shizuku_is_not_running">Shizuku 未运行</string>
+    <string name="preference_shizuku_state_title_shizuku_unauthorized">Shizuku 未授权</string>
 </resources>

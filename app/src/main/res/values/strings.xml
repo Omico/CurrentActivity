@@ -1,63 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Current Activity</string>
-    <string name="app_name_debug">Current Activity DEBUG</string>
-    <string name="tip">Click and hide into the notification bar</string>
-    <string name="should_re_enable_accessibility_service">Should re-enable accessibility service.</string>
-    <string name="failed_to_get">Failed to get current activity.</string>
-    <string name="quick_enable">Quick enable</string>
-    <string name="shortcut_quick_switch">Quick switch</string>
-    <string name="enable_float_window">Enable float window</string>
-    <string name="boot_completed">Boot completed</string>
-    <string name="open_main_activity_when_quick_start_or_quick_stop">Open main activity when quick start or quick stop</string>
-    <string name="gesture_click">Click</string>
-    <string name="gesture_long_press">Long press</string>
-    <string name="gesture_copy">Copy</string>
-    <string name="gesture_copy_value" translatable="false">me.omico.currentactivity.action.GESTURE_COPY</string>
-    <string name="gesture_hide">Hide</string>
-    <string name="gesture_hide_value" translatable="false">me.omico.currentactivity.action.GESTURE_HIDE</string>
-    <string name="gesture_click_label">Click: %1$s</string>
-    <string name="gesture_long_press_label">Long press: %1$s</string>
-    <string name="working_mode_label">Working mode: %1$s</string>
-    <string name="mode_root_value" translatable="false">mode_root</string>
-    <string name="mode_accessibility_service_value" translatable="false">mode_accessibility_service</string>
-    <string name="reset_setup_wizard">Reset setup wizard</string>
-    <string name="history">History</string>
-    <string name="action_clear_history">Clear history</string>
-    <string name="about">About</string>
-    <string name="version" translatable="false">Version: %1$s:%2$s(%3$d)</string>
-    <string name="open_source_address" translatable="false">https://github.com/Omico/CurrentActivity</string>
-    <string name="about_author">
-        "Author: 宇文 (Also you can tell me \"龙天宇\", \"Omico\", \"Yuwen\"）\n\n"
-
-        "This project has been open source in Github, welcome to inspect.\n\n"
-
-        "Address（click and copy)：\n"
-        "https://github.com/Omico/CurrentActivity\n\n"
-
-        "PS：Thanks iAcn（Leon连续）, drakeet review my code"
-    </string>
-    <string name="enable">Enable</string>
-    <string name="disable">Disable</string>
-    <string name="quick_settings_tile_is_unavailable">Quick settings tile is unavailable. Please select a working mode first.</string>
-    <string name="suw_welcome">Welcome to use Current Activity</string>
-    <string name="suw_welcome_introduction">First we need you to set up, before you use it.</string>
-    <string name="suw_working_mode">Working mode</string>
-    <string name="suw_mode_desc">We recommended use ROOT Mode. But in H₂OS or O₂OS it will be restricted to use shell. So please use Accessibility Service Mode.</string>
-    <string name="suw_mode_root">ROOT Mode</string>
-    <string name="suw_mode_root_desc">Tap button below to start ROOT access checking.</string>
-    <string name="suw_mode_accessibility_service">Accessibility Service Mode</string>
-    <string name="suw_mode_accessibility_service_desc">Tap button below to start Accessibility Service access checking.</string>
-    <string name="suw_check">Check</string>
-    <string name="suw_go_to_setting">Go to setting</string>
-    <string name="suw_check_root_fail">Unable to get ROOT access, maybe your device is not rooted or the request is denied by your ROOT control app.</string>
-    <string name="suw_check_success">Check Complete.</string>
-    <string name="suw_check_fail">Unable to get access, maybe you should try again.</string>
-    <string name="suw_draw_overlay">"Draw over other apps"</string>
-    <string name="suw_draw_overlay_check_os_variant_zui">For users of ZUI, select [Current Activity] -> [Permissions] to grant [Show the suspension window] permission.</string>
-    <string name="suw_draw_overlay_check_os_variant_flyme">For users of Flyme, need grant [Pop-ups] permission.</string>
-    <string name="suw_draw_overlay_check_os_variant_common">Need to grant [Permit drawing over other apps] permission.</string>
-    <string name="suw_finish">Finish</string>
-
-    <string name="mode_none">None</string>
-    <string name="notification_action_exit">Exit</string>
+    <string name="notification_action_stop">Stop</string>
+    <string name="notification_channel_floating_monitor_service">Floating monitor service</string>
+    <string name="notification_content_title_closing">Closing…</string>
+    <string name="notification_content_title_monitoring">Monitoring…</string>
+    <string name="preference_display_over_other_apps_summary">Require \"Display over other apps\" permission.</string>
+    <string name="preference_display_over_other_apps_title">Display over other apps</string>
+    <string name="preference_floating_monitor_summary_off">Floating monitor is not running.</string>
+    <string name="preference_floating_monitor_summary_on">Floating monitor is running.</string>
+    <string name="preference_floating_monitor_title">Floating monitor</string>
+    <string name="preference_shizuku_state_summary_click_here_go_to_shizuku">Click here to go to Shizuku.</string>
+    <string name="preference_shizuku_state_summary_click_here_to_authorize">Click here to authorize.</string>
+    <string name="preference_shizuku_state_title_shizuku_is_not_installed">Shizuku is not installed</string>
+    <string name="preference_shizuku_state_title_shizuku_is_not_running">Shizuku is not running</string>
+    <string name="preference_shizuku_state_title_shizuku_unauthorized">Shizuku unauthorized</string>
 </resources>
