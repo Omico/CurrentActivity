@@ -1,0 +1,10 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <service
+            android:name="me.omico.currentactivity.ui.monitor.MonitorService"
+            android:exported="false"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
+    </application>
+</manifest>
