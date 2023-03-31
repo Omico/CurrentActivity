@@ -62,3 +62,16 @@ fun <T> rememberUpdatedStateWithLifecycle(
         }
     }
 }
+
+@Composable
+fun <T> rememberUpdatedStateWithLifecycle2(
+    initialValue: T,
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
+    whenState: Lifecycle.State = Lifecycle.State.STARTED,
+    updater: () -> T,
+): State<T> = produceState(initialValue, lifecycleOwner, whenState, updater) {
+    lifecycleOwner.lifecycle.currentStateFlow.collect { state ->
+        if (state != whenState) return@collect
+        this@produceState.value = updater()
+    }
+}

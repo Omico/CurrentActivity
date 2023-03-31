@@ -36,10 +36,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -54,7 +59,6 @@ import me.omico.currentactivity.ui.animatedVisibilityItem
 import me.omico.currentactivity.ui.heightSpacer
 import me.omico.currentactivity.ui.rememberMonitorServiceStatus
 import me.omico.currentactivity.ui.rememberShizukuStatus
-import me.omico.currentactivity.ui.rememberUpdatedStateWithLifecycle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,11 +68,27 @@ fun HomeUi(
 ) {
     val shizukuStatus by rememberShizukuStatus()
     val monitorServiceStatus: MonitorServiceStatus by rememberMonitorServiceStatus()
-    val canDrawOverlays by rememberUpdatedStateWithLifecycle(
-        initialValue = false,
-        minActiveState = Lifecycle.State.RESUMED,
-        updater = checkCanDrawOverlays,
-    )
+//    val canDrawOverlays by rememberUpdatedStateWithLifecycle(
+//        initialValue = false,
+//        minActiveState = Lifecycle.State.RESUMED,
+//        updater = checkCanDrawOverlays,
+//    )
+
+//    val canDrawOverlays by rememberUpdatedStateWithLifecycle2(
+//        initialValue = false,
+//        whenState = Lifecycle.State.RESUMED,
+//        updater = checkCanDrawOverlays,
+//    )
+
+    var canDrawOverlays by remember { mutableStateOf(false) }
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val state by lifecycle.currentStateFlow.collectAsState()
+    if (state == Lifecycle.State.RESUMED) {
+        LaunchedEffect(state) {
+            canDrawOverlays = checkCanDrawOverlays()
+        }
+    }
+
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),

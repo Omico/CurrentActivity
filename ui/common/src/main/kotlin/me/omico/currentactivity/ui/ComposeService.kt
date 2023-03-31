@@ -38,7 +38,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleService
-import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
@@ -81,7 +81,7 @@ abstract class ComposeService : LifecycleService(), SavedStateRegistryOwner {
     fun setContent(content: @Composable () -> Unit) {
         require(view == null) { "Content has already been set." }
         view = ComposeView(this).apply {
-            ViewTreeLifecycleOwner.set(this, this@ComposeService)
+            setViewTreeLifecycleOwner(this@ComposeService)
             setViewTreeSavedStateRegistryOwner(this@ComposeService)
             setContent(content)
         }
