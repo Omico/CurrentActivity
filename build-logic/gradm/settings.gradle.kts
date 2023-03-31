@@ -1,10 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "build-logic"
+rootProject.name = "gradm"
 
 pluginManagement {
-    includeBuild("initialization")
-    includeBuild("gradm")
+    includeBuild("../initialization")
     repositories {
         mavenCentral()
         maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots")
@@ -13,7 +12,4 @@ pluginManagement {
 
 plugins {
     id("initialization")
-    id("gradm")
 }
-
-include(":convention")

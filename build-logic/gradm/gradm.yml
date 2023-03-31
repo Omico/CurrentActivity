@@ -20,27 +20,28 @@ versions:
   okhttp: "5.0.0-alpha.10"
   plugins:
     age: "1.0.0-SNAPSHOT"
-    android: "7.3.0-rc01"
+    android: "7.4.2"
     spotless: "6.10.0"
   shizuku: "12.1.0"
 
 repositories:
   google:
-    url: https://maven.google.com
+    url: "https://maven.google.com"
   gradlePluginPortal:
-    url: https://plugins.gradle.org/m2
+    url: "https://plugins.gradle.org/m2"
   mavenCentral:
-    url: https://repo1.maven.org/maven2
+    url: "https://repo1.maven.org/maven2"
 
 plugins:
   gradlePluginPortal:
     com.diffplug.spotless: ${versions.plugins.spotless}
-    org.jetbrains.kotlin.android: ${versions.kotlin}
   noUpdates:
     com.android.application: ${versions.plugins.android}
     com.android.library: ${versions.plugins.android}
     me.omico.age.project: ${versions.plugins.age}
     me.omico.age.spotless: ${versions.plugins.age}
+    org.jetbrains.kotlin.android: ${versions.kotlin}
+    org.jetbrains.kotlin.jvm: ${versions.kotlin}
 
 dependencies:
   google:
@@ -126,6 +127,10 @@ dependencies:
       savedstate-ktx:
         alias: androidx.savedState.ktx
         version: ${versions.androidx.savedState}
+    com.android.tools.build:
+      gradle:
+        alias: androidGradlePlugin
+        version: ${versions.plugins.android}
     com.google.android.material:
       material:
         alias: material
@@ -148,6 +153,10 @@ dependencies:
       provider:
         alias: shizuku.provider
         version: ${versions.shizuku}
+    org.jetbrains.kotlin:
+      kotlin-gradle-plugin:
+        alias: kotlinGradlePlugin
+        version: ${versions.kotlin}
     org.jetbrains.kotlinx:
       kotlinx-coroutines-android:
         alias: kotlinx.coroutines.android
@@ -156,3 +165,8 @@ dependencies:
       hiddenapibypass:
         alias: hiddenApiBypass
         version: ${versions.hiddenApiBypass}
+  noUpdates:
+    me.omico.age:
+      age-dsl:
+        alias: me.omico.age.dsl
+        version: ${versions.plugins.age}

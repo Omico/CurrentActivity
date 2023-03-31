@@ -1,37 +1,21 @@
 @file:Suppress("UnstableApiUsage")
 
-import me.omico.age.dsl.ageSnapshots
-import me.omico.age.dsl.gradmSnapshots
-import me.omico.age.dsl.spotless
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
-        ageSnapshots()
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots")
         google()
-        gradmSnapshots()
         mavenCentral()
-        spotless()
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        ageSnapshots()
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots")
         google()
-        gradmSnapshots()
         mavenCentral()
-        spotless()
+        gradlePluginPortal()
     }
-}
-
-buildCache {
-    local {
-        removeUnusedEntriesAfterDays = 1
-    }
-}
-
-plugins {
-    id("me.omico.age.settings.initialization")
 }

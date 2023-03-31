@@ -3,8 +3,8 @@
 rootProject.name = "CurrentActivity"
 
 pluginManagement {
-    includeBuild("build-logic")
     includeBuild("build-logic/initialization")
+    includeBuild("build-logic/gradm")
     repositories {
         gradlePluginPortal {
             content {
@@ -18,6 +18,7 @@ pluginManagement {
 
 plugins {
     id("initialization")
+    id("gradm")
     id("com.gradle.enterprise") version "3.11.1"
 }
 
@@ -28,6 +29,8 @@ gradleEnterprise {
         publishAlways()
     }
 }
+
+includeBuild("build-logic")
 
 include(":app")
 include(":core")
