@@ -21,7 +21,7 @@ versions:
   plugins:
     age: "1.0.0-SNAPSHOT"
     android: "7.4.2"
-    spotless: "6.10.0"
+    spotless: "6.17.0"
   shizuku: "12.1.0"
 
 repositories:
