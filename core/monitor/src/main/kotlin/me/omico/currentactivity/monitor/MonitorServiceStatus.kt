@@ -1,7 +1,7 @@
 /*
  * This file is part of CurrentActivity.
  *
- * Copyright (C) 2022 Omico
+ * Copyright (C) 2022-2023 Omico
  *
  * CurrentActivity is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public

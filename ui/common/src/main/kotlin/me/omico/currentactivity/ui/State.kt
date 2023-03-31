@@ -1,7 +1,7 @@
 /*
  * This file is part of CurrentActivity.
  *
- * Copyright (C) 2022 Omico
+ * Copyright (C) 2022-2023 Omico
  *
  * CurrentActivity is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -55,8 +55,10 @@ fun <T> rememberUpdatedStateWithLifecycle(
     lifecycle.repeatOnLifecycle(minActiveState) {
         if (context == EmptyCoroutineContext) {
             this@produceState.value = updater()
-        } else withContext(context) {
-            this@produceState.value = updater()
+        } else {
+            withContext(context) {
+                this@produceState.value = updater()
+            }
         }
     }
 }
