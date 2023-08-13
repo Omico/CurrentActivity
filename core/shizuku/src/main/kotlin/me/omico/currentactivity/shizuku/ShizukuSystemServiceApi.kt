@@ -18,15 +18,8 @@
  */
 package me.omico.currentactivity.shizuku
 
-import android.app.IActivityTaskManager
+import android.app.ActivityTaskManager
 import android.content.ComponentName
-import rikka.shizuku.ShizukuBinderWrapper
-import rikka.shizuku.SystemServiceHelper
 
-val topActivity: ComponentName?
-    get() = activityTaskManager.getTasks(1).first().topActivity
-
-private val activityTaskManager: IActivityTaskManager =
-    SystemServiceHelper.getSystemService("activity_task")
-        .let(::ShizukuBinderWrapper)
-        .let(IActivityTaskManager.Stub::asInterface)
+inline val topActivity: ComponentName?
+    get() = ActivityTaskManager.getInstance().getTasks(1).first().topActivity

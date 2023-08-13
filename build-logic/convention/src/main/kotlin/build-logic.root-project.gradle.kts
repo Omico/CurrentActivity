@@ -14,7 +14,7 @@ allprojects {
         compileSdk = 33
         buildToolsVersion = "33.0.0"
         defaultConfig {
-            minSdk = 26
+            minSdk = 29
         }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_11
