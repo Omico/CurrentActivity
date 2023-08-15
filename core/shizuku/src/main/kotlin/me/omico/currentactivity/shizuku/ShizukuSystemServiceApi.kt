@@ -18,8 +18,26 @@
  */
 package me.omico.currentactivity.shizuku
 
-import android.app.ActivityTaskManager
+import android.app.ActivityManager
+import android.app.IActivityTaskManager
 import android.content.ComponentName
+import android.os.Build
+import android.view.Display
+import rikka.shizuku.ShizukuBinderWrapper
+import rikka.shizuku.SystemServiceHelper
 
-inline val topActivity: ComponentName?
-    get() = ActivityTaskManager.getInstance().getTasks(1).first().topActivity
+val topActivity: ComponentName?
+    get() = getTasksWrapper().first().topActivity
+
+private val activityTaskManager: IActivityTaskManager =
+    SystemServiceHelper.getSystemService("activity_task")
+        .let(::ShizukuBinderWrapper)
+        .let(IActivityTaskManager.Stub::asInterface)
+
+private fun getTasksWrapper(): List<ActivityManager.RunningTaskInfo> = when {
+    Build.VERSION.SDK_INT < 31 -> activityTaskManager.getTasks(1)
+    Build.VERSION.SDK_INT >= 33 ->
+        activityTaskManager.getTasks(1, false, false, Display.INVALID_DISPLAY)
+    else -> runCatching { activityTaskManager.getTasks(1, false, false, Display.INVALID_DISPLAY) }
+        .getOrElse { activityTaskManager.getTasks(1, false, false) }
+}
