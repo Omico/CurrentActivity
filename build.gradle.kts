@@ -1,3 +1,3 @@
 plugins {
-    id("build-logic.root-project")
+    id("ca.root")
 }

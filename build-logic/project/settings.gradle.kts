@@ -1,4 +1,4 @@
-rootProject.name = "ca-initialization"
+rootProject.name = "ca-project"
 
 pluginManagement {
     includeBuild("../gradm")

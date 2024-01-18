@@ -1,0 +1,11 @@
+complexity:
+  LongParameterList:
+    active: false
+  TooManyFunctions:
+    active: false
+
+style:
+  MagicNumber:
+    ignoreLocalVariableDeclaration: true
+  ReturnCount:
+    active: false

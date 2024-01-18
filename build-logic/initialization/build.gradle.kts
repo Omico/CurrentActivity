@@ -2,6 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-repositories {
-    mavenCentral()
+dependencies {
+    implementation(com.gradle.enterprise)
+    implementation(gradmGeneratedJar)
 }
