@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import me.omico.age.dsl.configureAndroidCommon
+import me.omico.gradm.Versions
 
 plugins {
     id("build-logic.root-project.base")
@@ -21,13 +22,13 @@ allprojects {
             targetCompatibility = JavaVersion.VERSION_11
         }
         composeOptions {
-            kotlinCompilerExtensionVersion = versions.androidx.compose.compiler
+            kotlinCompilerExtensionVersion = Versions.androidx.compose.compiler
         }
     }
 }
 
 val wrapper: Wrapper by tasks.named<Wrapper>("wrapper") {
-    gradleVersion = versions.gradle
+    gradleVersion = Versions.gradle
     distributionType = Wrapper.DistributionType.BIN
 }
 

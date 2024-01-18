@@ -1,18 +1,14 @@
-buildscript {
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
-    }
-}
-
 plugins {
     `kotlin-dsl`
-    id("me.omico.gradm") version "3.1.0"
+    id("me.omico.gradm") version "4.0.0-beta03"
+    id("me.omico.gradm.integration.github") version "4.0.0-beta03"
+}
+
+repositories {
+    mavenCentral()
 }
 
 gradm {
-    pluginId = "gradm"
+    pluginId = "ca.gradm"
     debug = true
-    integrations {
-        apply("github")
-    }
 }

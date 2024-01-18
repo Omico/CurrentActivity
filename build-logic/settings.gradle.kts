@@ -13,7 +13,7 @@ pluginManagement {
 
 plugins {
     id("initialization")
-    id("gradm")
+    id("ca.gradm")
 }
 
 include(":convention")

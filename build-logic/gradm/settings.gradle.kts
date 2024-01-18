@@ -1,15 +1,8 @@
-@file:Suppress("UnstableApiUsage")
-
-rootProject.name = "gradm"
+rootProject.name = "ca-gradm"
 
 pluginManagement {
-    includeBuild("../initialization")
     repositories {
-        mavenCentral()
-        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots")
+        maven(url = "https://maven.omico.me")
+        gradlePluginPortal()
     }
-}
-
-plugins {
-    id("initialization")
 }

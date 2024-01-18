@@ -26,11 +26,9 @@ versions:
 
 repositories:
   google:
-    url: "https://maven.google.com"
   gradlePluginPortal:
-    url: "https://plugins.gradle.org/m2"
   mavenCentral:
-    url: "https://repo1.maven.org/maven2"
+  noUpdates:
 
 plugins:
   gradlePluginPortal:

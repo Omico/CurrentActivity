@@ -18,7 +18,7 @@ pluginManagement {
 
 plugins {
     id("initialization")
-    id("gradm")
+    id("ca.gradm")
     id("com.gradle.enterprise") version "3.11.1"
 }
 
