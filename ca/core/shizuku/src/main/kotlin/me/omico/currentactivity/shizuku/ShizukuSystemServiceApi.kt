@@ -36,8 +36,6 @@ private val activityTaskManager: IActivityTaskManager =
 
 private fun getTasksWrapper(): List<ActivityManager.RunningTaskInfo> = when {
     Build.VERSION.SDK_INT < 31 -> activityTaskManager.getTasks(1)
-    Build.VERSION.SDK_INT >= 33 ->
-        activityTaskManager.getTasks(1, false, false, Display.INVALID_DISPLAY)
     else -> runCatching { activityTaskManager.getTasks(1, false, false, Display.INVALID_DISPLAY) }
         .getOrElse { activityTaskManager.getTasks(1, false, false) }
 }
