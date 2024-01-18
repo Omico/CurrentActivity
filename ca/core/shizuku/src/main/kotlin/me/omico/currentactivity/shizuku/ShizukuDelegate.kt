@@ -21,6 +21,7 @@ package me.omico.currentactivity.shizuku
 import android.content.Context
 import androidx.core.content.PermissionChecker
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -92,7 +93,7 @@ class ShizukuDelegate(
         Shizuku.removeRequestPermissionResultListener(requestPermissionResultListener)
     }
 
-    @OptIn(FlowPreview::class)
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun collectStatus() {
         launch {
             flowOf(_binderStatus, _permissionStatus).flattenMerge(2).collect {

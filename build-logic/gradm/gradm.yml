@@ -1,29 +1,26 @@
 versions:
-  accompanist: "0.26.2-beta"
+  accompanist: "0.32.0"
   androidx:
-    activity: "1.6.0-rc01"
-    annotation: "1.5.0-beta01"
+    activity: "1.8.2"
     browser: "1.4.0"
-    compose: "1.3.0-beta01"
-    compose.compiler: "1.3.1"
-    compose.material3: "1.0.0-beta01"
-    core: "1.9.0-rc01"
-    core.splashScreen: "1.0.0"
+    compose:
+      bom: "2023.10.01"
+      compiler: "1.5.8"
+    core.splashScreen: "1.0.1"
     datastore: "1.0.0"
-    lifecycle: "2.6.0-alpha01"
-    navigation: "2.5.1"
-    savedState: "1.2.0"
+    lifecycle: "2.7.0"
+    navigation: "2.7.6"
   consensus: "0.8.0"
   hiddenApiBypass: "4.3"
-  kotlin: "1.7.10"
-  kotlin.coroutines: "1.6.4"
-  material: "1.8.0-alpha01"
+  kotlin: "1.9.22"
+  kotlin.coroutines: "1.7.3"
+  material: "1.11.0"
   okhttp: "5.0.0-alpha.10"
   plugins:
     android: "8.2.1"
     gradle.enterprise: "3.16.1"
     spotless: "6.24.0"
-  shizuku: "12.1.0"
+  shizuku: "13.1.5"
 
 repositories:
   omico:
@@ -56,56 +53,33 @@ dependencies:
       activity-ktx:
         alias: androidx.activity.ktx
         version: ${versions.androidx.activity}
-    androidx.annotation:
-      annotation:
-        alias: androidx.annotation
-        version: ${versions.androidx.annotation}
-    androidx.compose.animation:
-      animation:
-        alias: androidx.compose.animation
-        version: ${versions.androidx.compose}
-    androidx.compose.foundation:
-      foundation:
-        alias: androidx.compose.foundation
-        version: ${versions.androidx.compose}
+    androidx.compose:
+      compose-bom:
+        alias: androidx.compose.bom
+        version: ${versions.androidx.compose.bom}
+        bom: true
     androidx.compose.material:
-      material:
-        alias: androidx.compose.material
-        version: ${versions.androidx.compose}
-      material-icons-core:
-        alias: androidx.compose.material.icons.core
-        version: ${versions.androidx.compose}
       material-icons-extended:
         alias: androidx.compose.material.icons.extended
-        version: ${versions.androidx.compose}
+        noSpecificVersion: true
     androidx.compose.material3:
       material3:
         alias: androidx.compose.material3
-        version: ${versions.androidx.compose.material3}
+        noSpecificVersion: true
       material3-window-size-class:
         alias: androidx.compose.material3.windowSizeClass
-        version: ${versions.androidx.compose.material3}
-    androidx.compose.runtime:
-      runtime:
-        alias: androidx.compose.runtime
-        version: ${versions.androidx.compose}
+        noSpecificVersion: true
     androidx.compose.ui:
       ui:
         alias: androidx.compose.ui
-        version: ${versions.androidx.compose}
+        noSpecificVersion: true
       ui-tooling:
         alias: androidx.compose.ui.tooling
-        version: ${versions.androidx.compose}
+        noSpecificVersion: true
       ui-tooling-preview:
         alias: androidx.compose.ui.tooling.preview
-        version: ${versions.androidx.compose}
-      ui-util:
-        alias: androidx.compose.ui.util
-        version: ${versions.androidx.compose}
+        noSpecificVersion: true
     androidx.core:
-      core-ktx:
-        alias: androidx.core.ktx
-        version: ${versions.androidx.core}
       core-splashscreen:
         alias: androidx.core.splashScreen
         version: ${versions.androidx.core.splashScreen}
@@ -124,13 +98,6 @@ dependencies:
       navigation-compose:
         alias: androidx.navigation.compose
         version: ${versions.androidx.navigation}
-      navigation-runtime-ktx:
-        alias: androidx.navigation.runtime.ktx
-        version: ${versions.androidx.navigation}
-    androidx.savedstate:
-      savedstate-ktx:
-        alias: androidx.savedState.ktx
-        version: ${versions.androidx.savedState}
     com.android.tools.build:
       gradle:
         alias: androidGradlePlugin
