@@ -22,10 +22,12 @@ import android.content.Context
 import androidx.core.content.PermissionChecker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.flattenMerge
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
@@ -46,9 +48,8 @@ class ShizukuDelegate(
         MutableStateFlow(ShizukuPermissionStatus.Denied())
     val permissionStatus: StateFlow<ShizukuPermissionStatus> = _permissionStatus
 
-    private val _status: MutableStateFlow<ShizukuStatus> =
-        MutableStateFlow(ShizukuStatus.Initializing)
-    val status: StateFlow<ShizukuStatus> = _status
+    private val _status: MutableSharedFlow<ShizukuStatus> = MutableSharedFlow(replay = 0)
+    val status: SharedFlow<ShizukuStatus> = _status.asSharedFlow()
 
     private val binderReceivedListener = Shizuku.OnBinderReceivedListener {
         launch {
@@ -98,7 +99,6 @@ class ShizukuDelegate(
         launch {
             flowOf(_binderStatus, _permissionStatus).flattenMerge(2).collect {
                 if (_binderStatus.value is ShizukuBinderStatus.WaitingForBinder) return@collect
-                delay(100) // ensure emit everything
                 _status.emit(it)
             }
         }
