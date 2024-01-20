@@ -1,0 +1,2 @@
+-keep interface android.app.IActivityTaskManager { *; }
+-keep class android.app.IActivityTaskManager$Stub { *; }
