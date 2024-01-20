@@ -1,5 +1,3 @@
-import com.android.builder.signing.DefaultSigningConfig
-
 plugins {
     id("ca.android.application")
 }
@@ -8,9 +6,6 @@ android {
     signingConfigs {
         named("debug") {
             storeFile = file("debug.keystore")
-            storePassword = DefaultSigningConfig.DEFAULT_PASSWORD
-            keyAlias = DefaultSigningConfig.DEFAULT_ALIAS
-            keyPassword = DefaultSigningConfig.DEFAULT_PASSWORD
         }
     }
     buildTypes {
