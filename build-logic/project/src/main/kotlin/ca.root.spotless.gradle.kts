@@ -17,14 +17,10 @@ consensus {
             kotlin(
                 targets = ConsensusSpotlessTokens.Kotlin.targets + setOf(
                     "build-logic/**/src/main/kotlin/**/*.kt",
-                    "build-logic/**/src/main/kotlin/**/*.kts",
                 ),
+                licenseHeaderFile = rootProject.file("spotless/copyright.kt"),
             )
-            kotlinGradle(
-                targets = ConsensusSpotlessTokens.KotlinGradle.targets + setOf(
-                    "build-logic/*/*.gradle.kts",
-                ),
-            )
+            kotlinGradle()
         }
     }
 }
