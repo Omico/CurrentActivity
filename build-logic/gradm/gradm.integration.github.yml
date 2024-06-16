@@ -1,5 +1,0 @@
-github:
-  versions:
-    - repository: gradle/gradle
-      regex: "v([\\d].[\\d](.[1-9])?)"
-      matchType: "partial"

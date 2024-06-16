@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-    implementation(com.gradle.enterprise)
+    implementation(com.gradle.develocity)
     implementation(gradmGeneratedJar)
 }

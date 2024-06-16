@@ -11,6 +11,7 @@ versions:
     lifecycle: "2.7.0"
     navigation: "2.7.6"
   consensus: "0.8.0"
+  gradle: "8.8"
   hiddenApiBypass: "4.3"
   kotlin: "1.9.22"
   kotlin.coroutines: "1.7.3"
@@ -18,7 +19,7 @@ versions:
   okhttp: "5.0.0-alpha.10"
   plugins:
     android: "8.2.1"
-    gradle.enterprise: "3.16.1"
+    gradle.develocity: "3.16.1"
     spotless: "6.24.0"
   shizuku: "13.1.5"
 
@@ -32,7 +33,7 @@ repositories:
 plugins:
   gradlePluginPortal:
     com.diffplug.spotless: ${versions.plugins.spotless}
-    com.gradle.enterprise: ${versions.plugins.gradle.enterprise}
+    com.gradle.develocity: ${versions.plugins.develocity}
   noUpdates:
     com.android.application: ${versions.plugins.android}
     com.android.library: ${versions.plugins.android}
