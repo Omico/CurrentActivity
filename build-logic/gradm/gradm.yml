@@ -115,9 +115,6 @@ dependencies:
       accompanist-swiperefresh:
         alias: accompanist.swipeRefresh
         version: ${versions.accompanist}
-      accompanist-systemuicontroller:
-        alias: accompanist.systemUiController
-        version: ${versions.accompanist}
     dev.rikka.shizuku:
       api:
         alias: shizuku.api

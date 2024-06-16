@@ -27,13 +27,8 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import com.example.myapplication.ui.theme.Typography
-import com.google.accompanist.systemuicontroller.SystemUiController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -60,7 +55,6 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun CurrentActivityTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    systemUiController: SystemUiController = rememberSystemUiController(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit,
 ) {
@@ -71,16 +65,6 @@ fun CurrentActivityTheme(
         }
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
-    }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            systemUiController.setSystemBarsColor(
-                color = Color.Transparent,
-                darkIcons = !darkTheme,
-                isNavigationBarContrastEnforced = false,
-            )
-        }
     }
     MaterialTheme(
         colorScheme = colorScheme,
