@@ -1,26 +1,26 @@
 versions:
-  accompanist: "0.32.0"
+  accompanist: "0.34.0"
   androidx:
-    activity: "1.8.2"
+    activity: "1.9.0"
     browser: "1.4.0"
     compose:
-      bom: "2023.10.01"
-      compiler: "1.5.8"
-    core.splashScreen: "1.0.1"
-    datastore: "1.0.0"
-    lifecycle: "2.7.0"
-    navigation: "2.7.6"
+      bom: "2024.06.00"
+      compiler: "1.5.10"
+    core.splashScreen: "1.2.0-alpha01"
+    datastore: "1.1.1"
+    lifecycle: "2.8.2"
+    navigation: "2.8.0-beta03"
   consensus: "0.8.0"
   gradle: "8.8"
   hiddenApiBypass: "4.3"
   kotlin: "1.9.22"
-  kotlin.coroutines: "1.7.3"
-  material: "1.11.0"
+  kotlin.coroutines: "1.8.1"
+  material: "1.13.0-alpha03"
   okhttp: "5.0.0-alpha.10"
   plugins:
     android: "8.5.0"
-    gradle.develocity: "3.16.1"
-    spotless: "6.24.0"
+    gradle.develocity: "3.17.5"
+    spotless: "7.0.0.BETA1"
   shizuku: "13.1.5"
 
 repositories:
