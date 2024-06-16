@@ -45,5 +45,5 @@ internal fun Project.configureCommonAndroidCompose(
     }
 }
 
-private fun Project.commonAndroid(action: CommonExtension<*, *, *, *, *>.() -> Unit) =
+private fun Project.commonAndroid(action: CommonExtension<*, *, *, *, *, *>.() -> Unit) =
     extensions.configure("android", action)

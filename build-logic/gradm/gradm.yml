@@ -18,7 +18,7 @@ versions:
   material: "1.11.0"
   okhttp: "5.0.0-alpha.10"
   plugins:
-    android: "8.2.1"
+    android: "8.5.0"
     gradle.develocity: "3.16.1"
     spotless: "6.24.0"
   shizuku: "13.1.5"
