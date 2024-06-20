@@ -9,7 +9,7 @@ versions:
     datastore: "1.1.1"
     lifecycle: "2.8.2"
     navigation: "2.8.0-beta03"
-  consensus: "0.8.0"
+  consensus: "0.9.0"
   gradle: "8.8"
   hiddenApiBypass: "4.3"
   kotlin: "2.0.0"
@@ -18,7 +18,7 @@ versions:
   okhttp: "5.0.0-alpha.10"
   plugins:
     android: "8.5.0"
-    gradle.develocity: "3.17.5"
+    develocity: "3.17.5"
     spotless: "7.0.0.BETA1"
   shizuku: "13.1.5"
 
