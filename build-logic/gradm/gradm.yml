@@ -5,7 +5,6 @@ versions:
     browser: "1.4.0"
     compose:
       bom: "2024.06.00"
-      compiler: "1.5.10"
     core.splashScreen: "1.2.0-alpha01"
     datastore: "1.1.1"
     lifecycle: "2.8.2"
@@ -13,7 +12,7 @@ versions:
   consensus: "0.8.0"
   gradle: "8.8"
   hiddenApiBypass: "4.3"
-  kotlin: "1.9.22"
+  kotlin: "2.0.0"
   kotlin.coroutines: "1.8.1"
   material: "1.13.0-alpha03"
   okhttp: "5.0.0-alpha.10"
@@ -39,6 +38,7 @@ plugins:
     com.android.library: ${versions.plugins.android}
     org.jetbrains.kotlin.android: ${versions.kotlin}
     org.jetbrains.kotlin.jvm: ${versions.kotlin}
+    org.jetbrains.kotlin.plugin.compose: ${versions.kotlin}
   omico:
     me.omico.consensus.api: ${versions.consensus}
     me.omico.consensus.git: ${versions.consensus}

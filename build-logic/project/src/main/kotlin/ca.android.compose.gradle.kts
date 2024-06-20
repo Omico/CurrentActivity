@@ -1,10 +1,13 @@
 import me.omico.gradle.project.configureCommonAndroidCompose
-import me.omico.gradm.Versions
 
 plugins {
     id("com.android.base")
+    kotlin("plugin.compose")
 }
 
-configureCommonAndroidCompose(
-    composeCompilerVersion = Versions.androidx.compose.compiler,
-)
+configureCommonAndroidCompose()
+
+composeCompiler {
+    metricsDestination = file("build/composeMetrics")
+    reportsDestination = file("build/composeReports")
+}
