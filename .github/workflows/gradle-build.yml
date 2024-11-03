@@ -1,6 +1,8 @@
 name: Gradle Build
 
 on:
+  schedule:
+    - cron: "0 0 1 */2 *"
   pull_request:
   push:
     branches:
