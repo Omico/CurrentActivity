@@ -1,4 +1,4 @@
-rootProject.name = "ca-gradm"
+rootProject.name = "ca-build-logic-gradm"
 
 pluginManagement {
     repositories {

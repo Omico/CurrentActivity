@@ -18,42 +18,44 @@
  */
 package me.omico.gradle.project
 
+import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
-internal fun Project.configureCommonAndroid(
+internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
+
+internal fun Project.configureAndroidCommonExtension(block: AndroidCommonExtension.() -> Unit): Unit =
+    extensions.configure("android", block)
+
+internal fun Project.configureAndroidCommonExtension(
+    domain: String,
     compileSdk: Int,
     minSdk: Int,
-    domain: String = "me.omico",
     namespace: String = "$domain.${name.replace("-", ".")}",
-    coreLibraryDesugaringVersion: String = "2.0.4",
+    javaVersion: JavaVersion = JavaVersion.toVersion(PROJECT_JAVA_VERSION),
+    coreLibraryDesugaringDependency: Any,
 ) {
-    commonAndroid {
+    checkMinimalSupportedAndroidGradlePluginVersion()
+    configureAndroidCommonExtension {
         this.namespace = namespace
         this.compileSdk = compileSdk
         defaultConfig {
             this.minSdk = minSdk
         }
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = javaVersion
+            targetCompatibility = javaVersion
             isCoreLibraryDesugaringEnabled = true
         }
     }
-    dependencies.add(
-        "coreLibraryDesugaring",
-        "com.android.tools:desugar_jdk_libs:$coreLibraryDesugaringVersion",
-    )
+    dependencies.add("coreLibraryDesugaring", coreLibraryDesugaringDependency)
 }
 
-internal fun Project.configureCommonAndroidCompose() {
-    commonAndroid {
-        buildFeatures {
-            compose = true
-        }
+@Suppress("MagicNumber")
+private val MinimalSupportedAndroidPluginVersion = AndroidPluginVersion(8, 0)
+
+private fun checkMinimalSupportedAndroidGradlePluginVersion(): Unit =
+    require(AndroidPluginVersion.getCurrent() >= MinimalSupportedAndroidPluginVersion) {
+        "Minimal supported Android Gradle Plugin version is 8.0.0"
     }
-}
-
-private fun Project.commonAndroid(action: CommonExtension<*, *, *, *, *, *>.() -> Unit) =
-    extensions.configure("android", action)

@@ -11,14 +11,12 @@ on:
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.ref }}'
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   gradle-build:
     name: Gradle Build
     runs-on: ubuntu-latest
-    env:
-      DEPENDENCY_GRAPH_EXCLUDE_PROJECTS: ':(gradm|initialization|project)'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,9 +30,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
           dependency-graph: generate-and-upload
+          dependency-graph-exclude-projects: ':(gradm|initialization|project)'
 
       - run: ./gradlew build --no-daemon --stacktrace
 
@@ -47,7 +44,7 @@ jobs:
   gradle-submit-dependency-graph:
     name: Gradle Submit Dependency Graph
     uses: OmicoDev/gradle-project-initializer-template/.github/workflows/gradle-submit-dependency-graph.yml@main
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: gradle-build
     permissions:
       contents: write

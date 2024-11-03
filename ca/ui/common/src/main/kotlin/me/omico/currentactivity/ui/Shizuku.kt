@@ -1,7 +1,7 @@
 /*
  * This file is part of CurrentActivity.
  *
- * Copyright (C) 2022-2023 Omico
+ * Copyright (C) 2022-2024 Omico
  *
  * CurrentActivity is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -18,6 +18,7 @@
  */
 package me.omico.currentactivity.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.MutableState
@@ -97,6 +98,7 @@ fun rememberShizukuStatus(
     return status
 }
 
+@SuppressLint("ProduceStateDoesNotAssignValue")
 @Composable
 fun rememberCurrentActivityText(): State<String> =
     produceState(initialValue = "") {

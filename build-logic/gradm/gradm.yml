@@ -9,16 +9,17 @@ versions:
     datastore: "1.1.1"
     lifecycle: "2.8.2"
     navigation: "2.8.0-beta03"
-  consensus: "0.9.0"
-  gradle: "8.8"
+  consensus: "0.15.0"
+  desugarJdkLibs: "2.1.2"
+  gradle: "8.10.2"
   hiddenApiBypass: "4.3"
   kotlin: "2.0.0"
   kotlin.coroutines: "1.8.1"
   material: "1.13.0-alpha03"
   okhttp: "5.0.0-alpha.10"
   plugins:
-    android: "8.5.0"
-    develocity: "3.17.5"
+    android: "8.7.2"
+    develocity: "3.18.1"
     spotless: "7.0.0.BETA1"
   shizuku: "13.1.5"
 
@@ -34,16 +35,7 @@ plugins:
     com.diffplug.spotless: ${versions.plugins.spotless}
     com.gradle.develocity: ${versions.plugins.develocity}
   noUpdates:
-    com.android.application: ${versions.plugins.android}
-    com.android.library: ${versions.plugins.android}
-    org.jetbrains.kotlin.android: ${versions.kotlin}
-    org.jetbrains.kotlin.jvm: ${versions.kotlin}
     org.jetbrains.kotlin.plugin.compose: ${versions.kotlin}
-  omico:
-    me.omico.consensus.api: ${versions.consensus}
-    me.omico.consensus.git: ${versions.consensus}
-    me.omico.consensus.publishing: ${versions.consensus}
-    me.omico.consensus.spotless: ${versions.consensus}
 
 dependencies:
   google:
@@ -99,6 +91,10 @@ dependencies:
       navigation-compose:
         alias: androidx.navigation.compose
         version: ${versions.androidx.navigation}
+    com.android.tools:
+      desugar_jdk_libs_nio:
+        alias: desugarJdkLibs.nio
+        version: ${versions.desugarJdkLibs}
     com.android.tools.build:
       gradle:
         alias: androidGradlePlugin
@@ -136,6 +132,6 @@ dependencies:
         version: ${versions.hiddenApiBypass}
   omico:
     me.omico.consensus:
-      consensus-dsl:
-        alias: me.omico.consensus.dsl
+      consensus-gradle-plugins:
+        alias: consensusGradlePlugins
         version: ${versions.consensus}

@@ -4,6 +4,19 @@ complexity:
   TooManyFunctions:
     active: false
 
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - 'Composable'
+    excludes:
+      - '**/src/*Test/kotlin/**'
+  # TODO Remove this when detekt 2.0.0 is released
+  # Waiting for multiplatformFileSuffixes
+  MatchingDeclarationName:
+    active: false
+  MemberNameEqualsClassName:
+    active: false
+
 style:
   MagicNumber:
     ignoreLocalVariableDeclaration: true

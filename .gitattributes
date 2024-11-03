@@ -1,3 +1,42 @@
-* text eol=lf
+* text=auto eol=lf
+
+*.gradle text diff=java
+*.gradle.kts text diff=kotlin
+*.groovy text diff=java
+*.htm text diff=html
+*.html text diff=html
+*.java text diff=java
+*.json text diff=json
+*.kt text diff=kotlin
+*.md text diff=markdown
+*.properties text
+*.scala text diff=java
+*.xml text
+*.yml text
+.gitattributes text
+.gitignore text
+LICENSE text
+consumer-rules.pro text
+gradlew text
+proguard-rules.pro text
+yarn.lock text
+
 *.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.class binary
+*.dll binary
+*.gif binary
+*.ico binary
 *.jar binary
+*.jks binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.so binary
+*.tif binary
+*.tiff binary
+*.traineddata binary
+*.webp binary
+*.keystore binary

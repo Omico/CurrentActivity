@@ -3,9 +3,3 @@ plugins {
     id("com.android.library")
     id("ca.android.base")
 }
-
-android {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}

@@ -1,5 +1,6 @@
 plugins {
     id("ca.android.application")
+    id("ca.compose-compiler")
 }
 
 android {

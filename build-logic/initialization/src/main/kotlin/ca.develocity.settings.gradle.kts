@@ -10,5 +10,13 @@ develocity {
             val isOffline = providers.provider { gradle.startParameter.isOffline }
             onlyIf { !isOffline.getOrElse(false) }
         }
+        obfuscation {
+            val isCi = providers.environmentVariable("CI").getOrElse("false").toBooleanStrict()
+            if (isCi) return@obfuscation
+            username { "hidden" }
+            hostname { "hidden" }
+            ipAddresses { listOf("0.0.0.0") }
+            externalProcessName { "non-build-process" }
+        }
     }
 }
